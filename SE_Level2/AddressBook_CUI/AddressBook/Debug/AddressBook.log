@@ -1,0 +1,14 @@
+﻿Build started 2017-02-19 오후 4:13:26.
+     1>Project "C:\Users\home\Documents\GitHub\parkcom\AddressBook\AddressBook\AddressBook.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio Community 2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /D _CRT_SECURE_NO_WARNINGS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt Form.c
+         Form.c
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio Community 2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\home\Documents\GitHub\parkcom\AddressBook\Debug\AddressBook.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\home\Documents\GitHub\parkcom\AddressBook\Debug\AddressBook.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\home\Documents\GitHub\parkcom\AddressBook\Debug\AddressBook.lib" /MACHINE:X86 Debug\AddressBook.obj
+         Debug\Form.obj
+         AddressBook.vcxproj -> C:\Users\home\Documents\GitHub\parkcom\AddressBook\Debug\AddressBook.exe
+     1>Done Building Project "C:\Users\home\Documents\GitHub\parkcom\AddressBook\AddressBook\AddressBook.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.51
