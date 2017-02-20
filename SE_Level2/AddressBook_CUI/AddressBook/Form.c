@@ -148,7 +148,7 @@ void FormForCorrecting(AddressBook *addressBook) {
 		Find(addressBook, name, &indexes, &count);
 		if (count > 0) {			
 			for (i = 0; i < count; i++) {
-				printf("\t    %4d   %-12s%-12s%-16s%-12s\n", i + 1, addressBook->personals[indexes[i]].name,
+				printf("\t    %4d   %-12s%-12s%-16s%-12s\n", index + 1, addressBook->personals[indexes[i]].name,
 					addressBook->personals[indexes[i]].address, addressBook->personals[indexes[i]].telephoneNumber,
 					addressBook->personals[indexes[i]].emailAddress);
 			}
@@ -223,7 +223,7 @@ void FormForErasing(AddressBook *addressBook) {
 			printf("\t    ---------------------------------------------------------\n");
 			printf("\t    번호   성명        주소        전화번호        이메일주소\n");
 			printf("\t    ---------------------------------------------------------\n");
-			printf("\t    %4d   %-12s%-12s%-16s%-12s\n", i + 1, addressBook->personals[indexes[number - 1]].name,
+			printf("\t    %4d   %-12s%-12s%-16s%-12s\n", indexes[number - 1], addressBook->personals[indexes[number - 1]].name,
 				addressBook->personals[indexes[number - 1]].address, addressBook->personals[indexes[number - 1]].telephoneNumber,
 				addressBook->personals[indexes[number - 1]].emailAddress);
 			printf("\t    =========================================================\n");
@@ -284,7 +284,7 @@ void FormForViewAll(AddressBook *addressBook) {
 	Long i = 0;
 	Long j;
 
-	Arrange(addressBook);
+	//Arrange(addressBook);
 	while (i < addressBook->length) {
 		system("cls");
 		printf("\n\n\n\n");
