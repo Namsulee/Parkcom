@@ -58,6 +58,9 @@ https://msdn.microsoft.com/ko-kr/library/windows/desktop/bb761071(v=vs.85).aspx
 LVM_INSERTCOLUMN
 https://msdn.microsoft.com/ko-kr/library/windows/desktop/bb761101(v=vs.85).aspx
 
+LVM_INSERTITEM
+https://msdn.microsoft.com/ko-kr/library/windows/desktop/bb761107(v=vs.85).aspx
+
 LVM_SETITEMTEXT
 https://msdn.microsoft.com/ko-kr/library/windows/desktop/bb761198.aspx
 
