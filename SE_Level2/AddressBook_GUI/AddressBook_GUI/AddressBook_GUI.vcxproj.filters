@@ -24,6 +24,9 @@
     <ClInclude Include="AddressBook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FindingForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="AddressBook_GUI.rc">
@@ -35,6 +38,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AddressBook.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FindingForm.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

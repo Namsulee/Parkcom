@@ -8,12 +8,29 @@
 
 //전처리기
 #include "UpdatingForm.h"
+#include "FindingForm.h"
 #include "AddressBook.h"
 #include "resource.h"
 #include <CommCtrl.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 //함수 정의
+/*
+함수 명칭 : WinMain
+기    능 : 주소록 다이얼로그를 실행한다.
+출    력 : 다이얼로그 호출 후 반환값
+입    력 : 
+작 성 자 : Joey
+작성 일자 : 2017/02/23
+*/
+int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
+	int response;
+	
+	response = DialogBox(hInstance, MAKEINTRESOURCE(IDD_UPDATINGFORM), NULL, UpdatingFormProc);
+	
+	return  response;
+}
 
 /*
 함수 명칭 : UpdatingFormProc
@@ -66,19 +83,19 @@ BOOL UpdatingForm_OnInitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	SendMessage(GetDlgItem(hWnd, IDC_LIST_PERSONALS), LVM_INSERTCOLUMN, (WPARAM)0, (LPARAM)&column);
 
 	column.pszText = "성명";
-	column.cx = 100;
+	column.cx = 70;
 	SendMessage(GetDlgItem(hWnd, IDC_LIST_PERSONALS), LVM_INSERTCOLUMN, (WPARAM)1, (LPARAM)&column);
 
 	column.pszText = "주소";
-	column.cx = 100;
+	column.cx = 70;
 	SendMessage(GetDlgItem(hWnd, IDC_LIST_PERSONALS), LVM_INSERTCOLUMN, (WPARAM)2, (LPARAM)&column);
 
 	column.pszText = "전화번호";
-	column.cx = 100;
+	column.cx = 70;
 	SendMessage(GetDlgItem(hWnd, IDC_LIST_PERSONALS), LVM_INSERTCOLUMN, (WPARAM)3, (LPARAM)&column);
 
 	column.pszText = "이메일주소";
-	column.cx = 100;
+	column.cx = 70;
 	SendMessage(GetDlgItem(hWnd, IDC_LIST_PERSONALS), LVM_INSERTCOLUMN, (WPARAM)4, (LPARAM)&column);
 
 	return FALSE;
@@ -235,7 +252,7 @@ BOOL UpdatingForm_OnFindButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 
 /*
 함수 명칭 : UpdatingForm_OnCorrectButtonClicked
-기    능 : 고치기 버튼이 눌렸을 때, 이벤트를 처리한다. 
+기    능 : 고치기 버튼이 눌렸을 때, 고치기 기능을 수행한다. 
 출    력 : FALSE
 입    력 : 윈도우핸들, 정보1, 정보2
 작 성 자 : Joey
@@ -284,7 +301,7 @@ BOOL UpdatingForm_OnCorrectButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam
 
 /*
 함수 명칭 : UpdatingForm_OnEraseButtonClicked
-기    능 : 지우기 버튼이 눌렸을 때, 이벤트를 처리한다.
+기    능 : 지우기 버튼이 눌렸을 때, 지우기 기능을 수행한다.
 출    력 : FALSE
 입    력 : 윈도우핸들, 정보1, 정보2
 작 성 자 : Joey
@@ -329,8 +346,8 @@ BOOL UpdatingForm_OnEraseButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam) 
 
 /*
 함수 명칭 : UpdatingForm_OnArrangeButtonClicked
-기    능 : 정리하기 버튼이 눌렸을 때, 이벤트를 처리한다.
-출    력 :
+기    능 : 정리하기 버튼이 눌렸을 때, 정리하기 기능을 수행한다.
+출    력 : FALSE
 입    력 : 윈도우핸들, 정보1, 정보2
 작 성 자 : Joey
 작성 일자 : 2017/02/23
@@ -347,7 +364,7 @@ BOOL UpdatingForm_OnArrangeButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam
 		addressBook = (AddressBook *)GetWindowLong(hWnd, GWL_USERDATA);
 		Arrange(addressBook);
 
-		//7.2. 리스트뷰 컨트롤 항목을 지운다.
+		//7.2. 리스트뷰 항목들을 모두 지운다.
 		SendMessage(GetDlgItem(hWnd, IDC_LIST_PERSONALS), LVM_DELETEALLITEMS, (WPARAM)0, (LPARAM)0);
 
 		//7.3. 주소록의 사용량만큼 리스트 컨트롤에 항목을 추가한다.
@@ -385,8 +402,8 @@ BOOL UpdatingForm_OnArrangeButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam
 
 /*
 함수 명칭 : UpdatingForm_OnListViewItemDoubleClicked
-기    능 :
-출    력 :
+기    능 : 리스트뷰 항목을 더블클릭했을 때, 기능을 수행한다.
+출    력 : FALSE
 입    력 : 윈도우핸들, 정보1, 정보2
 작 성 자 : Joey
 작성 일자 : 2017/02/23
@@ -400,7 +417,7 @@ BOOL UpdatingForm_OnListViewItemDoubleClicked(HWND hWnd, WPARAM wParam, LPARAM l
 	LVITEM item = { 0, };
 
 	//버튼이 더블 클릭될 경우에만 수행한다.
-	if (((NMHDR *)lParam) == NM_DBLCLK) {
+	if (((NMHDR *)lParam)->code == NM_DBLCLK) {
 		//4.1. 리스트뷰 컨트롤에서 위치를 읽는다.
 		index = SendMessage(GetDlgItem(hWnd, IDC_LIST_PERSONALS), LVM_GETSELECTIONMARK, (WPARAM)0, (LPARAM)0);
 

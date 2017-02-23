@@ -1,13 +1,9 @@
-﻿Build started 2017-02-23 오후 10:03:06.
+﻿Build started 2017-02-24 오전 8:44:24.
      1>Project "C:\Users\home\Documents\GitHub\Parkcom\SE_Level2\AddressBook_GUI\AddressBook_GUI\AddressBook_GUI.vcxproj" on node 2 (Build target(s)).
-     1>ResourceCompile:
-         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /l"0x0409" /nologo /fo"Debug\AddressBook_GUI.res" AddressBook_GUI.rc 
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio Community 2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\home\Documents\GitHub\Parkcom\SE_Level2\AddressBook_GUI\Debug\AddressBook_GUI.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\home\Documents\GitHub\Parkcom\SE_Level2\AddressBook_GUI\Debug\AddressBook_GUI.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\home\Documents\GitHub\Parkcom\SE_Level2\AddressBook_GUI\Debug\AddressBook_GUI.lib" /MACHINE:X86 Debug\AddressBook_GUI.res
-     1>LINK : error LNK2001: unresolved external symbol _WinMainCRTStartup
-     1>C:\Users\home\Documents\GitHub\Parkcom\SE_Level2\AddressBook_GUI\Debug\AddressBook_GUI.exe : fatal error LNK1120: 1 unresolved externals
-     1>Done Building Project "C:\Users\home\Documents\GitHub\Parkcom\SE_Level2\AddressBook_GUI\AddressBook_GUI\AddressBook_GUI.vcxproj" (Build target(s)) -- FAILED.
+     1>Link:
+         AddressBook_GUI.vcxproj -> C:\Users\home\Documents\GitHub\Parkcom\SE_Level2\AddressBook_GUI\Debug\AddressBook_GUI.exe
+     1>Done Building Project "C:\Users\home\Documents\GitHub\Parkcom\SE_Level2\AddressBook_GUI\AddressBook_GUI\AddressBook_GUI.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:03.94
+Time Elapsed 00:00:00.14

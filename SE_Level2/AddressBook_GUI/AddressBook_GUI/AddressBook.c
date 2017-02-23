@@ -15,30 +15,30 @@
 #include <string.h>
 
 //함수정의
-int main(int argc, char* argv[]) {
-	AddressBook addressBook;
-	Long menu;
-
-	Create(&addressBook, 4);
-	DisplayMenu();
-	fflush(stdin); scanf("%d", &menu);
-
-	while (menu != 0) {
-		switch(menu) {
-			case 1: FormForRecording(&addressBook); break;
-			case 2: FormForFinding(&addressBook); break;
-			case 3: FormForCorrecting(&addressBook); break;
-			case 4: FormForErasing(&addressBook); break;
-			case 5: FormForArranging(&addressBook); break;
-			case 6: FormForViewAll(&addressBook); break;
-			default: break;
-		}
-		DisplayMenu();
-		fflush(stdin); scanf("%d", &menu);
-	}
-	Destroy(&addressBook);
-	return 0;
-}
+//int main(int argc, char* argv[]) {
+//	AddressBook addressBook;
+//	Long menu;
+//
+//	Create(&addressBook, 4);
+//	DisplayMenu();
+//	fflush(stdin); scanf("%d", &menu);
+//
+//	while (menu != 0) {
+//		switch(menu) {
+//			case 1: FormForRecording(&addressBook); break;
+//			case 2: FormForFinding(&addressBook); break;
+//			case 3: FormForCorrecting(&addressBook); break;
+//			case 4: FormForErasing(&addressBook); break;
+//			case 5: FormForArranging(&addressBook); break;
+//			case 6: FormForViewAll(&addressBook); break;
+//			default: break;
+//		}
+//		DisplayMenu();
+//		fflush(stdin); scanf("%d", &menu);
+//	}
+//	Destroy(&addressBook);
+//	return 0;
+//}
 
 /*
 함수 명칭 : Record
