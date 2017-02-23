@@ -76,10 +76,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AddressBook.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="UpdatingForm.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="AddressBook_GUI.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AddressBook.c" />
+    <ClCompile Include="UpdatingForm.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
