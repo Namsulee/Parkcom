@@ -207,8 +207,9 @@ BOOL UpdatingForm_OnClose(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 		Save(addressBook);
 
 		//8.2. 주소록을 지운다.
+		Destroy(addressBook);
 		free(addressBook);
-		addressBook = NULL;
+		//addressBook = NULL;
 	}
 
 	//8.2. 윈도우를 닫는다.
