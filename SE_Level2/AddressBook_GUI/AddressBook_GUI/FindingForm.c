@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <CommCtrl.h>
+#pragma warning(disable : 4996)
 
 /*
 함수 명칭 : FindingFormProc
@@ -52,6 +53,9 @@ BOOL FindingForm_OnInitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	LVCOLUMN column = { 0, };
 
 	//1.1. 리스트뷰 헤더를 생성한다.
+	// LVM_INSERTCOLUMN,
+	// wParam: Index of the new column.
+	// lParam: Pointer to an LVCOLUMN structure that contains the attributes of the new column.
 	column.mask = LVCF_TEXT | LVCF_WIDTH;
 	column.pszText = "번호";
 	column.cx = 50;
@@ -128,6 +132,7 @@ BOOL FindingForm_OnNotify(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 */
 BOOL FindingForm_OnClose(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	Long(*indexes);
+
 	//4.0. 메모리 할당 해제 한다.
 	indexes = (Long(*))GetWindowLong(hWnd, GWL_USERDATA);
 	if (indexes != NULL) {
@@ -162,24 +167,37 @@ BOOL FindingForm_OnFindButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	//버튼이 클릭될 경우에만 수행한다.
 	if (HIWORD(wParam) == BN_CLICKED) {
 		//2.1. 리스트뷰 항목들을 모두 지운다.
+		// LVM_DELETEALLITEMS
+		// wParam: Must be zero.
+		// lParam: Must be zero.
 		SendMessage(GetDlgItem(hWnd, IDC_LIST_PERSONALS), LVM_DELETEALLITEMS, (WPARAM)0, (LPARAM)0);
 
 		//2.2. 성명을 읽는다.
-		SendMessage(GetDlgItem(hWnd, IDC_LIST_PERSONALS), LVM_GETITEMTEXT, (WPARAM)NAME, (LPARAM)name);
+		// WM_GETTEXT: 
+		// wParam: The maximum number of characters to be copied
+		// lParam: A pointer to the buffer that is to receive the text.
+		SendMessage(GetDlgItem(hWnd, IDC_EDIT_NAME), WM_GETTEXT, (WPARAM)NAME, (LPARAM)name);
 
 		//2.3. 주소록 윈도우를 찾는다.
 		temp = FindWindow("#32770", "주소록"); //(클래스 이름, 윈도우 이름)
 
-		//2.4. 주소록 윈도 주소록을 찾는다.
-		addressBook = (AddressBook *)GetWindowLong(hWnd, GWL_USERDATA);
+		//2.4. 주소록 윈도우 주소록을 찾는다.
+		addressBook = (AddressBook *)GetWindowLong(temp, GWL_USERDATA);
 		indexes = (Long(*))GetWindowLong(hWnd, GWL_USERDATA);
 		if (indexes != NULL) {
 			free(indexes);
 			indexes = NULL;
 		}
 		Find(addressBook, name, &indexes, &count);
+		SetWindowLong(hWnd, GWL_USERDATA, (LONG)indexes);
 
 		//2.5. 찾은 개수만큼 리스트뷰에 항목을 추가한다.
+		// LVM_INSERTITEM
+		// wParam: Must be zero.
+		// lParam: Pointer to an LVITEM structure
+		// LVM_SETITEMTEXT
+		// wParam: Zero-based index of the list-view item
+		// lParam: Pointer to an LVITEM structure. 
 		item.mask = LVIF_TEXT;
 		while (i < count) {
 			item.iItem = i;
@@ -207,7 +225,6 @@ BOOL FindingForm_OnFindButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 
 			i++;
 		}
-		SetWindowLong(hWnd, GWL_USERDATA, (LONG)indexes);
 	}
 	return FALSE;
 }
@@ -263,12 +280,20 @@ BOOL FindingForm_OnListViewItemDoubleClicked(HWND hWnd, WPARAM wParam, LPARAM lP
 		temp = FindWindow("#32770", "주소록"); //(클래스 이름, 윈도우 이름)
 
 		//3.4. 주소록 윈도우에 개인을 출력한다.
+		// GetDlgItem: Retrieves a handle to a control in the specified dialog box.
+		// WM_SETTEXT: Sets the text of a window.
+		// wParam: This parameter is not used.
+		// lParam: A pointer to a null-terminated string that is the window text.	
 		SendMessage(GetDlgItem(temp, IDC_EDIT_NAME), WM_SETTEXT, (WPARAM)0, (LPARAM)name);
 		SendMessage(GetDlgItem(temp, IDC_EDIT_ADDRESS), WM_SETTEXT, (WPARAM)0, (LPARAM)address);
 		SendMessage(GetDlgItem(temp, IDC_EDIT_TELEPHONENUMBER), WM_SETTEXT, (WPARAM)0, (LPARAM)telephoneNumber);
 		SendMessage(GetDlgItem(temp, IDC_EDIT_EMAILADDRESS), WM_SETTEXT, (WPARAM)0, (LPARAM)emailAddress);
 
 		//3.5. 주소록 윈도우 리스트 뷰에 항목을 선택한다.
+		// LVM_SETSELECTIONMARK: Sets the selection mark in a list-view control.
+		// wParam: Must be zero.
+		// lParam: Zero-based index of the new selection mark.
+		// GetWindowLong(hWnd,GWL_USERDATA);
 		indexes = (Long(*))GetWindowLong(hWnd, GWL_USERDATA);
 		SendMessage(GetDlgItem(temp, IDC_LIST_PERSONALS), LVM_SETSELECTIONMARK, (WPARAM)0, (LPARAM)indexes[index]);
 		if (indexes != NULL) {

@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#pragma warning(disable : 4996)
 
 //함수정의
 //int main(int argc, char* argv[]) {

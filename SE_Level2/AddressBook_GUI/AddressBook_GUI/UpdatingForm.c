@@ -14,6 +14,7 @@
 #include <CommCtrl.h>
 #include <stdlib.h>
 #include <stdio.h>
+#pragma warning(disable : 4996)
 
 //함수 정의
 /*
@@ -322,7 +323,7 @@ BOOL UpdatingForm_OnEraseButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam) 
 
 		//6.2. 주소록에서 지운다.
 		addressBook = (AddressBook *)GetWindowLong(hWnd, GWL_USERDATA);
-		index = Erase(addressBook, index);
+		Erase(addressBook, index);
 
 		//6.3. 리스트뷰 컨트롤에 항목을 지운다.
 		SendMessage(GetDlgItem(hWnd, IDC_LIST_PERSONALS), LVM_DELETEITEM, (WPARAM)index, (LPARAM)0);
@@ -334,7 +335,7 @@ BOOL UpdatingForm_OnEraseButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam) 
 		i = index;
 		while (i < addressBook->length) {
 			item.iItem = i;
-			sprintf(number, "%d", i + 1);			
+			sprintf(number, "%d", i + 1);
 			item.pszText = number;
 			SendMessage(GetDlgItem(hWnd, IDC_LIST_PERSONALS), LVM_SETITEMTEXT, (WPARAM)i, (LPARAM)&item);
 			i++;
