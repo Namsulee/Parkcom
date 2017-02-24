@@ -32,4 +32,8 @@ void Arrange(AddressBook *addressBook);
 void Create(AddressBook *addressBook, Long capacity);
 void Destroy(AddressBook *addressBook);
 
+//파일 저장
+Long Load(AddressBook *addressBook);
+Long Save(AddressBook *addressBook);
+
 #endif //_ADDRESSBOOK_H

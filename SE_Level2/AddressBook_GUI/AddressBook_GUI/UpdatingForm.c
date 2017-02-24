@@ -67,12 +67,18 @@ BOOL CALLBACK UpdatingFormProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 입    력 : 윈도우핸들, 정보1, 정보2
 작 성 자 : Joey
 작성 일자 : 2017/02/23
+작업 내역 : Load 함수 추가(2017/02/24)
+           리스트뷰에 적재된 크기만큼 추가한다.(2017/02/24)
 */
 BOOL UpdatingForm_OnInitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	AddressBook *addressBook;
 	LVCOLUMN column = { 0, };
+	LVITEM item = { 0, };
+	Long count;
+	Long i = 0;
+	TCHAR number[NUMBER];
 
-	//1.1. 주소록을 만든다.
+	//1.1. 주소록을 준비한다.
 	addressBook = (AddressBook *)malloc(sizeof(AddressBook));
 	Create(addressBook, 60000);
 	SetWindowLong(hWnd, GWL_USERDATA, (LONG)addressBook);
@@ -99,6 +105,37 @@ BOOL UpdatingForm_OnInitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	column.cx = 70;
 	SendMessage(GetDlgItem(hWnd, IDC_LIST_PERSONALS), LVM_INSERTCOLUMN, (WPARAM)4, (LPARAM)&column);
 
+	//1.3. 주소록을 적재하다.
+	count = Load(addressBook);
+
+	//1.4. 리스트뷰에 적재된 개수만큼 추가한다.
+	item.mask = LVIF_TEXT;
+	while (i < count) {
+		item.iItem = i;
+
+		sprintf(number, "%d", i + 1);
+		item.pszText = number;
+		item.iSubItem = 0;
+		SendMessage(GetDlgItem(hWnd, IDC_LIST_PERSONALS), LVM_INSERTITEM, (WPARAM)0, (LPARAM)&item);
+		
+		item.pszText = addressBook->personals[i].name;
+		item.iSubItem = 1;
+		SendMessage(GetDlgItem(hWnd, IDC_LIST_PERSONALS), LVM_SETITEMTEXT, (WPARAM)i, (LPARAM)&item);
+
+		item.pszText = addressBook->personals[i].address;
+		item.iSubItem = 2;
+		SendMessage(GetDlgItem(hWnd, IDC_LIST_PERSONALS), LVM_SETITEMTEXT, (WPARAM)i, (LPARAM)&item);
+
+		item.pszText = addressBook->personals[i].telephoneNumber;
+		item.iSubItem = 3;
+		SendMessage(GetDlgItem(hWnd, IDC_LIST_PERSONALS), LVM_SETITEMTEXT, (WPARAM)i, (LPARAM)&item);
+
+		item.pszText = addressBook->personals[i].emailAddress;
+		item.iSubItem = 4;
+		SendMessage(GetDlgItem(hWnd, IDC_LIST_PERSONALS), LVM_SETITEMTEXT, (WPARAM)i, (LPARAM)&item);
+
+		i++;
+	}
 	return FALSE;
 }
 
@@ -159,13 +196,17 @@ BOOL UpdatingForm_OnNotify(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 입    력 : 윈도우핸들, 정보1, 정보2
 작 성 자 : Joey
 작성 일자 : 2017/02/23
+작업 내역 : Save 함수 추가(2017/02/24)
 */
 BOOL UpdatingForm_OnClose(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	AddressBook *addressBook;
-
-	//8.1. 주소록을 없앤다.
 	addressBook = (AddressBook *)GetWindowLong(hWnd, GWL_USERDATA);
+
 	if (addressBook != NULL) {
+		//8.1. 주소록을 파일에 저장한다.
+		Save(addressBook);
+
+		//8.2. 주소록을 지운다.
 		free(addressBook);
 		addressBook = NULL;
 	}

@@ -89,6 +89,9 @@
     <ClCompile Include="FindingForm.c" />
     <ClCompile Include="UpdatingForm.c" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="AddressBook.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

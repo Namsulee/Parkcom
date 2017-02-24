@@ -4,7 +4,7 @@
 기     능 : 주소록을 관리한다.
 입     력 : 없음
 출     력 : 없음
-작 성 자 : 김세중
+작 성 자 : Joey
 작성 일자 : 2016/2/19
 */
 
@@ -195,4 +195,99 @@ void Destroy(AddressBook *addressBook) {
 	if (addressBook->personals != NULL) {
 		free(addressBook->personals);
 	}
+}
+
+/*
+함수 명칭 : Load
+기     능 : 파일에서 개인들을 주소록에 저장한다.
+입     력 : 주소록
+출     력 : 개인들의 수
+작성 일자 : 2017/02/24
+*/
+Long Load(AddressBook *addressBook) {
+	Long count = 0;
+	Personal personal;
+	Personal(*temp);
+	Long index;
+	Long i;
+	Long j;
+	FILE *file;
+
+	file = fopen("AddressBook.txt", "rt");
+	if (file != NULL) {
+		//1.1. 성명, 주소, 전화번호, 이메일주소를 읽는다.
+		fscanf(file, "%s %s %s %s", personal.name, personal.address, personal.telephoneNumber, personal.emailAddress);
+		//1. 파일의 끝이 아닌동안 반복한다.
+		while (!feof(file)) {
+			
+			i = 0;
+			while (i < addressBook->capacity && strcmp(addressBook->personals[i].name, "") != 0) {
+				i++;
+			}
+			if (i >= addressBook->capacity) {
+				temp = (Personal(*))calloc(addressBook->capacity + 1, sizeof(Personal));
+				j = 0;
+				while (j < addressBook->length) {
+					temp[j] = addressBook->personals[j];
+					j++;
+				}
+				if (addressBook->personals != NULL) {
+					free(addressBook->personals);
+					addressBook->personals = NULL;
+				}
+				addressBook->personals = temp;
+				(addressBook->capacity)++;
+			}
+			
+			//1.2. 주소록에 성명, 주소, 전화번호, 이메일주소를 기재한다.
+			index = i;
+			addressBook->personals[index] = personal;
+			(addressBook->length)++;
+
+			//1.3. 개수를 센다.
+			count++;
+
+			//1.1. 성명, 주소, 전화번호, 이메일주소를 읽는다.
+			fscanf(file, "%s %s %s %s", personal.name, personal.address, personal.telephoneNumber, personal.emailAddress);
+		}
+		fclose(file);
+	}
+	//2. 개수를 출력한다.	
+	return count;
+
+	//3. 끝내다.
+}
+
+/*
+함수 명칭 : Save
+기     능 : 주소록의 개인들을 파일에 저장한다.
+입     력 : 주소록
+출     력 : 개인들의 수
+작성 일자 : 2017/02/24
+*/
+Long Save(AddressBook *addressBook) {
+	Long count = 0;
+	Long i = 0;
+	FILE *file;
+
+	file = fopen("AddressBook.txt", "wt");
+
+	if (!feof(file)) {
+		//1. 주소록의 사용량 만큼 반복한다.
+		while (i < addressBook->length) {
+			//1.1. 파일에 성명, 주소, 전화번호, 이메일주소를 기재한다.
+			fprintf(file, "%s %s %s %s\n", addressBook->personals[i].name, addressBook->personals[i].address,
+				addressBook->personals[i].telephoneNumber, addressBook->personals[i].emailAddress);
+			
+			//1.2. 개수를 센다.
+			count++;
+			i++;
+		}
+		fclose(file);
+	}
+
+	//2. 개수를 출력한다.
+	return count;
+
+	//3. 끝내다.
 }
