@@ -212,7 +212,7 @@ BOOL UpdatingForm_OnClose(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 		//addressBook = NULL;
 	}
 
-	//8.2. 윈도우를 닫는다.
+	//8.3. 윈도우를 닫는다.
 	EndDialog(hWnd, 0);
 
 	return FALSE;
