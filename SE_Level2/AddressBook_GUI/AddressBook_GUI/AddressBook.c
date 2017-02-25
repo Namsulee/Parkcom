@@ -199,10 +199,10 @@ void Destroy(AddressBook *addressBook) {
 
 /*
 함수 명칭 : Load
-기     능 : 파일에서 개인들을 주소록에 저장한다.
+기     능 : dat파일에서 개인들을 주소록에 저장한다.
 입     력 : 주소록
 출     력 : 개인들의 수
-작성 일자 : 2017/02/24
+작성 일자 : 2017/02/25
 */
 Long Load(AddressBook *addressBook) {
 	Long count = 0;
@@ -212,13 +212,16 @@ Long Load(AddressBook *addressBook) {
 	Long i;
 	Long j;
 	FILE *file;
+	Long flag;
 
-	file = fopen("AddressBook.txt", "rt");
+	//file = fopen("AddressBook.txt", "rt");
+	file = fopen("AddressBook.dat", "rb");
 	if (file != NULL) {
 		//1.1. 성명, 주소, 전화번호, 이메일주소를 읽는다.
-		fscanf(file, "%s %s %s %s", personal.name, personal.address, personal.telephoneNumber, personal.emailAddress);
+		//fscanf(file, "%s %s %s %s", personal.name, personal.address, personal.telephoneNumber, personal.emailAddress);
+		flag = fread(&personal, sizeof(Personal), 1, file);
 		//1. 파일의 끝이 아닌동안 반복한다.
-		while (!feof(file)) {
+		while (!feof(file) && flag != 0) {
 			
 			i = 0;
 			while (i < addressBook->capacity && strcmp(addressBook->personals[i].name, "") != 0) {
@@ -248,7 +251,8 @@ Long Load(AddressBook *addressBook) {
 			count++;
 
 			//1.1. 성명, 주소, 전화번호, 이메일주소를 읽는다.
-			fscanf(file, "%s %s %s %s", personal.name, personal.address, personal.telephoneNumber, personal.emailAddress);
+			//fscanf(file, "%s %s %s %s", personal.name, personal.address, personal.telephoneNumber, personal.emailAddress);
+			fread(&personal, sizeof(Personal), 1, file);
 		}
 		fclose(file);
 	}
@@ -260,24 +264,26 @@ Long Load(AddressBook *addressBook) {
 
 /*
 함수 명칭 : Save
-기     능 : 주소록의 개인들을 파일에 저장한다.
+기     능 : 주소록의 개인들을 dat파일에 저장한다.
 입     력 : 주소록
 출     력 : 개인들의 수
-작성 일자 : 2017/02/24
+작성 일자 : 2017/02/25
 */
 Long Save(AddressBook *addressBook) {
 	Long count = 0;
 	Long i = 0;
 	FILE *file;
 
-	file = fopen("AddressBook.txt", "wt");
+	//file = fopen("AddressBook.txt", "wt");
+	file = fopen("AddressBook.dat", "wb");
 
 	if (!feof(file)) {
 		//1. 주소록의 사용량 만큼 반복한다.
 		while (i < addressBook->length) {
 			//1.1. 파일에 성명, 주소, 전화번호, 이메일주소를 기재한다.
-			fprintf(file, "%s %s %s %s\n", addressBook->personals[i].name, addressBook->personals[i].address,
-				addressBook->personals[i].telephoneNumber, addressBook->personals[i].emailAddress);
+			//fprintf(file, "%s %s %s %s\n", addressBook->personals[i].name, addressBook->personals[i].address,
+			//	addressBook->personals[i].telephoneNumber, addressBook->personals[i].emailAddress);
+			fwrite(addressBook->personals + i, sizeof(Personal), 1, file);
 			
 			//1.2. 개수를 센다.
 			count++;
