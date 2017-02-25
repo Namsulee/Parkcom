@@ -99,3 +99,9 @@ https://msdn.microsoft.com/en-us/library/windows/desktop/bb774867(v=vs.85).aspx
 
 LVM_DELETEITEM
 https://msdn.microsoft.com/ko-kr/library/windows/desktop/bb774895.aspx
+
+LVM_SETEXTENDEDLISTVIEWSTYLE 
+https://msdn.microsoft.com/ko-kr/library/windows/desktop/bb761165(v=vs.85).aspx
+
+Extended List-View Styles
+https://msdn.microsoft.com/ko-kr/library/windows/desktop/bb774732(v=vs.85).aspx#LVS_EX_FULLROWSELECT
