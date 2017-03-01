@@ -236,6 +236,7 @@ BOOL FindingZipcodeForm_OnListViewItemDoubleClicked(HWND hWnd, WPARAM wParam, LP
 	TCHAR text[MAXTEXTSIZE];
 	ULong index;
 	LVITEM item = { 0, };
+	HWND addressBookWindow;
 
 	//if (((LPNMHDR)lParam)->code == NM_DBLCLK) {
 	if (((NMHDR *)lParam)->code == NM_DBLCLK) {
@@ -250,14 +251,23 @@ BOOL FindingZipcodeForm_OnListViewItemDoubleClicked(HWND hWnd, WPARAM wParam, LP
 		item.cchTextMax = COMPLETEADDRESS;
 		SendMessage(GetDlgItem(hWnd, IDC_LIST_ADDRESSES), LVM_GETITEMTEXT, (WPARAM)index, (LPARAM)&item);
 
-		item.iSubItem = 2;
-		item.pszText = zipcode;
-		item.cchTextMax = ZIPCODE;
-		SendMessage(GetDlgItem(hWnd, IDC_LIST_ADDRESSES), LVM_GETITEMTEXT, (WPARAM)index, (LPARAM)&item);
+		//item.iSubItem = 2;
+		//item.pszText = zipcode;
+		//item.cchTextMax = ZIPCODE;
+		//SendMessage(GetDlgItem(hWnd, IDC_LIST_ADDRESSES), LVM_GETITEMTEXT, (WPARAM)index, (LPARAM)&item);
 
-		sprintf(text, "%s\n%s", zipcode, completeAddress);
+		//sprintf(text, "%s\n%s", zipcode, completeAddress);
 
-		MessageBox(hWnd, (LPCTSTR)text, (LPCTSTR)"알림", MB_OK | MB_ICONEXCLAMATION);
+		//MessageBox(hWnd, (LPCTSTR)text, (LPCTSTR)"알림", MB_OK | MB_ICONEXCLAMATION);
+		addressBookWindow = FindWindow("#32770", "주소록");
+		SendMessage(GetDlgItem(addressBookWindow, IDC_EDIT_ADDRESS), WM_SETTEXT, (WPARAM)0, (LPARAM)completeAddress);
+		//3.5. 캐럿의 위치를 적은 문자 한칸뒤로 보낸다.
+
+		if (postalBook != NULL) {
+			PostalBookDestroy(postalBook);
+			free(postalBook);
+		}
+		EndDialog(hWnd, 0);
 	}
 	return FALSE;
 }
