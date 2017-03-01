@@ -1,12 +1,21 @@
-﻿Build started 2017-03-01 오후 5:35:39.
-     1>Project "C:\Users\home\Documents\GitHub\Parkcom\SE_Level3\AddressBook20170228\AddressBook20170228\AddressBook20170228.vcxproj" on node 2 (Build target(s)).
+﻿Build started 2017-03-01 오후 8:19:01.
+     1>Project "C:\Users\home\Documents\GitHub\Parkcom\SE_Level3\AddressBook20170228\AddressBook20170228\AddressBook20170228.vcxproj" on node 2 (Rebuild target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio Community 2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _CRT_SECURE_NO_WARNINGS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt FindingZipcodeForm.c
+         C:\Program Files (x86)\Microsoft Visual Studio Community 2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _CRT_SECURE_NO_WARNINGS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt AddressBook.c FindingForm.c FindingZipcodeForm.c PostalBook.c UpdatingForm.c
+         UpdatingForm.c
+         PostalBook.c
          FindingZipcodeForm.c
-     1>c:\users\home\documents\github\parkcom\se_level3\addressbook20170228\addressbook20170228\findingzipcodeform.c(264): warning C4047: 'function' : 'WPARAM' differs in levels of indirection from 'void *'
-     1>c:\users\home\documents\github\parkcom\se_level3\addressbook20170228\addressbook20170228\findingzipcodeform.c(264): warning C4024: 'SendMessageA' : different types for formal and actual parameter 3
+     1>c:\users\home\documents\github\parkcom\se_level3\addressbook20170228\addressbook20170228\findingzipcodeform.c(268): warning C4047: 'function' : 'WPARAM' differs in levels of indirection from 'void *'
+     1>c:\users\home\documents\github\parkcom\se_level3\addressbook20170228\addressbook20170228\findingzipcodeform.c(268): warning C4024: 'SendMessageA' : different types for formal and actual parameter 3
+     1>c:\users\home\documents\github\parkcom\se_level3\addressbook20170228\addressbook20170228\findingzipcodeform.c(269): warning C4047: 'function' : 'WPARAM' differs in levels of indirection from 'void *'
+     1>c:\users\home\documents\github\parkcom\se_level3\addressbook20170228\addressbook20170228\findingzipcodeform.c(269): warning C4024: 'SendMessageA' : different types for formal and actual parameter 3
      1>c:\users\home\documents\github\parkcom\se_level3\addressbook20170228\addressbook20170228\findingzipcodeform.c(236): warning C4101: 'text' : unreferenced local variable
      1>c:\users\home\documents\github\parkcom\se_level3\addressbook20170228\addressbook20170228\findingzipcodeform.c(234): warning C4101: 'zipcode' : unreferenced local variable
+         FindingForm.c
+         AddressBook.c
+         Generating Code...
+       ResourceCompile:
+         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /l"0x0409" /nologo /fo"Debug\AddressBook_GUI.res" AddressBook_GUI.rc 
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio Community 2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\home\Documents\GitHub\Parkcom\SE_Level3\AddressBook20170228\Debug\AddressBook20170228.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\home\Documents\GitHub\Parkcom\SE_Level3\AddressBook20170228\Debug\AddressBook20170228.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\home\Documents\GitHub\Parkcom\SE_Level3\AddressBook20170228\Debug\AddressBook20170228.lib" /MACHINE:X86 Debug\AddressBook_GUI.res
          Debug\AddressBook.obj
@@ -15,8 +24,8 @@
          Debug\PostalBook.obj
          Debug\UpdatingForm.obj
          AddressBook20170228.vcxproj -> C:\Users\home\Documents\GitHub\Parkcom\SE_Level3\AddressBook20170228\Debug\AddressBook20170228.exe
-     1>Done Building Project "C:\Users\home\Documents\GitHub\Parkcom\SE_Level3\AddressBook20170228\AddressBook20170228\AddressBook20170228.vcxproj" (Build target(s)).
+     1>Done Building Project "C:\Users\home\Documents\GitHub\Parkcom\SE_Level3\AddressBook20170228\AddressBook20170228\AddressBook20170228.vcxproj" (Rebuild target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.94
+Time Elapsed 00:00:05.53

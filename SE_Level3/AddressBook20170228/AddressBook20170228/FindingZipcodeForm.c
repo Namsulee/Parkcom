@@ -259,14 +259,21 @@ BOOL FindingZipcodeForm_OnListViewItemDoubleClicked(HWND hWnd, WPARAM wParam, LP
 		//sprintf(text, "%s\n%s", zipcode, completeAddress);
 
 		//MessageBox(hWnd, (LPCTSTR)text, (LPCTSTR)"알림", MB_OK | MB_ICONEXCLAMATION);
-		addressBookWindow = FindWindow("#32770", "주소록");
-		SendMessage(GetDlgItem(addressBookWindow, IDC_EDIT_ADDRESS), WM_SETTEXT, (WPARAM)0, (LPARAM)completeAddress);
-		//3.5. 캐럿의 위치를 적은 문자 한칸뒤로 보낸다.
 
+		//3.3. 
+		addressBookWindow = FindWindow("#32770", "주소록");
+		//3.4. 
+		SendMessage(GetDlgItem(addressBookWindow, IDC_EDIT_ADDRESS), WM_SETTEXT, (WPARAM)0, (LPARAM)completeAddress);
+		//3.5. 캐럿의 위치를 적은 문자 한칸뒤로 보낸다. (미해결)
+		SendMessage(GetDlgItem(addressBookWindow, IDC_BUTTON_FINDINGZIPCODE), WM_KILLFOCUS, NULL, (LPARAM)0);
+		SendMessage(GetDlgItem(addressBookWindow, IDC_EDIT_ADDRESS), WM_SETFOCUS, NULL, (LPARAM)0);
+
+		//3.6. 
 		if (postalBook != NULL) {
 			PostalBookDestroy(postalBook);
 			free(postalBook);
 		}
+		//3.7.
 		EndDialog(hWnd, 0);
 	}
 	return FALSE;
