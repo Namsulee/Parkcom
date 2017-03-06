@@ -21,7 +21,7 @@ Long AppendFromRear(Array *array, void *object, size_t size);
 Long Delete(Array *array, Long index, size_t size);
 Long DeleteFromFront(Array *array, size_t size);
 Long DeleteFromRear(Array *array, size_t size);
-Long Clear(Array *array);
+void Clear(Array *array);
 Long Modify(Array *array, Long index, void *object, size_t size);
 Long LinearSearchUnique(Array *array, void *key, size_t size, int (*compare)(void*, void*));
 void LinearSearchDuplicate(Array *array, void *key, Long *(*indexes), Long *count, size_t size, int (*compare)(void*, void*));

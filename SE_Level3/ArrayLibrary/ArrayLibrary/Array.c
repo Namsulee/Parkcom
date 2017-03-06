@@ -201,45 +201,97 @@ Long Delete(Array *array, Long index, size_t size) {
 
 /*
 함수 명칭 : DeleteFromFront
-기    능 :
-입    력 :
-출    력 :
+기    능 : 맨앞의 객체를 삭제한다.
+입    력 : 사이즈
+출    력 : 삭제위치(-1)
 작 성 자 : Joey
 작성 일자 : 2017/03/06
 */
 Long DeleteFromFront(Array *array, size_t size) {
-
+	void(*temp);
+	Long index;
+	Long i;
+	if (array->capacity > 1) {
+		temp = calloc(array->capacity - 1, size);
+	}
+	while (i < array->length) {
+		memcpy(((char*)temp) + ((i - 1) *size), ((char*)(array->front)) + (i* size), size);
+		i++;
+	}
+	if (array->front != NULL) {
+		free(array->front);
+		array->front = NULL;
+	}
+	if (array->capacity > 1){
+		array->front = temp;
+	}
+	array->length--;
+	array->capacity--;
+	index = -1;
+	return index;
 }
 
 /*
-함수 명칭 :
-기    능 :
-입    력 :
-출    력 :
+함수 명칭 : DeleteFromRear
+기    능 : 마지막의 객체를 삭제한다.
+입    력 : 사이즈
+출    력 : 삭제한 위치(-1)
 작 성 자 : Joey
 작성 일자 : 2017/03/06
 */
-Long DeleteFromRear(Array *array, size_t size);
+Long DeleteFromRear(Array *array, size_t size) {
+	void(*temp);
+	Long index;
+	Long i;
+	if (array->capacity > 1) {
+		temp = calloc(array->capacity - 1, size);
+	}
+	while (i < array->length - 1) {
+		memcpy(((char*)temp) + (i * size), ((char*)(array->front)) + (i* size), size);
+		i++;
+	}
+	if (array->front != NULL) {
+		free(array->front);
+		array->front = NULL;
+	}
+	if (array->capacity > 1){
+		array->front = temp;
+	}
+	array->length--;
+	array->capacity--;
+	index = -1;
+	return index;
+}
 
 /*
-함수 명칭 :
-기    능 :
-입    력 :
-출    력 :
+함수 명칭 : Clear
+기    능 : 배열을 해제한다.
+입    력 : 없음
+출    력 : 없음
 작 성 자 : Joey
 작성 일자 : 2017/03/06
 */
-Long Clear(Array *array);
+void Clear(Array *array) {
+	if (array->front != NULL) {
+		free(array->front);
+		array->front = NULL;
+	}
+	array->capacity = 0;
+	array->length = 0;
+}
 
 /*
-함수 명칭 :
-기    능 :
-입    력 :
-출    력 :
+함수 명칭 : Modify
+기    능 : 입력받은 객체를 배열 위치의 객체를 고친다.
+입    력 : 위치, 객체, 사이즈
+출    력 : 위치
 작 성 자 : Joey
 작성 일자 : 2017/03/06
 */
-Long Modify(Array *array, Long index, void *object, size_t size);
+Long Modify(Array *array, Long index, void *object, size_t size) {
+	memcpy(((char*)(array->front)) + (index*size), object, size);
+	return index;
+}
 
 /*
 함수 명칭 : LinearSearchUnique
@@ -263,37 +315,115 @@ Long LinearSearchUnique(Array *array, void *key, size_t size, int(*compare)(void
 }
 
 /*
-함수 명칭 :
-기    능 :
-입    력 :
-출    력 :
+함수 명칭 : LinearSearchDuplicate
+기    능 : 배열에서 주어진 키값과 동일한 객체를 찾는다.
+입    력 : 키, 사이즈, 비교 함수
+출    력 : 객체들, 개수
 작 성 자 : Joey
 작성 일자 : 2017/03/06
 */
-void LinearSearchDuplicate(Array *array, void *key, Long *(*indexes), Long *count, size_t size, int(*compare)(void*, void*));
+void LinearSearchDuplicate(Array *array, void *key, Long *(*indexes), Long *count, size_t size, int(*compare)(void*, void*)){
+	Long i = 0;
+	Long index = 0;
+	*count = 0;
+	*indexes = (Long(*))calloc(array->length, sizeof(Long));
+	while (i < array->length) {
+		if (compare(((char*)(array->front)) + (i *size), key) == 0) {
+			(*indexes)[index] = i;
+			index++;
+			(*count)++;
+		}
+		i++;
+	}
+}
 
 /*
-함수 명칭 :
-기    능 :
-입    력 :
-출    력 :
+함수 명칭 : BinarySearchUnique
+기    능 : 주어진 키와 같은 객체를 이분검색을 통해서 찾는다.
+입    력 : 키, 사이즈, 비교함수
+출    력 : 객체의 위치
 작 성 자 : Joey
 작성 일자 : 2017/03/06
 */
-Long BinarySearchUnique(Array *array, void *key, size_t size, int(*compare)(void*, void*));
+Long BinarySearchUnique(Array *array, void *key, size_t size, int(*compare)(void*, void*)){
+	Long index;
+	Long begin = 0;
+	Long end;
+	Long middle;
+	
+	end = array->length - 1;
+	middle = (begin + end) / 2;
+	while (begin <= end && compare(((char*)(array->front)) + (middle * size), key) != 0) {
+		if (compare(((char*)(array->front)) + (middle * size), key) > 0) {
+			begin = middle + 1;
+		}
+		else {
+			end = middle - 1;
+		}
+		middle = (begin + end) / 2;
+	}
+	if (begin <= end) {
+		index = middle;
+	}
+}
 
 /*
-함수 명칭 :
-기    능 :
-입    력 :
-출    력 :
+함수 명칭 : BinarySearchDuplicate
+기    능 : 주어진 키와 같은 객체들을 이분검색을 통해서 찾는다.
+입    력 : 키, 사이즈, 비교함수
+출    력 : 위치들, 개수
 작 성 자 : Joey
 작성 일자 : 2017/03/06
 */
-void BinarySearchDuplicate(Array *array, void *key, Long *(*indexes), Long *count, size_t size, int(*compare)(void*, void*));
+void BinarySearchDuplicate(Array *array, void *key, Long *(*indexes), Long *count, size_t size, int(*compare)(void*, void*)){
+	Long begin = 0;
+	Long end;
+	Long middle;
+	Long keyBegin;
+	Long keyEnd;
+	Long i;
+	Long j;
+	Long index;
+	*count = 0;
+	*indexes = NULL;
+
+	end = array->length - 1;
+	middle = (begin + end) / 2;
+	while (begin <= end && compare(((char*)(array->front)) + (middle * size), key) != 0) {
+		if (compare(((char*)(array->front)) + (middle * size), key) < 0) {
+			begin = middle + 1;
+		}
+		else {
+			end = middle - 1;
+		}
+		middle = (begin + end) / 2;
+	}
+
+	index = middle;
+	i = index - 1;
+	while (i >= begin && compare(((char*)(array->front)) + (i *size), key) == 0) {
+		i--;
+	}
+	keyBegin = i + 1;
+	i = keyBegin;
+	while (i <= end && compare(((char*)(array->front)) + (i * size), key) == 0) {
+		(*count)++;
+		i++;
+	}
+	keyEnd = i - 1;
+	if (*count > 0) {
+		*indexes = (Long(*))calloc(count, sizeof(Long));
+	}
+	i = keyBegin;
+	while (i <= keyBegin && compare(((char*)(array->front)) + (i*size), key) == 0) {
+		(*indexes)[j] = i;
+		j++;
+		i++;
+	}
+}
 
 /*
-함수 명칭 :
+함수 명칭 : SelectionSort
 기    능 :
 입    력 :
 출    력 :
