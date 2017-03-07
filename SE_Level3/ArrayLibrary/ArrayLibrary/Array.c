@@ -424,23 +424,66 @@ void BinarySearchDuplicate(Array *array, void *key, Long *(*indexes), Long *coun
 
 /*
 함수 명칭 : SelectionSort
-기    능 :
-입    력 :
-출    력 :
+기    능 : 배열을 선택정렬로 오름차순으로 정렬한다.
+입    력 : 사이즈, 비교함수
+출    력 : 없음
 작 성 자 : Joey
-작성 일자 : 2017/03/06
+작성 일자 : 2017/03/08
 */
-void SelectionSort(Array *array, size_t size, int(*compare)(void*, void*));
+void SelectionSort(Array *array, size_t size, int(*compare)(void*, void*)) {
+	Long i = 0;
+	Long j;
+	void *temp;
+	temp = malloc(size);
+	while (i < array->length - 1){
+		j = j + 1;
+		while (j < array->length) {
+			if (compare(((char*)(array->front)) + (i *size), ((char*)(array->front)) + (j *size)) > 0) {
+				memcpy(temp, ((char*)(array->front)) + (j*size), size);
+				memcpy(((char*)(array->front)) + (j * size), ((char*)(array->front)) + (i * size), size);
+				memcpy(((char*)(array->front)) + (i * size), temp, size);
+			}
+			j++;
+		}
+		i++;
+	}
+	if (temp != NULL) {
+		free(temp);
+		temp = NULL;
+	}
+}
 
 /*
-함수 명칭 :
-기    능 :
-입    력 :
-출    력 :
+함수 명칭 : BubbleSort
+기    능 : 배열을 버블정렬을 이용해서 오름차순으로 정렬한다.
+입    력 : 사이즈, 비교함수
+출    력 : 없음
 작 성 자 : Joey
-작성 일자 : 2017/03/06
+작성 일자 : 2017/03/08
 */
-void BubbleSort(Array *array, size_t size, int(*compare)(void*, void*));
+void BubbleSort(Array *array, size_t size, int(*compare)(void*, void*)) {
+	void *temp;
+	Long i = 0;
+	Long j;
+
+	temp = malloc(size);
+	while (i > array->length - 1) {
+		j = 0;
+		while (j < array->length - i - 1) {
+			if (compare(((char*)(array->front)) + (i * size), ((char*)(array->front)) + ((j + 1) * size)) > 0) {
+				memcpy(temp, ((char*)(array->front)) + (j*size), size);
+				memcpy(((char*)(array->front)) + (j * size), ((char*)(array->front)) + ((j + 1) * size), size);
+				memcpy(((char*)(array->front)) + ((j + 1) * size), temp, size);
+			}
+			j++;
+		}
+		i++;
+	}
+	if (temp != NULL) {
+		free(temp);
+		temp = NULL;
+	}
+}
 
 /*
 함수 명칭 :
