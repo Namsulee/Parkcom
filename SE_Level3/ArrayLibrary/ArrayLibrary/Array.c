@@ -115,22 +115,22 @@ int main(int argc, char* argv[]) {
 	printf("%d\n", ret);
 
 	object = 20;
-	index = Store(&one, 0, &object, sizeof(Long));
+	index = Store(&one, 1, &object, sizeof(Long));
 	GetAt(&one, index, &ret, sizeof(Long));
 	printf("%d\n", ret);
 
 	object = 50000;
-	index = Store(&one, 0, &object, sizeof(Long));
+	index = Store(&one, 2, &object, sizeof(Long));
 	GetAt(&one, index, &ret, sizeof(Long));
 	printf("%d\n", ret);
 
 	object = 1;
-	index = Store(&one, 0, &object, sizeof(Long));
+	index = Store(&one, 3, &object, sizeof(Long));
 	GetAt(&one, index, &ret, sizeof(Long));
 	printf("%d\n", ret);
 
 	object = 300;
-	index = Store(&one, 0, &object, sizeof(Long));
+	index = Store(&one, 4, &object, sizeof(Long));
 	GetAt(&one, index, &ret, sizeof(Long));
 	printf("%d\n", ret);
 
@@ -141,22 +141,22 @@ int main(int argc, char* argv[]) {
 	printf("%d\n", ret);
 
 	object = 20;
-	index = Store(&other, 0, &object, sizeof(Long));
+	index = Store(&other, 1, &object, sizeof(Long));
 	GetAt(&other, index, &ret, sizeof(Long));
 	printf("%d\n", ret);
 
 	object = 50000;
-	index = Store(&other, 0, &object, sizeof(Long));
+	index = Store(&other, 2, &object, sizeof(Long));
 	GetAt(&other, index, &ret, sizeof(Long));
 	printf("%d\n", ret);
 
 	object = 1;
-	index = Store(&other, 0, &object, sizeof(Long));
+	index = Store(&other, 3, &object, sizeof(Long));
 	GetAt(&other, index, &ret, sizeof(Long));
 	printf("%d\n", ret);
 
 	object = 300;
-	index = Store(&other, 0, &object, sizeof(Long));
+	index = Store(&other, 4, &object, sizeof(Long));
 	GetAt(&other, index, &ret, sizeof(Long));
 	printf("%d\n", ret);
 
@@ -181,7 +181,7 @@ int main(int argc, char* argv[]) {
 	//DeleteFromRear
 	index = DeleteFromRear(&array, sizeof(Long));
 	if (index == -1) {
-		printf("처음 위치의 객체를 지웠습니다.\n");
+		printf("마지막 위치의 객체를 지웠습니다.\n");
 	}
 
 	//SelectionSort
@@ -205,7 +205,7 @@ int main(int argc, char* argv[]) {
 	printf("\n");
 
 	//InsertionSort
-	InsertionSort(&one, sizeof(Long), CompareIntegers);
+	InsertionSort(&other, sizeof(Long), CompareIntegers);
 	i = 0;
 	while (i < other.length) {
 		GetAt(&other, i, &ret, sizeof(Long));
@@ -217,19 +217,44 @@ int main(int argc, char* argv[]) {
 	//LinearSearchUnique
 	key = 300;
 	index = LinearSearchUnique(&array, &key, sizeof(Long), CompareIntegers);
-	GetAt(&array, index, &ret, sizeof(Long));
-	printf("%d\n", ret);
+	if (index >= 0) {
+		GetAt(&array, index, &ret, sizeof(Long));
+		printf("%d\n", ret);
+	}
+	else {
+		printf("찾을 수 없습니다.\n");
+	}
+
+	key = 999;
+	index = LinearSearchUnique(&array, &key, sizeof(Long), CompareIntegers);
+	if (index >= 0) {
+		GetAt(&array, index, &ret, sizeof(Long));
+		printf("%d\n", ret);
+	}
+	else {
+		printf("찾을 수 없습니다.\n");
+	}
 
 	//BinarySearchUnique
-	object = 999;
-	index = AppendFromFront(&array, &object, sizeof(Long));
-	GetAt(&array, index, &ret, sizeof(Long));
-	printf("%d\n", ret);
-
 	key = 300;
 	index = BinarySearchUnique(&array, &key, sizeof(Long), CompareIntegers);
-	GetAt(&array, index, &ret, sizeof(Long));
-	printf("%d\n", ret);
+	if (index >= 0) {
+		GetAt(&array, index, &ret, sizeof(Long));
+		printf("%d\n", ret);
+	}
+	else {
+		printf("찾을 수 없습니다.\n");
+	}
+
+	key = 990;
+	index = BinarySearchUnique(&array, &key, sizeof(Long), CompareIntegers);
+	if (index >= 0) {
+		GetAt(&array, index, &ret, sizeof(Long));
+		printf("%d\n", ret);
+	}
+	else {
+		printf("찾을 수 없습니다.\n");
+	}
 
 	//Clear
 	Clear(&array);
@@ -297,7 +322,7 @@ int main(int argc, char* argv[]) {
 */
 void Create(Array*array, Long capacity, size_t size) {
 	array->front = calloc(capacity, size);
-	array->capacity++;
+	array->capacity = capacity;
 	array->length = 0;
 }
 
@@ -342,7 +367,7 @@ Long Insert(Array *array, Long index, void *object, size_t size) {
 	}
 	array->front = temp;
 	array->capacity++;
-	memcpy(((char*)(array->front)) + (i*size), object, size);
+	memcpy(((char*)(array->front)) + (index * size), object, size);
 	array->length++;
 
 	return index;
@@ -598,7 +623,7 @@ void LinearSearchDuplicate(Array *array, void *key, Long *(*indexes), Long *coun
 작성 일자 : 2017/03/06
 */
 Long BinarySearchUnique(Array *array, void *key, size_t size, int(*compare)(void*, void*)){
-	Long index;
+	Long index = - 1;
 	Long begin = 0;
 	Long end;
 	Long middle;
@@ -720,11 +745,11 @@ void BubbleSort(Array *array, size_t size, int(*compare)(void*, void*)) {
 	Long j;
 
 	temp = malloc(size);
-	while (i > array->length - 1) {
+	while (i < array->length - 1) {
 		j = 0;
 		while (j < array->length - i - 1) {
-			if (compare(((char*)(array->front)) + (i * size), ((char*)(array->front)) + ((j + 1) * size)) > 0) {
-				memcpy(temp, ((char*)(array->front)) + (j*size), size);
+			if (compare(((char*)(array->front)) + (j * size), ((char*)(array->front)) + ((j + 1) * size)) > 0) {
+				memcpy(temp, ((char*)(array->front)) + (j  *size), size);
 				memcpy(((char*)(array->front)) + (j * size), ((char*)(array->front)) + ((j + 1) * size), size);
 				memcpy(((char*)(array->front)) + ((j + 1) * size), temp, size);
 			}
@@ -756,7 +781,7 @@ void InsertionSort(Array *array, size_t size, int(*compare)(void*, void*)) {
 	while (i < array->length) {
 		memcpy(temp, ((char*)(array->front)) + (i * size), size);
 		j = i - 1;
-		while (j <= 0 && compare( ((char*)(array->front)) + (i *size), ((char*)(array->front)) + (j * size) ) < 0){
+		while (j >= 0 && compare( ((char*)(array->front)) + (i *size), ((char*)(array->front)) + (j * size) ) < 0){
 			j--;
 		}
 		k = i;
