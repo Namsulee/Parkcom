@@ -486,24 +486,82 @@ void BubbleSort(Array *array, size_t size, int(*compare)(void*, void*)) {
 }
 
 /*
-함수 명칭 :
-기    능 :
-입    력 :
-출    력 :
+함수 명칭 : InsertionSort
+기    능 : 배열을 삽입정렬을 이용해서 오름차순으로 정렬한다.
+입    력 : 사이즈, 비교함수
+출    력 : 없음
 작 성 자 : Joey
-작성 일자 : 2017/03/06
+작성 일자 : 2017/03/11
 */
-void InsertionSort(Array *array, size_t size, int(*compare)(void*, void*));
+void InsertionSort(Array *array, size_t size, int(*compare)(void*, void*)) {
+	void *temp;
+	Long i = 1;
+	Long j = 0;
+	Long k;
+
+	temp = malloc(size);
+	while (i < array->length) {
+		memcpy(temp, ((char*)(array->front)) + (i * size), size);
+		j = i - 1;
+		while (j <= 0 && compare( ((char*)(array->front)) + (i *size), ((char*)(array->front)) + (j * size) ) < 0){
+			j--;
+		}
+		k = i;
+		j++;
+		while (k > j) {
+			memcpy(((char*)(array->front)) + (k * size), ((char*)(array->front)) + ((k - 1) * size), size);
+			k--;
+		}
+		memcpy(((char*)(array->front)) + (j * size), temp, size);
+		i++;
+	}
+	if (temp != NULL) {
+		free(temp);
+		temp = NULL;
+	}
+}
 
 /*
-함수 명칭 :
-기    능 :
-입    력 :
-출    력 :
+함수 명칭 : MergeSort
+기    능 : 2개의 배열을 입력받아서 오름차순으로 정렬한다.
+입    력 : 배열1, 배열2, 사이즈, 비교함수
+출    력 : 없음
 작 성 자 : Joey
-작성 일자 : 2017/03/06
+작성 일자 : 2017/03/11
 */
-void MergeSort(Array *array, Array *one, Array *other, size_t size, int(*compare)(void*, void*));
+void MergeSort(Array *array, Array *one, Array *other, size_t size, int(*compare)(void*, void*)){
+	Long i = 0;
+	Long j = 0;
+	Long k = 0;
+
+	if (array->front != NULL){
+		free(array->front);
+	}
+	array->front = calloc(one->length + other->length, size);
+	array->capacity = one->length + other->length;
+	while (i < one->length && j < other->length) {
+		if (compare(((char*)(one->front)) + (i * size), ((char*)(other->front)) + (j * size)) < 0) {
+			memcpy(((char*)(array->front)) + (k * size), ((char*)(one->front)) + (i * size), size);
+			i++;
+		}
+		else {
+			memcpy(((char*)(array->front)) + (k * size), ((char*)(other->front)) + (j * size), size);
+			j++;
+		}
+		k++;
+	}
+	while (i < one->length) {
+		memcpy(((char*)(array->front)) + (k * size), ((char*)(one->front)) + (i * size), size);
+		k++;
+		i++;
+	}
+	while (j < other->length) {
+		memcpy(((char*)(array->front)) + (k * size), ((char*)(other->front)) + (j * size), size);
+		k++;
+		j++;
+	}
+	array->length = one->length + other->length;
+}
 
 /*
 함수 명칭 : Destroy
