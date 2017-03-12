@@ -10,5 +10,7 @@ Parkcom
 ## SE Level 3
 #### step1 : PostalBook
 #### step2 : Array Library
-#### step3 : AddressBook GUI with Array Library
+#### step3 : AddressBook with Array Library
+#### step4 : PostalBook with Array Libarary
+#### step5 : AddressBook + PostalBook + Array Library (GUI)
 #### step4 : BusinessCardBinder
