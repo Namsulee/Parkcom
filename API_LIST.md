@@ -105,3 +105,9 @@ https://msdn.microsoft.com/ko-kr/library/windows/desktop/bb761165(v=vs.85).aspx
 
 Extended List-View Styles
 https://msdn.microsoft.com/ko-kr/library/windows/desktop/bb774732(v=vs.85).aspx#LVS_EX_FULLROWSELECT
+
+EM_SETSEL
+https://msdn.microsoft.com/ko-kr/library/windows/desktop/bb761661(v=vs.85).aspx
+
+WM_SETFOCUS
+https://msdn.microsoft.com/ko-kr/library/windows/desktop/ms646283(v=vs.85).aspx
