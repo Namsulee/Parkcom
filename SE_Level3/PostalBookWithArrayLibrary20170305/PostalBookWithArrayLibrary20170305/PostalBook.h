@@ -38,6 +38,6 @@ ULong PostalBook_Load(PostalBook *postalBook);
 void PostalBook_Find(PostalBook *postalBook, char(*inputDong), ULong *(*indexes), ULong *count);
 void PostalBook_Destroy(PostalBook *postalBook);
 
-void PostalBook_GetAt(PostalBook *postalBook, ULong index);
+Address PostalBook_GetAt(PostalBook *postalBook, ULong index);
 int CompareDongs(void *one, void *other);
 #endif //_POSTALBOOK_H
