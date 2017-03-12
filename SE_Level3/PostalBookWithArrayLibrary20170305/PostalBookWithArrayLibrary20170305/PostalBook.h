@@ -26,7 +26,7 @@ typedef struct _address {
 }Address;
 
 typedef struct _postalBook{
-	Address (*addresses);
+	Array addresses;
 	ULong capacity;
 	ULong length;
 }PostalBook;

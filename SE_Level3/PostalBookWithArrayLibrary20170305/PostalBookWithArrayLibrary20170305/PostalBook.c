@@ -80,7 +80,7 @@ ULong PostalBook_Load(PostalBook *postalBook) {
 	char line[256];
 	Address address;
 	ULong fieldIndex;
-	ULong i = 0;
+	ULong i;
 	ULong j;
 	FILE *file;
 
@@ -113,7 +113,7 @@ ULong PostalBook_Load(PostalBook *postalBook) {
 				}
 				fieldIndex++;
 				i++;
-			}
+			}			
 			if (postalBook->length < postalBook->capacity) {
 				Store(&postalBook->addresses, postalBook->length, &address, sizeof(Address));
 			}
