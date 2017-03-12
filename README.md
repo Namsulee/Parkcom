@@ -8,7 +8,7 @@ Parkcom
 - update ListView Style of API's in msdn
 
 ## SE Level 3
-#### PostalBook
-#### Array Library
-#### AddressBook GUI with Array Library
-#### BusinessCardBinder
+#### step1 : PostalBook
+#### step2 : Array Library
+#### step3 : AddressBook GUI with Array Library
+#### step4 : BusinessCardBinder
