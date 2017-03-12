@@ -1,0 +1,31 @@
+﻿Build started 2017-03-12 오후 10:07:33.
+     1>Project "C:\Users\home\Documents\GitHub\Parkcom\SE_Level3\AddressBookPostalBookArrayLibrary20170305\AddressBookPostalBookArrayLibrary20170305\AddressBookPostalBookArrayLibrary20170305.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio Community 2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /D _CRT_SECURE_NO_WARNINGS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt FindingZipcodeForm.c PostalBook.c
+         PostalBook.c
+         FindingZipcodeForm.c
+     1>c:\users\home\documents\github\parkcom\se_level3\addressbookpostalbookarraylibrary20170305\addressbookpostalbookarraylibrary20170305\findingzipcodeform.c(77): warning C4133: '=' : incompatible types - from 'char [5]' to 'LPWSTR'
+     1>c:\users\home\documents\github\parkcom\se_level3\addressbookpostalbookarraylibrary20170305\addressbookpostalbookarraylibrary20170305\findingzipcodeform.c(81): warning C4133: '=' : incompatible types - from 'char [5]' to 'LPWSTR'
+     1>c:\users\home\documents\github\parkcom\se_level3\addressbookpostalbookarraylibrary20170305\addressbookpostalbookarraylibrary20170305\findingzipcodeform.c(85): warning C4133: '=' : incompatible types - from 'char [9]' to 'LPWSTR'
+     1>c:\users\home\documents\github\parkcom\se_level3\addressbookpostalbookarraylibrary20170305\addressbookpostalbookarraylibrary20170305\findingzipcodeform.c(180): warning C4133: 'function' : incompatible types - from 'TCHAR [27]' to 'char *'
+     1>c:\users\home\documents\github\parkcom\se_level3\addressbookpostalbookarraylibrary20170305\addressbookpostalbookarraylibrary20170305\findingzipcodeform.c(200): warning C4133: 'function' : incompatible types - from 'TCHAR [8]' to 'char *'
+     1>c:\users\home\documents\github\parkcom\se_level3\addressbookpostalbookarraylibrary20170305\addressbookpostalbookarraylibrary20170305\findingzipcodeform.c(206): warning C4133: 'function' : incompatible types - from 'TCHAR [256]' to 'char *'
+     1>c:\users\home\documents\github\parkcom\se_level3\addressbookpostalbookarraylibrary20170305\addressbookpostalbookarraylibrary20170305\findingzipcodeform.c(209): warning C4133: 'function' : incompatible types - from 'TCHAR [256]' to 'char *'
+     1>c:\users\home\documents\github\parkcom\se_level3\addressbookpostalbookarraylibrary20170305\addressbookpostalbookarraylibrary20170305\findingzipcodeform.c(215): warning C4133: '=' : incompatible types - from 'char *' to 'LPWSTR'
+     1>c:\users\home\documents\github\parkcom\se_level3\addressbookpostalbookarraylibrary20170305\addressbookpostalbookarraylibrary20170305\findingzipcodeform.c(266): warning C4133: 'function' : incompatible types - from 'char [7]' to 'LPCWSTR'
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio Community 2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\home\Documents\GitHub\Parkcom\SE_Level3\AddressBookPostalBookArrayLibrary20170305\Debug\AddressBookPostalBookArrayLibrary20170305.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\home\Documents\GitHub\Parkcom\SE_Level3\AddressBookPostalBookArrayLibrary20170305\Debug\AddressBookPostalBookArrayLibrary20170305.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\home\Documents\GitHub\Parkcom\SE_Level3\AddressBookPostalBookArrayLibrary20170305\Debug\AddressBookPostalBookArrayLibrary20170305.lib" /MACHINE:X86 Debug\AddressBook_GUI.res
+         Debug\AddressBook.obj
+         Debug\Array.obj
+         Debug\FindingForm.obj
+         Debug\FindingZipcodeForm.obj
+         Debug\PostalBook.obj
+         Debug\UpdatingForm.obj
+     1>MSVCRTD.lib(crtexe.obj) : error LNK2019: unresolved external symbol _main referenced in function ___tmainCRTStartup
+     1>C:\Users\home\Documents\GitHub\Parkcom\SE_Level3\AddressBookPostalBookArrayLibrary20170305\Debug\AddressBookPostalBookArrayLibrary20170305.exe : fatal error LNK1120: 1 unresolved externals
+     1>Done Building Project "C:\Users\home\Documents\GitHub\Parkcom\SE_Level3\AddressBookPostalBookArrayLibrary20170305\AddressBookPostalBookArrayLibrary20170305\AddressBookPostalBookArrayLibrary20170305.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:02.65
