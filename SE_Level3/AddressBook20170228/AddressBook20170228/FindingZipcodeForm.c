@@ -231,12 +231,13 @@ BOOL FindingZipcodeForm_OnFindButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lPa
 */
 BOOL FindingZipcodeForm_OnListViewItemDoubleClicked(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	PostalBook *postalBook;
-	TCHAR zipcode[ZIPCODE];
+	//TCHAR zipcode[ZIPCODE];
 	TCHAR completeAddress[COMPLETEADDRESS];
-	TCHAR text[MAXTEXTSIZE];
+	//TCHAR text[MAXTEXTSIZE];
 	ULong index;
 	LVITEM item = { 0, };
 	HWND addressBookWindow;
+	int textLength;
 
 	//if (((LPNMHDR)lParam)->code == NM_DBLCLK) {
 	if (((NMHDR *)lParam)->code == NM_DBLCLK) {
@@ -251,23 +252,24 @@ BOOL FindingZipcodeForm_OnListViewItemDoubleClicked(HWND hWnd, WPARAM wParam, LP
 		item.cchTextMax = COMPLETEADDRESS;
 		SendMessage(GetDlgItem(hWnd, IDC_LIST_ADDRESSES), LVM_GETITEMTEXT, (WPARAM)index, (LPARAM)&item);
 
+		//Message Box로 띄우기 위해서 사용했고, 현재는 필요없는 내용임
 		//item.iSubItem = 2;
 		//item.pszText = zipcode;
 		//item.cchTextMax = ZIPCODE;
 		//SendMessage(GetDlgItem(hWnd, IDC_LIST_ADDRESSES), LVM_GETITEMTEXT, (WPARAM)index, (LPARAM)&item);
-
 		//sprintf(text, "%s\n%s", zipcode, completeAddress);
-
 		//MessageBox(hWnd, (LPCTSTR)text, (LPCTSTR)"알림", MB_OK | MB_ICONEXCLAMATION);
 
-		//3.3. 
+		//3.3. 주소록 윈도우를 찾는다.
 		addressBookWindow = FindWindow("#32770", "주소록");
-		//3.4. 
+		//3.4. 주소록 윈도우의 주소에 찾은 주소를 적는다.
 		SendMessage(GetDlgItem(addressBookWindow, IDC_EDIT_ADDRESS), WM_SETTEXT, (WPARAM)0, (LPARAM)completeAddress);
 		//3.5. 캐럿의 위치를 적은 문자 한칸뒤로 보낸다. (미해결)
-		SendMessage(GetDlgItem(addressBookWindow, IDC_BUTTON_FINDINGZIPCODE), WM_KILLFOCUS, NULL, (LPARAM)0);
-		SendMessage(GetDlgItem(addressBookWindow, IDC_EDIT_ADDRESS), WM_SETFOCUS, NULL, (LPARAM)0);
-
+		//SendMessage(GetDlgItem(addressBookWindow, IDC_BUTTON_FINDINGZIPCODE), WM_KILLFOCUS, NULL, (LPARAM)0);
+		textLength = SendMessage(GetDlgItem(addressBookWindow, IDC_EDIT_ADDRESS), WM_GETTEXT, (WPARAM)COMPLETEADDRESS, (LPARAM)completeAddress);
+		SendMessage(GetDlgItem(addressBookWindow, IDC_EDIT_ADDRESS), EM_SETSEL, (WPARAM)textLength, (LPARAM)textLength);
+		SendMessage(GetDlgItem(addressBookWindow, IDC_EDIT_ADDRESS), WM_SETFOCUS, (WPARAM)0, (LPARAM)0);
+		
 		//3.6. 
 		if (postalBook != NULL) {
 			PostalBookDestroy(postalBook);
