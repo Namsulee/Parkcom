@@ -270,14 +270,15 @@ void LinearSearchDuplicate(LinkedList *linkedList, void *key, Node* *(*indexes),
 	*count = 0;
 	(*indexes) = (Node* (*))calloc(linkedList->length, sizeof(Node *));
 	linkedList->current = linkedList->head;
-	while (previous != linkedList->tail) 
+	while (previous != linkedList->tail) {
 		if (compare(linkedList->current + 1, key) == 0) {
 			(*indexes)[i] = linkedList->current;
 			(*count)++;
 			i++;
 		}
-	previous = linkedList->current;
-	linkedList->current = linkedList->current->next;
+		previous = linkedList->current;
+		linkedList->current = linkedList->current->next;
+	}
 }
 
 /*
