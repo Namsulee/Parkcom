@@ -38,7 +38,7 @@ Node* InsertBefore(LinkedList *linkedList, Node *index, void *object, size_t siz
 		linkedList->current->previous = linkedList->current;
 		linkedList->head = linkedList->current;
 	}
-	index->previous->next = linkedList->current;
+	index->previous = linkedList->current;
 	linkedList->length++;
 	return linkedList->current;
 }
@@ -85,7 +85,7 @@ Node* AppendFromHead(LinkedList *linkedList, void *object, size_t size) {
 		linkedList->head->previous = linkedList->current;
 	}
 	else {
-		linkedList->current->previous = linkedList->current;
+		linkedList->current->next = linkedList->current;
 		linkedList->tail = linkedList->current;
 	}
 	linkedList->head = linkedList->current;
@@ -107,7 +107,7 @@ Node* AppendFromTail(LinkedList *linkedList, void *object, size_t size) {
 	linkedList->current->next = linkedList->current;
 	if (linkedList->tail != NULL) {
 		linkedList->current->previous = linkedList->tail;
-		linkedList->tail = linkedList->current;
+		linkedList->tail->next = linkedList->current;
 	}
 	else {
 		linkedList->current->previous = linkedList->current;

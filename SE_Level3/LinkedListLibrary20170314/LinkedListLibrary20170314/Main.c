@@ -31,15 +31,15 @@ int main(int argc, char *argv[]) {
 	GetAt(&linkedList, index, &object, sizeof(Long));
 	printf("%d\n", object);
 
-	//object = 10;
-	//index = InsertBefore(&linkedList, index, &object, sizeof(Long));
-	//GetAt(&linkedList, index, &object, sizeof(Long));
-	//printf("%d\n", object);
+	object = 10;
+	index = InsertBefore(&linkedList, index, &object, sizeof(Long));
+	GetAt(&linkedList, index, &object, sizeof(Long));
+	printf("%d\n", object);
 
-	//object = 4;
-	//index = InsertAfter(&linkedList, index, &object, sizeof(Long));
-	//GetAt(&linkedList, index, &object, sizeof(Long));
-	//printf("%d\n", object);
+	object = 4;
+	index = InsertAfter(&linkedList, index, &object, sizeof(Long));
+	GetAt(&linkedList, index, &object, sizeof(Long));
+	printf("%d\n", object);
 
 	object = 2000;
 	index = AppendFromTail(&linkedList, &object, sizeof(Long));

@@ -1,4 +1,3 @@
-#pragma once
 //LinkedList.h
 #ifndef _LINKEDLIST_H
 #define _LINKEDLIST_H
