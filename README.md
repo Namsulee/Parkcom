@@ -13,5 +13,8 @@ Parkcom
 #### step3 : AddressBook with Array Library
 #### step4 : PostalBook with Array Libarary
 #### step5 : AddressBook + PostalBook + Array Library (GUI)
-#### step6 : BusinessCardBinder - (Need to Implementation API Windows programming)
+#### step6 : BusinessCardBinder - (to be API Windows programming)
 #### step7 : LinkedList Library
+#### step8 : BusinessCardBinder + LinkedList Library (to be...)
+#### step9 : BusinessCardBinder + DiskFile(Load/Save) + LinkedList Library (to be...)
+#### step10 : BinaryTree Library (to be...)
