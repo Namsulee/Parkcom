@@ -139,10 +139,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BusinessCardBinder.h" />
+    <ClInclude Include="BusinessCardBinderForm.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="TakingInForm.h" />
+    <ClInclude Include="TakingOutForm.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BusinessCardBinder.c" />
+    <ClCompile Include="BusinessCardBinderForm.c" />
+    <ClCompile Include="TakingInForm.c" />
+    <ClCompile Include="TakingOutForm.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,0 +1,34 @@
+﻿  BusinessCardBinderForm.c
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(32): error C2065: 'BusinessCardBinder': 선언되지 않은 식별자입니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(32): error C2065: 'businessCardBinder': 선언되지 않은 식별자입니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(32): warning C4552: '*': 의미 없는 연산자입니다. 파생 작업이 있는 연산자여야 합니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(33): error C2065: 'businessCardBinder': 선언되지 않은 식별자입니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(33): error C2065: 'BusinessCardBinder': 선언되지 않은 식별자입니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(33): error C2059: 구문 오류: ')'
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(34): warning C4013: 'Create'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(34): error C2065: 'businessCardBinder': 선언되지 않은 식별자입니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(35): error C2065: 'businessCardBinder': 선언되지 않은 식별자입니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(64): error C2065: 'BusinessCardBinder': 선언되지 않은 식별자입니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(64): error C2065: 'businessCardBinder': 선언되지 않은 식별자입니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(64): warning C4552: '*': 의미 없는 연산자입니다. 파생 작업이 있는 연산자여야 합니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(65): error C2065: 'businessCardBinder': 선언되지 않은 식별자입니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(65): error C2065: 'BusinessCardBinder': 선언되지 않은 식별자입니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(65): error C2059: 구문 오류: ')'
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(66): error C2065: 'businessCardBinder': 선언되지 않은 식별자입니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(66): warning C4047: '!=': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(67): warning C4013: 'Destroy'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(67): error C2065: 'businessCardBinder': 선언되지 않은 식별자입니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(68): error C2065: 'businessCardBinder': 선언되지 않은 식별자입니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(68): warning C4022: 'free': 실제 매개 변수 1의 포인터가 일치하지 않습니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(76): error C2065: 'TakingInFormProc': 선언되지 않은 식별자입니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(76): warning C4047: '함수': 'DLGPROC'의 간접 참조 수준이 'int'과(와) 다릅니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(76): warning C4024: 'DialogBoxParamW': 형식 및 실제 매개 변수 4의 형식이 서로 다릅니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(83): error C2065: 'BusinessCardBinderFindingFormProc': 선언되지 않은 식별자입니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(83): warning C4047: '함수': 'DLGPROC'의 간접 참조 수준이 'int'과(와) 다릅니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(83): warning C4024: 'DialogBoxParamW': 형식 및 실제 매개 변수 4의 형식이 서로 다릅니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(90): error C2065: 'TakingOutFormProc': 선언되지 않은 식별자입니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(90): warning C4047: '함수': 'DLGPROC'의 간접 참조 수준이 'int'과(와) 다릅니다.
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinderform.c(90): warning C4024: 'DialogBoxParamW': 형식 및 실제 매개 변수 4의 형식이 서로 다릅니다.
+  BusinessCardBinder.c
+c:\users\juju5\documents\github\parkcom\se_level3\businesscardbinderapiprogramming20170309\businesscardbinderapiprogramming20170309\businesscardbinder.h(29): warning C4091: 'typedef ': 변수를 선언하지 않으면 '_businessCard' 왼쪽은 무시됩니다.
+  코드를 생성하고 있습니다...
