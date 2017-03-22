@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BusinessCardBinder.h" />
+    <ClInclude Include="BusinessCardBinderFindingForm.h" />
     <ClInclude Include="BusinessCardBinderForm.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="TakingInForm.h" />
@@ -150,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BusinessCardBinder.c" />
+    <ClCompile Include="BusinessCardBinderFindingForm.c" />
     <ClCompile Include="BusinessCardBinderForm.c" />
     <ClCompile Include="TakingInForm.c" />
     <ClCompile Include="TakingOutForm.c" />

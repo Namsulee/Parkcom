@@ -6,10 +6,10 @@
 #include <Windows.h>
 
 //함수 선언
-BOOL CALLBACK TakingInFormFormProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-BOOL TakingInFormForm_OnInitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam);
-BOOL TakingInFormForm_OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam);
-BOOL TakingInFormForm_OnClose(HWND hWnd, WPARAM wParam, LPARAM lParam);
-BOOL TakingInFormForm_OnTakeInButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam);
-BOOL TakingInFormForm_OnCompanyNameEditKillFocus(HWND hWnd, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK TakingInFormProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+BOOL TakingInForm_OnInitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam);
+BOOL TakingInForm_OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam);
+BOOL TakingInForm_OnClose(HWND hWnd, WPARAM wParam, LPARAM lParam);
+BOOL TakingInForm_OnTakeInButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam);
+BOOL TakingInForm_OnCompanyNameEditKillFocus(HWND hWnd, WPARAM wParam, LPARAM lParam);
 #endif //_TAKINGINFORM_H

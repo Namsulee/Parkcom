@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 //함수정의
-BOOL CALLBACK TakingInFormFormProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+BOOL CALLBACK TakingInFormProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 	BOOL ret;
 	switch (message) {
 		case WM_INITDIALOG:
@@ -20,7 +20,7 @@ BOOL CALLBACK TakingInFormFormProc(HWND hWnd, UINT message, WPARAM wParam, LPARA
 	return ret;
 }
 
-BOOL TakingInFormForm_OnInitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam) {
+BOOL TakingInForm_OnInitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	//1.1. 직급콤보의 직급목록을 만든다.
 	SendMessage(GetDlgItem(hWnd, IDC_COMBO_PERSONALPOSITION), CB_ADDSTRING, (WPARAM)0, (LPARAM)"이사");
 	SendMessage(GetDlgItem(hWnd, IDC_COMBO_PERSONALPOSITION), CB_ADDSTRING, (WPARAM)0, (LPARAM)"부장");
@@ -35,7 +35,7 @@ BOOL TakingInFormForm_OnInitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	SendMessage(GetDlgItem(hWnd, IDC_COMBO_PERSONALEMAILADDRESS), CB_ADDSTRING, (WPARAM)0, (LPARAM)"google.net");
 }
 
-BOOL TakingInFormForm_OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam) {
+BOOL TakingInForm_OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	BOOL ret;
 	switch (LOWORD(wParam)) {
 	case IDC_BUTTON_TAKEIN:
@@ -47,12 +47,12 @@ BOOL TakingInFormForm_OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	return ret;
 }
 
-BOOL TakingInFormForm_OnClose(HWND hWnd, WPARAM wParam, LPARAM lParam) {
+BOOL TakingInForm_OnClose(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	EndDialog(hWnd, 0);
 	return FALSE;
 }
 
-BOOL TakingInFormForm_OnTakeInButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam) {
+BOOL TakingInForm_OnTakeInButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	BusinessCardBinder *businessCardBinder;
 	BusinessCard *index;
 	BusinessCard businessCard;
@@ -63,16 +63,17 @@ BOOL TakingInFormForm_OnTakeInButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lPa
 	if (HIWORD(wParam) == BN_CLICKED) {
 		//2.1. 명함을 읽는다.
 		SendMessage(GetDlgItem(hWnd, IDC_EDIT_PERSONALNAME), WM_GETTEXT, (WPARAM)11, (LPARAM)businessCard.personal.name);
-		SendMessage(GetDlgItem(hWnd, IDC_EDIT_PERSONALNAME), WM_GETTEXT, (WPARAM)256, (LPARAM)businessCard.personal.position);
-		SendMessage(GetDlgItem(hWnd, IDC_EDIT_PERSONALNAME), WM_GETTEXT, (WPARAM)12, (LPARAM)businessCard.personal.cellularPhoneNumber);
-		SendMessage(GetDlgItem(hWnd, IDC_EDIT_PERSONALNAME), WM_GETTEXT, (WPARAM)256, (LPARAM)businessCard.personal.emailAddress);
+		SendMessage(GetDlgItem(hWnd, IDC_COMBO_PERSONALPOSITION), WM_GETTEXT, (WPARAM)256, (LPARAM)businessCard.personal.position);
+		SendMessage(GetDlgItem(hWnd, IDC_EDIT_PERSONALCELLUALRPHONENUMBER), WM_GETTEXT, (WPARAM)12, (LPARAM)businessCard.personal.cellularPhoneNumber);
+		SendMessage(GetDlgItem(hWnd, IDC_EDIT_PERSONALEMAILADDRESS), WM_GETTEXT, (WPARAM)256, (LPARAM)emailAddress);
+		SendMessage(GetDlgItem(hWnd, IDC_COMBO_PERSONALEMAILADDRESS), WM_GETTEXT, (WPARAM)256, (LPARAM)domain);
 		sprintf(emailAddress, "%s@%s", emailAddress, domain);
 		strcpy(businessCard.personal.emailAddress, emailAddress);
-		SendMessage(GetDlgItem(hWnd, IDC_EDIT_PERSONALNAME), WM_GETTEXT, (WPARAM)64, (LPARAM)businessCard.company.name);
-		SendMessage(GetDlgItem(hWnd, IDC_EDIT_PERSONALNAME), WM_GETTEXT, (WPARAM)12, (LPARAM)businessCard.company.telephoneNumber);
-		SendMessage(GetDlgItem(hWnd, IDC_EDIT_PERSONALNAME), WM_GETTEXT, (WPARAM)256, (LPARAM)businessCard.company.url);
-		SendMessage(GetDlgItem(hWnd, IDC_EDIT_PERSONALNAME), WM_GETTEXT, (WPARAM)256, (LPARAM)businessCard.company.address);
-		SendMessage(GetDlgItem(hWnd, IDC_EDIT_PERSONALNAME), WM_GETTEXT, (WPARAM)12, (LPARAM)businessCard.company.faxNumber);
+		SendMessage(GetDlgItem(hWnd, IDC_EDIT_COMPANYNAME), WM_GETTEXT, (WPARAM)64, (LPARAM)businessCard.company.name);
+		SendMessage(GetDlgItem(hWnd, IDC_EDIT_COMPANYTELEPHONENUMBER), WM_GETTEXT, (WPARAM)12, (LPARAM)businessCard.company.telephoneNumber);
+		SendMessage(GetDlgItem(hWnd, IDC_EDIT_COMPANYURL), WM_GETTEXT, (WPARAM)256, (LPARAM)businessCard.company.url);
+		SendMessage(GetDlgItem(hWnd, IDC_EDIT_COMPANYADDRESS), WM_GETTEXT, (WPARAM)256, (LPARAM)businessCard.company.address);
+		SendMessage(GetDlgItem(hWnd, IDC_EDIT_COMPANYFAXNUMBER), WM_GETTEXT, (WPARAM)12, (LPARAM)businessCard.company.faxNumber);
 		businessCard.next = NULL;
 		//2.2. 명함관리철 윈도우를 찾는다.
 		hBusinessCardBinderForm = FindWindow("#32770", "명함관리철");
