@@ -26,7 +26,7 @@ typedef struct _businessCard{
 	Company company;
 	Personal personal;
 	BusinessCard *next;
-};
+}BusinessCard;
 
 typedef struct _businessCardBinder{
 	BusinessCard *first;
@@ -45,4 +45,6 @@ BusinessCard* First(BusinessCardBinder *businessCardBinder);
 BusinessCard* Previous(BusinessCardBinder *businessCardBinder);
 BusinessCard* Next(BusinessCardBinder *businessCardBinder);
 BusinessCard* Last(BusinessCardBinder *businessCardBinder);
+//신규추가 2017/03/23
+BusinessCard* FindByCompanyName(BusinessCardBinder *businessCardBinder, char(*name));
 #endif //_BUSINESSCARDBINDER_H

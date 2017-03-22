@@ -389,3 +389,19 @@ BusinessCard* Last(BusinessCardBinder *businessCardBinder){
 	businessCardBinder->current = previous;
 	return businessCardBinder->current;
 }
+
+/*
+함수 명칭 : FindByCompanyName
+기    능 : 명함관리철의 회사을 찾는다.(중복없음)
+입    력 : 없음
+출    력 : 없음
+작 성 자 : Joey
+작성 일자 : 2017/03/23
+*/
+BusinessCard* FindByCompanyName(BusinessCardBinder *businessCardBinder, char(*name)) {
+	businessCardBinder->current = businessCardBinder->first;
+	while (businessCardBinder->current != NULL && strcmp(businessCardBinder->current->company.name, name) != 0) {
+		businessCardBinder->current = businessCardBinder->current->next;
+	}
+	return businessCardBinder->current;
+}

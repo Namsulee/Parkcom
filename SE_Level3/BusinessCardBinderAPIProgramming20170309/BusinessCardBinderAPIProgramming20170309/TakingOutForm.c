@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 //함수정의
-BOOL CALLBACK TakingOutFormFormProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+BOOL CALLBACK TakingOutFormProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 	BOOL ret;
 	switch (message) {
 	case WM_INITDIALOG:
@@ -16,7 +16,7 @@ BOOL CALLBACK TakingOutFormFormProc(HWND hWnd, UINT message, WPARAM wParam, LPAR
 	return ret;
 }
 
-BOOL TakingOutFormForm_OnInitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam) {
+BOOL TakingOutForm_OnInitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	BusinessCardBinder *businessCardBinder;
 	BusinessCard *index;
 	BusinessCard businessCard;
@@ -65,7 +65,7 @@ BOOL TakingOutFormForm_OnInitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	return FALSE;
 }
 
-BOOL TakingOutFormForm_OnClose(HWND hWnd, WPARAM wParam, LPARAM lParam) {
+BOOL TakingOutForm_OnClose(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	int value;
 	BusinessCard businessCard;
 	HWND hBusinessCardBinderForm;

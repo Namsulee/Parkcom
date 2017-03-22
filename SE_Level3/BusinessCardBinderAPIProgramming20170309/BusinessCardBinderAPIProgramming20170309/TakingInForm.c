@@ -91,12 +91,12 @@ BOOL TakingInForm_OnTakeInButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam)
 		SendMessage(GetDlgItem(hBusinessCardBinderForm, IDC_STATIC_COMPANYADDRESS_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->company.address);
 		SendMessage(GetDlgItem(hBusinessCardBinderForm, IDC_STATIC_COMPANYFAXNUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->company.faxNumber);
 		//2.5. 윈도우를 닫는다.
-		EndDailog(hWnd, 0);
+		EndDialog(hWnd, 0);
 	}
 	return FALSE;
 }
 
-BOOL TakingInFormForm_OnCompanyNameEditKillFocus(HWND hWnd, WPARAM wParam, LPARAM lParam) {
+BOOL TakingInForm_OnCompanyNameEditKillFocused(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	BusinessCardBinder *businessCardBinder;
 	BusinessCard *index;
 	TCHAR companyName[64];

@@ -11,5 +11,5 @@ BOOL TakingInForm_OnInitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam);
 BOOL TakingInForm_OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam);
 BOOL TakingInForm_OnClose(HWND hWnd, WPARAM wParam, LPARAM lParam);
 BOOL TakingInForm_OnTakeInButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam);
-BOOL TakingInForm_OnCompanyNameEditKillFocus(HWND hWnd, WPARAM wParam, LPARAM lParam);
+BOOL TakingInForm_OnCompanyNameEditKillFocused(HWND hWnd, WPARAM wParam, LPARAM lParam);
 #endif //_TAKINGINFORM_H

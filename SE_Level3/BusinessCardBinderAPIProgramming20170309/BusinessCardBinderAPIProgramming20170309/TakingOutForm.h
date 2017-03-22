@@ -4,7 +4,7 @@
 #include <Windows.h>
 
 //함수선언
-BOOL CALLBACK TakingOutFormFormProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-BOOL TakingOutFormForm_OnInitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam);
-BOOL TakingOutFormForm_OnClose(HWND hWnd, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK TakingOutFormProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+BOOL TakingOutForm_OnInitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam);
+BOOL TakingOutForm_OnClose(HWND hWnd, WPARAM wParam, LPARAM lParam);
 #endif //_TAKINGOUTFORM_H

@@ -2,9 +2,9 @@
 #include "BusinessCardBinder.h"
 #include "resource.h"
 #include <stdlib.h>
-//#include "TakingInForm.h"
-//#include "TakingOutForm.h"
-//#include "BusinessCardBinderFindingForm.h"
+#include "TakingInForm.h"
+#include "TakingOutForm.h"
+#include "BusinessCardBinderFindingForm.h"
 
 //메인함수
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdline, int mCmdShow) {
