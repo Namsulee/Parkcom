@@ -20,25 +20,25 @@ BOOL CALLBACK BusinessCardBinderFindingFormProc(HWND hWnd, UINT message, WPARAM 
 BOOL BusinessCardBinderFindingForm_OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	BOOL ret;
 	switch (LOWORD(wParam)) {
-	case IDC_BUTTON_FIND:
-		ret = BusinessCardBinderFindingForm_OnFindButtonClicked(hWnd, wParam, lParam); break;
-	case IDC_BUTTON_CHOICE:
-		ret = BusinessCardBinderFindingForm_OnChoiceButtonclicked(hWnd, wParam, lParam); break;
-	case IDC_BUTTON_FIRST:
-		ret = BusinessCardBinderFindingForm_OnFirstButtonClicked(hWnd, wParam, lParam); break;
-	case IDC_BUTTON_PREVIOUS:
-		ret = BusinessCardBinderFindingForm_OnPreviousButtonClicked(hWnd, wParam, lParam); break;
-	case IDC_BUTTON_NEXT:
-		ret = BusinessCardBinderFindingForm_OnNextButtonClicked(hWnd, wParam, lParam); break;
-	case IDC_BUTTON_LAST:
-		ret = BusinessCardBinderFindingForm_OnLastButtonClicked(hWnd, wParam, lParam); break;
-	default: ret = FALSE; break;
+		case IDC_BUTTON_FIND:
+			ret = BusinessCardBinderFindingForm_OnFindButtonClicked(hWnd, wParam, lParam); break;
+		case IDC_BUTTON_CHOICE:
+			ret = BusinessCardBinderFindingForm_OnChoiceButtonclicked(hWnd, wParam, lParam); break;
+		case IDC_BUTTON_FIRST:
+			ret = BusinessCardBinderFindingForm_OnFirstButtonClicked(hWnd, wParam, lParam); break;
+		case IDC_BUTTON_PREVIOUS:
+			ret = BusinessCardBinderFindingForm_OnPreviousButtonClicked(hWnd, wParam, lParam); break;
+		case IDC_BUTTON_NEXT:
+			ret = BusinessCardBinderFindingForm_OnNextButtonClicked(hWnd, wParam, lParam); break;
+		case IDC_BUTTON_LAST:
+			ret = BusinessCardBinderFindingForm_OnLastButtonClicked(hWnd, wParam, lParam); break;
+		default: ret = FALSE; break;
 	}
 	return ret;
 }
 
 BOOL BusinessCardBinderFindingForm_OnClose(HWND hWnd, WPARAM wParam, LPARAM lParam) {
-	ULong count;
+	//ULong count;
 	BusinessCard* (*indexes);
 	indexes = (BusinessCard(*))GetWindowLong(hWnd, GWL_USERDATA);
 	if (indexes != NULL) {
@@ -58,11 +58,11 @@ BOOL BusinessCardBinderFindingForm_OnFindButtonClicked(HWND hWnd, WPARAM wParam,
 	BusinessCardBinder *businessCardBinder;
 	BusinessCard* (*indexes);
 	ULong count;
-	ULong current;
+	//ULong current;
 
 	if (HIWORD(wParam) == BN_CLICKED) {
 		SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_GETTEXT, (WPARAM)11, (LPARAM)name);
-		hBusinessCardBinderForm = FindWindo("#32770", "疙窃包府枚");
+		hBusinessCardBinderForm = FindWindow("#32770", "疙窃包府枚");
 		businessCardBinder = (BusinessCardBinder*)GetWindowLong(hBusinessCardBinderForm, GWL_USERDATA);
 		Find(businessCardBinder, name, &indexes, &count);
 		SetWindowLong(hWnd, GWL_USERDATA, (LONG)indexes);
@@ -237,7 +237,7 @@ BOOL BusinessCardBinderFindingForm_OnLastButtonClicked(HWND hWnd, WPARAM wParam,
 	if (HIWORD(wParam) == BN_CLICKED) {
 		indexes = (BusinessCard*(*))GetWindowLong(hWnd, GWL_USERDATA);
 		count = (ULong)GetProp(hWnd, "count");
-		SetProp(hWnd, "current", (ULong)count - 1);
+		SetProp(hWnd, "current", (HANDLE)(count - 1));
 		current = count - 1;
 		if (count > 0) {
 			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.name);

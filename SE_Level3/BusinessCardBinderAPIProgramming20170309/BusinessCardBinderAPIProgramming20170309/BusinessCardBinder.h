@@ -1,12 +1,11 @@
 //BusinessCardBinder.h
-
-#ifndef _BUSINESSCARDBINDER_H
+#ifndef _BUSINDESSCARDBINDER_H
 #define _BUSINESSCARDBINDER_H
 
 //자료형 선언들
 typedef unsigned long int ULong;
 
-typedef struct _company{
+typedef struct _company {
 	char name[64];
 	char telephoneNumber[12];
 	char url[256];
@@ -14,7 +13,7 @@ typedef struct _company{
 	char faxNumber[12];
 }Company;
 
-typedef struct _personal{
+typedef struct _personal {
 	char name[11];
 	char position[256];
 	char cellularPhoneNumber[12];
@@ -22,13 +21,13 @@ typedef struct _personal{
 }Personal;
 
 typedef struct _businessCard BusinessCard;
-typedef struct _businessCard{
+typedef struct _businessCard {
 	Company company;
 	Personal personal;
 	BusinessCard *next;
 }BusinessCard;
 
-typedef struct _businessCardBinder{
+typedef struct _businessCardBinder {
 	BusinessCard *first;
 	ULong length;
 	BusinessCard *current;
