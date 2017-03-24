@@ -33,6 +33,7 @@ BOOL TakingInForm_OnInitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	SendMessage(GetDlgItem(hWnd, IDC_COMBO_PERSONALEMAILADDRESS), CB_ADDSTRING, (WPARAM)0, (LPARAM)"daum.net");
 	SendMessage(GetDlgItem(hWnd, IDC_COMBO_PERSONALEMAILADDRESS), CB_ADDSTRING, (WPARAM)0, (LPARAM)"naver.com");
 	SendMessage(GetDlgItem(hWnd, IDC_COMBO_PERSONALEMAILADDRESS), CB_ADDSTRING, (WPARAM)0, (LPARAM)"google.net");
+	return FALSE;
 }
 
 BOOL TakingInForm_OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam) {

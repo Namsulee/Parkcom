@@ -339,7 +339,7 @@ BusinessCard* First(BusinessCardBinder *businessCardBinder) {
 작성 일자 : 2017/03/13
 */
 BusinessCard* Previous(BusinessCardBinder *businessCardBinder){
-	BusinessCard *previous;
+	BusinessCard *previous = NULL;
 	BusinessCard *current = businessCardBinder->current;
 	businessCardBinder->current = businessCardBinder->first;
 	while (businessCardBinder->current != current){

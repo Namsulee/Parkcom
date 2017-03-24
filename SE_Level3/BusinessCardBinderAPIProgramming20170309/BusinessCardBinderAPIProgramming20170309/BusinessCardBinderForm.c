@@ -140,7 +140,6 @@ BOOL BusinessCardBinderForm_OnPreviousButtonClicked(HWND hWnd, WPARAM wParam, LP
 	BusinessCard *index;
 	if (HIWORD(wParam) == BN_CLICKED) {
 		businessCardBinder = (BusinessCardBinder*)GetWindowLong(hWnd, GWL_USERDATA);
-		Arrange(businessCardBinder);
 		index = Previous(businessCardBinder);
 		if (index != NULL) {
 			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.name);
@@ -162,7 +161,6 @@ BOOL BusinessCardBinderForm_OnNextButtonClicked(HWND hWnd, WPARAM wParam, LPARAM
 	BusinessCard *index;
 	if (HIWORD(wParam) == BN_CLICKED) {
 		businessCardBinder = (BusinessCardBinder*)GetWindowLong(hWnd, GWL_USERDATA);
-		Arrange(businessCardBinder);
 		index = Next(businessCardBinder);
 		if (index != NULL) {
 			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.name);
@@ -184,7 +182,6 @@ BOOL BusinessCardBinderForm_OnLastButtonClicked(HWND hWnd, WPARAM wParam, LPARAM
 	BusinessCard *index;
 	if (HIWORD(wParam) == BN_CLICKED) {
 		businessCardBinder = (BusinessCardBinder*)GetWindowLong(hWnd, GWL_USERDATA);
-		Arrange(businessCardBinder);
 		index = Last(businessCardBinder);
 		if (index != NULL) {
 			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.name);

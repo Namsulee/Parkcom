@@ -23,7 +23,7 @@ BOOL BusinessCardBinderFindingForm_OnCommand(HWND hWnd, WPARAM wParam, LPARAM lP
 		case IDC_BUTTON_FIND:
 			ret = BusinessCardBinderFindingForm_OnFindButtonClicked(hWnd, wParam, lParam); break;
 		case IDC_BUTTON_CHOICE:
-			ret = BusinessCardBinderFindingForm_OnChoiceButtonclicked(hWnd, wParam, lParam); break;
+			ret = BusinessCardBinderFindingForm_OnChoiceButtonClicked(hWnd, wParam, lParam); break;
 		case IDC_BUTTON_FIRST:
 			ret = BusinessCardBinderFindingForm_OnFirstButtonClicked(hWnd, wParam, lParam); break;
 		case IDC_BUTTON_PREVIOUS:
@@ -40,7 +40,7 @@ BOOL BusinessCardBinderFindingForm_OnCommand(HWND hWnd, WPARAM wParam, LPARAM lP
 BOOL BusinessCardBinderFindingForm_OnClose(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	//ULong count;
 	BusinessCard* (*indexes);
-	indexes = (BusinessCard(*))GetWindowLong(hWnd, GWL_USERDATA);
+	indexes = (BusinessCard*(*))GetWindowLong(hWnd, GWL_USERDATA);
 	if (indexes != NULL) {
 		free(indexes);
 		indexes = NULL;
@@ -61,9 +61,16 @@ BOOL BusinessCardBinderFindingForm_OnFindButtonClicked(HWND hWnd, WPARAM wParam,
 	//ULong current;
 
 	if (HIWORD(wParam) == BN_CLICKED) {
-		SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_GETTEXT, (WPARAM)11, (LPARAM)name);
+		SendMessage(GetDlgItem(hWnd, IDC_EDIT_PERSONALNAME), WM_GETTEXT, (WPARAM)11, (LPARAM)name);
 		hBusinessCardBinderForm = FindWindow("#32770", "명함관리철");
 		businessCardBinder = (BusinessCardBinder*)GetWindowLong(hBusinessCardBinderForm, GWL_USERDATA);
+		
+		//찾기윈도우에서 다시 다른 성명을 찾을 수도 있기 때문에 index에 대해서 할당 해제가 필요하다.
+		indexes = (BusinessCard*(*))GetWindowLong(hWnd, GWL_USERDATA);
+		if (indexes != NULL) {
+			free(indexes);
+			indexes = NULL;
+		}
 		Find(businessCardBinder, name, &indexes, &count);
 		SetWindowLong(hWnd, GWL_USERDATA, (LONG)indexes);
 		SetProp(hWnd, "count", (HANDLE)count);
@@ -111,10 +118,12 @@ BOOL BusinessCardBinderFindingForm_OnChoiceButtonClicked(HWND hWnd, WPARAM wPara
 		SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYURL_INFO), WM_GETTEXT, (WPARAM)256, (LPARAM)businessCard.company.url);
 		SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYADDRESS_INFO), WM_GETTEXT, (WPARAM)256, (LPARAM)businessCard.company.address);
 		SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYFAXNUMBER_INFO), WM_GETTEXT, (WPARAM)12, (LPARAM)businessCard.company.faxNumber);
+		
 		indexes = (BusinessCard*(*))GetWindowLong(hWnd, GWL_USERDATA);
 		current = (ULong)GetProp(hWnd, "current");
-		businessCardBinder->current = indexes[current];
 		hBusinessCardBinderForm = FindWindow("#32770", "명함관리철");
+		businessCardBinder = (BusinessCardBinder*)GetWindowLong(hBusinessCardBinderForm, GWL_USERDATA);
+		businessCardBinder->current = indexes[current];		
 
 		SendMessage(GetDlgItem(hBusinessCardBinderForm, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)businessCard.personal.name);
 		SendMessage(GetDlgItem(hBusinessCardBinderForm, IDC_STATIC_PERSONALPOSITION_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)businessCard.personal.position);
@@ -165,6 +174,7 @@ BOOL BusinessCardBinderFindingForm_OnFirstButtonClicked(HWND hWnd, WPARAM wParam
 }
 
 //2017.03.23 코드 수정이 필요할수도 있음
+//2017.03.24 수정완료
 BOOL BusinessCardBinderFindingForm_OnPreviousButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	BusinessCard* (*indexes);
 	ULong count;
@@ -178,8 +188,9 @@ BOOL BusinessCardBinderFindingForm_OnPreviousButtonClicked(HWND hWnd, WPARAM wPa
 			if (current < 0) {//underFlow
 				current = 0;
 			}
-			if (current != 0) {
-				current--;
+
+			//if (current >= 0) {
+				//current--;
 				SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.name);
 				SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALPOSITION_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.position);
 				SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALCELLULARPHONENUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.cellularPhoneNumber);
@@ -190,13 +201,14 @@ BOOL BusinessCardBinderFindingForm_OnPreviousButtonClicked(HWND hWnd, WPARAM wPa
 				SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYADDRESS_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.address);
 				SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYFAXNUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.faxNumber);
 				SetProp(hWnd, "current", (HANDLE)current);
-			}
+			//}
 		}
 	}
 	return FALSE;
 }
 
 //2017.03.23 코드 수정이 필요할수도 있음
+//2017.03.24 수정완료
 BOOL BusinessCardBinderFindingForm_OnNextButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	BusinessCard* (*indexes);
 	ULong count;
@@ -206,12 +218,14 @@ BOOL BusinessCardBinderFindingForm_OnNextButtonClicked(HWND hWnd, WPARAM wParam,
 		count = (ULong)GetProp(hWnd, "count");
 		if (count > 0) {
 			current = (ULong)GetProp(hWnd, "current");
+			
 			current++;
 			if (current >= count) {//underFlow
 				current = count - 1;
 			}
-			if (current < count - 1) {
-				current++;
+
+			//if (current <= count - 1) {
+				//current++;
 				SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.name);
 				SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALPOSITION_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.position);
 				SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALCELLULARPHONENUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.cellularPhoneNumber);
@@ -222,7 +236,7 @@ BOOL BusinessCardBinderFindingForm_OnNextButtonClicked(HWND hWnd, WPARAM wParam,
 				SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYADDRESS_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.address);
 				SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYFAXNUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.faxNumber);
 				SetProp(hWnd, "current", (HANDLE)current);
-			}
+			//}
 		}
 	}
 	return FALSE;
@@ -237,7 +251,6 @@ BOOL BusinessCardBinderFindingForm_OnLastButtonClicked(HWND hWnd, WPARAM wParam,
 	if (HIWORD(wParam) == BN_CLICKED) {
 		indexes = (BusinessCard*(*))GetWindowLong(hWnd, GWL_USERDATA);
 		count = (ULong)GetProp(hWnd, "count");
-		SetProp(hWnd, "current", (HANDLE)(count - 1));
 		current = count - 1;
 		if (count > 0) {
 			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.name);
@@ -249,6 +262,7 @@ BOOL BusinessCardBinderFindingForm_OnLastButtonClicked(HWND hWnd, WPARAM wParam,
 			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYURL_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.url);
 			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYADDRESS_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.address);
 			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYFAXNUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.faxNumber);
+			SetProp(hWnd, "current", (HANDLE)current);
 		}
 	}
 	return FALSE;
