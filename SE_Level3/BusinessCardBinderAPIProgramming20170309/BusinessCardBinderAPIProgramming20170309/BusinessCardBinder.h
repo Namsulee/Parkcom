@@ -4,6 +4,7 @@
 
 //자료형 선언들
 typedef unsigned long int ULong;
+typedef signed long int Long;
 
 typedef struct _company {
 	char name[64];

@@ -57,7 +57,7 @@ BOOL BusinessCardBinderFindingForm_OnFindButtonClicked(HWND hWnd, WPARAM wParam,
 	HWND hBusinessCardBinderForm;
 	BusinessCardBinder *businessCardBinder;
 	BusinessCard* (*indexes);
-	ULong count;
+	Long count;
 	//ULong current;
 
 	if (HIWORD(wParam) == BN_CLICKED) {
@@ -107,7 +107,7 @@ BOOL BusinessCardBinderFindingForm_OnChoiceButtonClicked(HWND hWnd, WPARAM wPara
 	BusinessCardBinder *businessCardBinder;
 	BusinessCard* (*indexes);
 	BusinessCard businessCard;
-	ULong current;
+	Long current;
 	if (HIWORD(wParam) == BN_CLICKED) {
 		SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_GETTEXT, (WPARAM)11, (LPARAM)businessCard.personal.name);
 		SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALPOSITION_INFO), WM_GETTEXT, (WPARAM)256, (LPARAM)businessCard.personal.position);
@@ -120,7 +120,7 @@ BOOL BusinessCardBinderFindingForm_OnChoiceButtonClicked(HWND hWnd, WPARAM wPara
 		SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYFAXNUMBER_INFO), WM_GETTEXT, (WPARAM)12, (LPARAM)businessCard.company.faxNumber);
 		
 		indexes = (BusinessCard*(*))GetWindowLong(hWnd, GWL_USERDATA);
-		current = (ULong)GetProp(hWnd, "current");
+		current = (Long)GetProp(hWnd, "current");
 		hBusinessCardBinderForm = FindWindow("#32770", "명함관리철");
 		businessCardBinder = (BusinessCardBinder*)GetWindowLong(hBusinessCardBinderForm, GWL_USERDATA);
 		businessCardBinder->current = indexes[current];		
@@ -150,12 +150,12 @@ BOOL BusinessCardBinderFindingForm_OnChoiceButtonClicked(HWND hWnd, WPARAM wPara
 //2017.03.23 코드 수정이 필요할수도 있음
 BOOL BusinessCardBinderFindingForm_OnFirstButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	BusinessCard* (*indexes);
-	ULong count;
-	ULong current;
+	Long count;
+	Long current;
 
 	if (HIWORD(wParam) == BN_CLICKED) {
 		indexes = (BusinessCard* (*))GetWindowLong(hWnd, GWL_USERDATA);
-		count = (ULong)GetProp(hWnd, "count");
+		count = (Long)GetProp(hWnd, "count");
 		if (count > 0) {
 			current = 0;
 			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.name);
@@ -177,12 +177,12 @@ BOOL BusinessCardBinderFindingForm_OnFirstButtonClicked(HWND hWnd, WPARAM wParam
 //2017.03.24 수정완료
 BOOL BusinessCardBinderFindingForm_OnPreviousButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	BusinessCard* (*indexes);
-	ULong count;
-	ULong current;
+	Long count;
+	Long current;
 	if (HIWORD(wParam) == BN_CLICKED) {
 		indexes = (BusinessCard*(*))GetWindowLong(hWnd, GWL_USERDATA);
-		count = (ULong)GetProp(hWnd, "count");
-		current = (ULong)GetProp(hWnd, "current");
+		count = (Long)GetProp(hWnd, "count");
+		current = (Long)GetProp(hWnd, "current");
 		if (count > 0) {
 			current--;
 			if (current < 0) {//underFlow
@@ -211,13 +211,13 @@ BOOL BusinessCardBinderFindingForm_OnPreviousButtonClicked(HWND hWnd, WPARAM wPa
 //2017.03.24 수정완료
 BOOL BusinessCardBinderFindingForm_OnNextButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	BusinessCard* (*indexes);
-	ULong count;
-	ULong current;
+	Long count;
+	Long current;
 	if (HIWORD(wParam) == BN_CLICKED) {
 		indexes = (BusinessCard*(*))GetWindowLong(hWnd, GWL_USERDATA);
-		count = (ULong)GetProp(hWnd, "count");
+		count = (Long)GetProp(hWnd, "count");
 		if (count > 0) {
-			current = (ULong)GetProp(hWnd, "current");
+			current = (Long)GetProp(hWnd, "current");
 			
 			current++;
 			if (current >= count) {//underFlow
@@ -245,12 +245,12 @@ BOOL BusinessCardBinderFindingForm_OnNextButtonClicked(HWND hWnd, WPARAM wParam,
 //2017.03.23 코드 수정이 필요할수도 있음
 BOOL BusinessCardBinderFindingForm_OnLastButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	BusinessCard* (*indexes);
-	ULong count;
-	ULong current;
+	Long count;
+	Long current;
 
 	if (HIWORD(wParam) == BN_CLICKED) {
 		indexes = (BusinessCard*(*))GetWindowLong(hWnd, GWL_USERDATA);
-		count = (ULong)GetProp(hWnd, "count");
+		count = (Long)GetProp(hWnd, "count");
 		current = count - 1;
 		if (count > 0) {
 			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.name);
