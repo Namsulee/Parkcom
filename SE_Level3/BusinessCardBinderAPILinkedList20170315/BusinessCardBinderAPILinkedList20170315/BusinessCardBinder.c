@@ -78,6 +78,14 @@ int main(int argc, char *argv[]) {
 		indexes = NULL;
 	}
 
+	//FindByCompanyNames
+	index = FindByCompanyName(&businessCardBinder, "삼성");
+	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
+		index->personal.cellularPhoneNumber, index->personal.emailAddress,
+		index->company.name, index->company.telephoneNumber, index->company.url,
+		index->company.address, index->company.faxNumber);
+
+
 	//TakeOut
 	//index = BusinessCardBinder_Last(&businessCardBinder);
 	businessCard = TakeOut(&businessCardBinder, index);
@@ -161,14 +169,22 @@ void Find(BusinessCardBinder *businessCardBinder, char(*name), BusinessCard* *(*
 }
 
 /*
-함수명칭 :
-기    능 :
-입    력 :
-출    력 :
+함수명칭 : FindByCompanyName
+기    능 : 명함관리철에서 입력받은 상호를 찾아서 명함링크를 출력한다.
+입    력 : 상호
+출    력 : 명함링크
 작 성 자 : Joey
 작성일자 : 2017/03/26
 */
-BusinessCard* FindByCompanyName(BusinessCardBinder *businessCardBinder, char(*companyName));
+BusinessCard* FindByCompanyName(BusinessCardBinder *businessCardBinder, char(*companyName)) {
+	BusinessCard *index;
+	Node *nodeIndex;
+
+	nodeIndex = LinearSearchUnique(&businessCardBinder->businessCards, companyName, CompareCompanyNames);
+	index = (BusinessCard*)(nodeIndex + 1);
+
+	return index;
+}
 
 /*
 함수명칭 : TakeOut
@@ -277,14 +293,16 @@ int CompareNames(void *one, void *other) {
 }
 
 /*
-함수명칭 :
-기    능 :
-입    력 :
-출    력 :
+함수명칭 : CompareCompanyNames
+기    능 : 명함과 상호를 입력받고 명함의 상호와 상호를 비교한 결과를 출력한다.
+입    력 : 명함링크, 상호
+출    력 : 비교결과
 작 성 자 : Joey
 작성일자 : 2017/03/26
 */
-int CompareCompanyNames(void *one, void *other);
+int CompareCompanyNames(void *one, void *other) {
+	return strcmp(((BusinessCard*)one)->company.name, (char*)other);
+}
 
 /*
 함수명칭 : CompareIndexes
