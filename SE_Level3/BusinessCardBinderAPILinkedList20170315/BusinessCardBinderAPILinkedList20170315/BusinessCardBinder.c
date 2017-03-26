@@ -78,6 +78,15 @@ int main(int argc, char *argv[]) {
 		indexes = NULL;
 	}
 
+	//TakeOut
+	//index = BusinessCardBinder_Last(&businessCardBinder);
+	businessCard = TakeOut(&businessCardBinder, index);
+	printf("%s %s %s %s %s %s %s %s %s\n", businessCard.personal.name, businessCard.personal.position,
+		businessCard.personal.cellularPhoneNumber, businessCard.personal.emailAddress,
+		businessCard.company.name, businessCard.company.telephoneNumber, businessCard.company.url,
+		businessCard.company.address, businessCard.company.faxNumber);
+
+
 	//Destroy
 	BusinessCardBinder_Destroy(&businessCardBinder);
 
@@ -119,9 +128,11 @@ ULong Load(BusinessCardBinder *businessCardBinder);
 */
 BusinessCard* TakeIn(BusinessCardBinder *businessCardBinder, BusinessCard businessCard) {
 	Node *index;
+
 	index = AppendFromTail(&businessCardBinder->businessCards, &businessCard, sizeof(BusinessCard));
 	businessCardBinder->length++;
 	businessCardBinder->current = (BusinessCard*)(index + 1);
+
 	return businessCardBinder->current;
 }
 
@@ -136,6 +147,7 @@ BusinessCard* TakeIn(BusinessCardBinder *businessCardBinder, BusinessCard busine
 void Find(BusinessCardBinder *businessCardBinder, char(*name), BusinessCard* *(*indexes), ULong *count) {
 	Node* (*nodeIndexes);
 	ULong i = 0;
+
 	*indexes = (BusinessCard* (*))calloc(businessCardBinder->length, sizeof(BusinessCard*));
 	LinearSearchDuplicate(&businessCardBinder->businessCards, name, &nodeIndexes, count, CompareNames);
 	while (i < *count) {
@@ -159,14 +171,25 @@ void Find(BusinessCardBinder *businessCardBinder, char(*name), BusinessCard* *(*
 BusinessCard* FindByCompanyName(BusinessCardBinder *businessCardBinder, char(*companyName));
 
 /*
-함수명칭 :
-기    능 :
-입    력 :
-출    력 :
+함수명칭 : TakeOut
+기    능 : 명함관리철에서 입력받은 명함링크에 해당하는 명함을 출력한다.
+입    력 : 명함링크
+출    력 : 명함
 작 성 자 : Joey
 작성일자 : 2017/03/26
 */
-BusinessCard TakeOut(BusinessCardBinder *businessCardBinder, BusinessCard *index);
+BusinessCard TakeOut(BusinessCardBinder *businessCardBinder, BusinessCard *index) {
+	Node *nodeIndex;
+	BusinessCard businessCard;
+
+	nodeIndex = LinearSearchUnique(&businessCardBinder->businessCards, index, CompareIndexes);
+	GetAt(&businessCardBinder->businessCards, nodeIndex, &businessCard, sizeof(BusinessCard));
+	Delete(&businessCardBinder->businessCards, nodeIndex);
+	businessCardBinder->length--;
+	businessCardBinder->current = (BusinessCard*)(businessCardBinder->businessCards.current + 1);
+
+	return businessCard;
+}
 
 /*
 함수명칭 :
@@ -264,11 +287,17 @@ int CompareNames(void *one, void *other) {
 int CompareCompanyNames(void *one, void *other);
 
 /*
-함수명칭 :
-기    능 :
-입    력 :
-출    력 :
+함수명칭 : CompareIndexes
+기    능 : 입력받은 노드링크와 노드링크를 비교해서 결과를 출력한다.
+입    력 : 노드링크, 노드링크
+출    력 : 비교결과
 작 성 자 : Joey
 작성일자 : 2017/03/26
 */
-int CompareIndexes(void *one, void *other);
+int CompareIndexes(void *one, void *other) {
+	int ret = -1;
+	if (one == other) {
+		return 0;
+	}
+	return ret;
+}
