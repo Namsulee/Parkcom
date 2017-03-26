@@ -94,6 +94,12 @@ int main(int argc, char *argv[]) {
 		businessCard.company.name, businessCard.company.telephoneNumber, businessCard.company.url,
 		businessCard.company.address, businessCard.company.faxNumber);
 
+	//First
+	index = BusinessCardBinder_First(&businessCardBinder);
+	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
+		index->personal.cellularPhoneNumber, index->personal.emailAddress,
+		index->company.name, index->company.telephoneNumber, index->company.url,
+		index->company.address, index->company.faxNumber);
 
 	//Destroy
 	BusinessCardBinder_Destroy(&businessCardBinder);
@@ -218,14 +224,21 @@ BusinessCard TakeOut(BusinessCardBinder *businessCardBinder, BusinessCard *index
 BusinessCard BusinessCardBinder_GetAt(BusinessCardBinder *businessCardBinder, BusinessCard *index);
 
 /*
-함수명칭 :
-기    능 :
-입    력 :
-출    력 :
+함수명칭 : BusinessCardBinder_First
+기    능 : 명함관리철의 처음 명함이동하고 처음 명함의 링크를 출력한다.
+입    력 : 없음
+출    력 : 명함링크
 작 성 자 : Joey
 작성일자 : 2017/03/26
 */
-BusinessCard* BusinessCardBinder_First(BusinessCardBinder *businessCardBinder);
+BusinessCard* BusinessCardBinder_First(BusinessCardBinder *businessCardBinder) {
+	Node *nodeIndex;
+
+	nodeIndex = First(&businessCardBinder->businessCards);
+	businessCardBinder->current = (BusinessCard*)(nodeIndex + 1);
+
+	return businessCardBinder->current;
+}
 
 /*
 함수명칭 :
