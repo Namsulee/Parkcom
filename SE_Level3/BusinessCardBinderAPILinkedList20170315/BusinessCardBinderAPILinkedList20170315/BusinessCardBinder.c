@@ -112,6 +112,19 @@ int main(int argc, char *argv[]) {
 		index->company.name, index->company.telephoneNumber, index->company.url,
 		index->company.address, index->company.faxNumber);
 
+	//Last & Next, Overflow check
+	index = BusinessCardBinder_Last(&businessCardBinder);
+	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
+		index->personal.cellularPhoneNumber, index->personal.emailAddress,
+		index->company.name, index->company.telephoneNumber, index->company.url,
+		index->company.address, index->company.faxNumber);
+
+	index = BusinessCardBinder_Next(&businessCardBinder);
+	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
+		index->personal.cellularPhoneNumber, index->personal.emailAddress,
+		index->company.name, index->company.telephoneNumber, index->company.url,
+		index->company.address, index->company.faxNumber);
+
 	//TakeOut
 	//index = BusinessCardBinder_Last(&businessCardBinder);
 	businessCard = TakeOut(&businessCardBinder, index);
@@ -294,14 +307,21 @@ BusinessCard* BusinessCardBinder_Next(BusinessCardBinder *businessCardBinder) {
 }
 
 /*
-함수명칭 :
-기    능 :
-입    력 :
-출    력 :
+함수명칭 : BusinessCardBinder_Last
+기    능 : 명함관리철 마지막 명함으로 이동하고 명함링크를 출력한다.
+입    력 : 없음
+출    력 : 명함링크
 작 성 자 : Joey
 작성일자 : 2017/03/26
 */
-BusinessCard* BusinessCardBinder_Last(BusinessCardBinder *businessCardBinder);
+BusinessCard* BusinessCardBinder_Last(BusinessCardBinder *businessCardBinder) {
+	Node *nodeIndex;
+
+	nodeIndex = Last(&businessCardBinder->businessCards);
+	businessCardBinder->current = (BusinessCard*)(nodeIndex + 1);
+
+	return businessCardBinder->current;
+}
 
 /*
 함수명칭 :
