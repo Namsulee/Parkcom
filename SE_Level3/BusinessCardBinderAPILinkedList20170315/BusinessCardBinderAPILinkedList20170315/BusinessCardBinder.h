@@ -28,6 +28,8 @@ typedef struct _businessCardBinder {
 	BusinessCard *current;
 }BusinessCardBinder;
 
+int main(int argc, char * argv[]);
+
 //함수선언
 void BusinessCardBinder_Create(BusinessCardBinder *businessCardBinder);
 ULong Load(BusinessCardBinder *businessCardBinder);

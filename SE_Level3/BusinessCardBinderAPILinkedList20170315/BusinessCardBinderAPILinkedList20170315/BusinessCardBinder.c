@@ -2,6 +2,7 @@
 #include "BusinessCardBinder.h"
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 
 //메인함수정의
@@ -9,6 +10,9 @@ int main(int argc, char *argv[]) {
 	BusinessCardBinder businessCardBinder;
 	BusinessCard businessCard;
 	BusinessCard *index;
+	BusinessCard* (*indexes);
+	ULong count;
+	ULong i;
 
 	//Create
 	BusinessCardBinder_Create(&businessCardBinder);
@@ -28,6 +32,51 @@ int main(int argc, char *argv[]) {
 		index->personal.cellularPhoneNumber, index->personal.emailAddress,
 		index->company.name, index->company.telephoneNumber, index->company.url,
 		index->company.address, index->company.faxNumber);
+	//TakeIn
+	strcpy(businessCard.personal.name, "이길동");
+	strcpy(businessCard.personal.position, "대리");
+	strcpy(businessCard.personal.cellularPhoneNumber, "0105879424");
+	strcpy(businessCard.personal.emailAddress, "lee@");
+	strcpy(businessCard.company.name, "현대");
+	strcpy(businessCard.company.telephoneNumber, "025879424");
+	strcpy(businessCard.company.url, "HUNDAI.com");
+	strcpy(businessCard.company.address, "서울시 중구");
+	strcpy(businessCard.company.faxNumber, "025879424");
+	index = TakeIn(&businessCardBinder, businessCard);
+	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
+		index->personal.cellularPhoneNumber, index->personal.emailAddress,
+		index->company.name, index->company.telephoneNumber, index->company.url,
+		index->company.address, index->company.faxNumber);
+	//TakeIn
+	strcpy(businessCard.personal.name, "홍길동");
+	strcpy(businessCard.personal.position, "과장");
+	strcpy(businessCard.personal.cellularPhoneNumber, "0105879424");
+	strcpy(businessCard.personal.emailAddress, "hong2@");
+	strcpy(businessCard.company.name, "엘지");
+	strcpy(businessCard.company.telephoneNumber, "025879424");
+	strcpy(businessCard.company.url, "LG.com");
+	strcpy(businessCard.company.address, "서울시 서초구");
+	strcpy(businessCard.company.faxNumber, "025879424");
+	index = TakeIn(&businessCardBinder, businessCard);
+	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
+		index->personal.cellularPhoneNumber, index->personal.emailAddress,
+		index->company.name, index->company.telephoneNumber, index->company.url,
+		index->company.address, index->company.faxNumber);
+
+	//Find
+	Find(&businessCardBinder, "홍길동", &indexes, &count);
+	i = 0;
+	while (i < count) {
+		printf("%s %s %s %s %s %s %s %s %s\n", indexes[i]->personal.name, indexes[i]->personal.position,
+			indexes[i]->personal.cellularPhoneNumber, indexes[i]->personal.emailAddress,
+			indexes[i]->company.name, indexes[i]->company.telephoneNumber, indexes[i]->company.url,
+			indexes[i]->company.address, indexes[i]->company.faxNumber);
+		i++;
+	}
+	if (indexes != NULL) {
+		free(indexes);
+		indexes = NULL;
+	}
 
 	//Destroy
 	BusinessCardBinder_Destroy(&businessCardBinder);
@@ -84,7 +133,20 @@ BusinessCard* TakeIn(BusinessCardBinder *businessCardBinder, BusinessCard busine
 작 성 자 : Joey
 작성일자 : 2017/03/26
 */
-void Find(BusinessCardBinder *businessCardBinder, char(*name), BusinessCard* *(*indexes), ULong *count);
+void Find(BusinessCardBinder *businessCardBinder, char(*name), BusinessCard* *(*indexes), ULong *count) {
+	Node* (*nodeIndexes);
+	ULong i = 0;
+	*indexes = (BusinessCard* (*))calloc(businessCardBinder->length, sizeof(BusinessCard*));
+	LinearSearchDuplicate(&businessCardBinder->businessCards, name, &nodeIndexes, count, CompareNames);
+	while (i < *count) {
+		(*indexes)[i] = (BusinessCard*)(nodeIndexes[i] + 1);
+		i++;
+	}
+	if (nodeIndexes != NULL) {
+		free(nodeIndexes);
+		nodeIndexes = NULL;
+	}
+}
 
 /*
 함수명칭 :
@@ -180,14 +242,16 @@ void BusinessCardBinder_Destroy(BusinessCardBinder *businessCardBinder) {
 
 
 /*
-함수명칭 :
-기    능 :
-입    력 :
-출    력 :
+함수명칭 : CompareNames
+기    능 : 명함과 성명을 입력받고 명함의 성명과 성명을 비교한다.
+입    력 : 명함, 성명
+출    력 : 비교결과
 작 성 자 : Joey
 작성일자 : 2017/03/26
 */
-int CompareNames(void *one, void *other);
+int CompareNames(void *one, void *other) {
+	return strcmp( ((BusinessCard*)one)->personal.name, (char*)other );
+}
 
 /*
 함수명칭 :
