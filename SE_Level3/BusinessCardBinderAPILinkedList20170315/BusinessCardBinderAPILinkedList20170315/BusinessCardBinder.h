@@ -40,8 +40,8 @@ BusinessCard TakeOut(BusinessCardBinder *businessCardBinder, BusinessCard *index
 BusinessCard BusinessCardBinder_GetAt(BusinessCardBinder *businessCardBinder, BusinessCard *index);
 BusinessCard* BusinessCardBinder_First(BusinessCardBinder *businessCardBinder);
 BusinessCard* BusinessCardBinder_Previous(BusinessCardBinder *businessCardBinder);
-BusinessCard* BusinessCardBInder_Next(BusinessCardBinder *businessCardBinder);
-BusinessCard* BusinessCardBInder_Last(BusinessCardBinder *businessCardBinder);
+BusinessCard* BusinessCardBinder_Next(BusinessCardBinder *businessCardBinder);
+BusinessCard* BusinessCardBinder_Last(BusinessCardBinder *businessCardBinder);
 ULong Save(BusinessCardBinder *businessCardBinder);
 void BusinessCardBinder_Destroy(BusinessCardBinder *businessCardBinder);
 
