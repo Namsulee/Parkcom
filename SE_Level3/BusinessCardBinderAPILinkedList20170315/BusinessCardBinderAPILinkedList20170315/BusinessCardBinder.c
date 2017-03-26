@@ -15,9 +15,15 @@ int main(int argc, char *argv[]) {
 	ULong i;
 
 	//Create
+	printf("\nCreate\n");
 	BusinessCardBinder_Create(&businessCardBinder);
 
+	//Load
+	printf("\nLoad\n");
+	Load(&businessCardBinder);
+
 	//TakeIn
+	printf("\nTakeIn\n");
 	strcpy(businessCard.personal.name, "홍길동");
 	strcpy(businessCard.personal.position, "사원");
 	strcpy(businessCard.personal.cellularPhoneNumber, "0105879424");
@@ -33,6 +39,7 @@ int main(int argc, char *argv[]) {
 		index->company.name, index->company.telephoneNumber, index->company.url,
 		index->company.address, index->company.faxNumber);
 	//TakeIn
+	printf("\nTakeIn\n");
 	strcpy(businessCard.personal.name, "이길동");
 	strcpy(businessCard.personal.position, "대리");
 	strcpy(businessCard.personal.cellularPhoneNumber, "0105879424");
@@ -48,6 +55,7 @@ int main(int argc, char *argv[]) {
 		index->company.name, index->company.telephoneNumber, index->company.url,
 		index->company.address, index->company.faxNumber);
 	//TakeIn
+	printf("\nTakeIn\n");
 	strcpy(businessCard.personal.name, "홍길동");
 	strcpy(businessCard.personal.position, "과장");
 	strcpy(businessCard.personal.cellularPhoneNumber, "0105879424");
@@ -64,6 +72,7 @@ int main(int argc, char *argv[]) {
 		index->company.address, index->company.faxNumber);
 
 	//Find
+	printf("\nFind\n");
 	Find(&businessCardBinder, "홍길동", &indexes, &count);
 	i = 0;
 	while (i < count) {
@@ -79,6 +88,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	//FindByCompanyNames
+	printf("\nFindByCompanyNames\n");
 	index = FindByCompanyName(&businessCardBinder, "삼성");
 	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
 		index->personal.cellularPhoneNumber, index->personal.emailAddress,
@@ -86,6 +96,7 @@ int main(int argc, char *argv[]) {
 		index->company.address, index->company.faxNumber);
 
 	//Previous
+	printf("\nPrevious\n");
 	index = BusinessCardBinder_Previous(&businessCardBinder);
 	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
 		index->personal.cellularPhoneNumber, index->personal.emailAddress,
@@ -93,12 +104,13 @@ int main(int argc, char *argv[]) {
 		index->company.address, index->company.faxNumber);
 
 	//First & Previous, UnderFlow Check
+	printf("\nFirst\n");
 	index = BusinessCardBinder_First(&businessCardBinder);
 	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
 		index->personal.cellularPhoneNumber, index->personal.emailAddress,
 		index->company.name, index->company.telephoneNumber, index->company.url,
 		index->company.address, index->company.faxNumber);
-
+	printf("\nPrevious\n");
 	index = BusinessCardBinder_Previous(&businessCardBinder);
 	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
 		index->personal.cellularPhoneNumber, index->personal.emailAddress,
@@ -106,6 +118,7 @@ int main(int argc, char *argv[]) {
 		index->company.address, index->company.faxNumber);
 
 	//Next
+	printf("\nNext\n");
 	index = BusinessCardBinder_Next(&businessCardBinder);
 	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
 		index->personal.cellularPhoneNumber, index->personal.emailAddress,
@@ -113,12 +126,13 @@ int main(int argc, char *argv[]) {
 		index->company.address, index->company.faxNumber);
 
 	//Last & Next, Overflow check
+	printf("\nLast\n");
 	index = BusinessCardBinder_Last(&businessCardBinder);
 	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
 		index->personal.cellularPhoneNumber, index->personal.emailAddress,
 		index->company.name, index->company.telephoneNumber, index->company.url,
 		index->company.address, index->company.faxNumber);
-
+	printf("\nNext\n");
 	index = BusinessCardBinder_Next(&businessCardBinder);
 	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
 		index->personal.cellularPhoneNumber, index->personal.emailAddress,
@@ -126,14 +140,20 @@ int main(int argc, char *argv[]) {
 		index->company.address, index->company.faxNumber);
 
 	//TakeOut
-	//index = BusinessCardBinder_Last(&businessCardBinder);
+	printf("\nTakeOut\n");
+	index = BusinessCardBinder_Last(&businessCardBinder);
 	businessCard = TakeOut(&businessCardBinder, index);
 	printf("%s %s %s %s %s %s %s %s %s\n", businessCard.personal.name, businessCard.personal.position,
 		businessCard.personal.cellularPhoneNumber, businessCard.personal.emailAddress,
 		businessCard.company.name, businessCard.company.telephoneNumber, businessCard.company.url,
 		businessCard.company.address, businessCard.company.faxNumber);
 
+	//Save
+	printf("\nSave\n");
+	Save(&businessCardBinder);
+
 	//Destroy
+	printf("\nDestroy\n");
 	BusinessCardBinder_Destroy(&businessCardBinder);
 
 	return 0;
@@ -153,16 +173,48 @@ void BusinessCardBinder_Create(BusinessCardBinder *businessCardBinder) {
 	businessCardBinder->current = NULL;
 }
 
-
 /*
-함수명칭 :
-기    능 :
-입    력 :
-출    력 :
+함수명칭 : Load
+기    능 : 디스크파일을 명함관리철에 명함으로 추가하고 명함개수를 출력한다.
+입    력 : 없음
+출    력 : 명함개수
 작 성 자 : Joey
 작성일자 : 2017/03/26
 */
-ULong Load(BusinessCardBinder *businessCardBinder);
+ULong Load(BusinessCardBinder *businessCardBinder) {
+	ULong number;
+	BusinessCard businessCard;
+	BusinessCard *index;
+	ULong i;
+	ULong flag1;
+	ULong flag2;
+	FILE *personalsFile;
+	FILE *companiesFile;
+
+	personalsFile = fopen("Personals.dat", "rb");
+	companiesFile = fopen("Companies.dat", "rb");
+	if (personalsFile != NULL && companiesFile != NULL) {
+		fread(&number, sizeof(ULong), 1, personalsFile);
+		flag1 = fread(&businessCard.personal, sizeof(Personal), 1, personalsFile);
+		while (!feof(personalsFile) && flag1 != 0) {
+			fseek(companiesFile, 0L, SEEK_SET);
+			i = 1;
+			flag2 = fread(&businessCard.company, sizeof(Company), 1, companiesFile);
+			while (!feof(companiesFile) && flag2 != 0 && i < number) {
+				i++;
+				flag2 = fread(&businessCard.company, sizeof(Company), 1, companiesFile);
+			}
+			index = (BusinessCard*)(AppendFromTail(&businessCardBinder->businessCards, &businessCard, sizeof(BusinessCard) + 1));
+			businessCardBinder->current = index;
+			businessCardBinder->length++;
+			fread(&number, sizeof(ULong), 1, personalsFile);
+			flag1 = fread(&businessCard.personal, sizeof(Personal), 1, personalsFile);
+		}
+		fclose(personalsFile);
+		fclose(companiesFile);
+	}
+	return businessCardBinder->length;
+}
 
 /*
 함수명칭 : TakeIn
@@ -324,14 +376,53 @@ BusinessCard* BusinessCardBinder_Last(BusinessCardBinder *businessCardBinder) {
 }
 
 /*
-함수명칭 :
-기    능 :
-입    력 :
-출    력 :
+함수명칭 : Save
+기    능 : 명함관리철에 명함들을 개인파일과 회사파일에 저장하고 명함개수를 출력한다.
+입    력 : 없음
+출    력 : 명함개수
 작 성 자 : Joey
 작성일자 : 2017/03/26
 */
-ULong Save(BusinessCardBinder *businessCardBinder);
+ULong Save(BusinessCardBinder *businessCardBinder) {
+	BusinessCard businessCard;
+	ULong count = 0;
+	Company company;
+	ULong relationShip;
+	Node *lastIndex;
+	Node *index;
+	Node *previous = NULL;
+	ULong flag;
+	FILE *personalsFile;
+	FILE *companiesFile;
+
+	personalsFile = fopen("Personals.dat", "wb");
+	companiesFile = fopen("CompaniesFile.dat", "wb+");
+	if (personalsFile != NULL && companiesFile != NULL) {
+		lastIndex = Last(&businessCardBinder->businessCards);
+		index = First(&businessCardBinder->businessCards);
+		while (previous != lastIndex) {
+			GetAt(&businessCardBinder->businessCards, index, &businessCard, sizeof(BusinessCard));
+			relationShip = 1;
+			fseek(companiesFile, 0L, SEEK_SET);
+			flag = fread(&company, sizeof(Company), 1, companiesFile);
+			while (!feof(companiesFile) && flag != 0 && strcmp(businessCard.company.name, company.name) != 0) {
+				relationShip++;
+				flag = fread(&company, sizeof(Company), 1, companiesFile);
+			}
+			if (feof(companiesFile) && flag == 0) {
+				fwrite(&businessCard.company, sizeof(Company), 1, companiesFile);
+			}
+			fwrite(&relationShip, sizeof(ULong), 1, personalsFile);
+			fwrite(&businessCard.personal, sizeof(Personal), 1, personalsFile);
+			count++;
+			previous = index;
+			index = Next(&businessCardBinder->businessCards);
+		}
+		fclose(personalsFile);
+		fclose(companiesFile);
+	}
+	return count;
+}
 
 /*
 함수명칭 : BusinessCardBinder_Destroy
