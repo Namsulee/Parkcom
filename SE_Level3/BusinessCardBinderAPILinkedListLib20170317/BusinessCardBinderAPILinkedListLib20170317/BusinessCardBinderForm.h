@@ -1,5 +1,4 @@
-#pragma once
-//businessCardBinderForm.h
+//BusinessCardBinderForm.h
 #ifndef _BUSINESSCARDBINDER_H
 #define _BUSINESSCARDBINDER_H
 #include <Windows.h>
@@ -12,7 +11,7 @@ BOOL BusinessCardBinderForm_OnClose(HWND hWnd, WPARAM wParam, LPARAM lParam);
 BOOL BusinessCardBinderForm_OnTakeInButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam);
 BOOL BusinessCardBinderForm_OnFindButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam);
 BOOL BusinessCardBinderForm_OnTakeOutButtonclicked(HWND hWnd, WPARAM wParam, LPARAM lParam);
-BOOL BusinessCardBinderForm_OnArrangeButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam);
+//BOOL BusinessCardBinderForm_OnArrangeButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam);
 BOOL BusinessCardBinderForm_OnFirstButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam);
 BOOL BusinessCardBinderForm_OnPreviousButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam);
 BOOL BusinessCardBinderForm_OnNextButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam);

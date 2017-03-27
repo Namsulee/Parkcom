@@ -189,19 +189,16 @@ BOOL BusinessCardBinderFindingForm_OnPreviousButtonClicked(HWND hWnd, WPARAM wPa
 				current = 0;
 			}
 
-			//if (current >= 0) {
-				//current--;
-				SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.name);
-				SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALPOSITION_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.position);
-				SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALCELLULARPHONENUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.cellularPhoneNumber);
-				SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALEMAILADDRESS_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.emailAddress);
-				SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.name);
-				SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYTELEPHONENUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.telephoneNumber);
-				SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYURL_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.url);
-				SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYADDRESS_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.address);
-				SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYFAXNUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.faxNumber);
-				SetProp(hWnd, "current", (HANDLE)current);
-			//}
+			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.name);
+			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALPOSITION_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.position);
+			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALCELLULARPHONENUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.cellularPhoneNumber);
+			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALEMAILADDRESS_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.emailAddress);
+			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.name);
+			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYTELEPHONENUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.telephoneNumber);
+			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYURL_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.url);
+			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYADDRESS_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.address);
+			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYFAXNUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.faxNumber);
+			SetProp(hWnd, "current", (HANDLE)current);
 		}
 	}
 	return FALSE;
@@ -224,19 +221,16 @@ BOOL BusinessCardBinderFindingForm_OnNextButtonClicked(HWND hWnd, WPARAM wParam,
 				current = count - 1;
 			}
 
-			//if (current <= count - 1) {
-				//current++;
-				SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.name);
-				SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALPOSITION_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.position);
-				SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALCELLULARPHONENUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.cellularPhoneNumber);
-				SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALEMAILADDRESS_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.emailAddress);
-				SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.name);
-				SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYTELEPHONENUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.telephoneNumber);
-				SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYURL_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.url);
-				SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYADDRESS_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.address);
-				SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYFAXNUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.faxNumber);
-				SetProp(hWnd, "current", (HANDLE)current);
-			//}
+			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.name);
+			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALPOSITION_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.position);
+			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALCELLULARPHONENUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.cellularPhoneNumber);
+			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALEMAILADDRESS_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->personal.emailAddress);
+			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.name);
+			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYTELEPHONENUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.telephoneNumber);
+			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYURL_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.url);
+			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYADDRESS_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.address);
+			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYFAXNUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)indexes[current]->company.faxNumber);
+			SetProp(hWnd, "current", (HANDLE)current);
 		}
 	}
 	return FALSE;

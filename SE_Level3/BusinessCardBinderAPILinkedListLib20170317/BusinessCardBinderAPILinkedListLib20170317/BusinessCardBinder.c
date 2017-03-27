@@ -4,160 +4,160 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-//메인함수정의
-int main(int argc, char *argv[]) {
-	BusinessCardBinder businessCardBinder;
-	BusinessCard businessCard;
-	BusinessCard *index;
-	BusinessCard* (*indexes);
-	ULong count;
-	ULong i;
-
-	//Create
-	printf("\nCreate\n");
-	BusinessCardBinder_Create(&businessCardBinder);
-
-	//Load
-	printf("\nLoad\n");
-	Load(&businessCardBinder);
-
-	//TakeIn
-	printf("\nTakeIn\n");
-	strcpy(businessCard.personal.name, "홍길동");
-	strcpy(businessCard.personal.position, "사원");
-	strcpy(businessCard.personal.cellularPhoneNumber, "0105879424");
-	strcpy(businessCard.personal.emailAddress, "hong@");
-	strcpy(businessCard.company.name, "삼성");
-	strcpy(businessCard.company.telephoneNumber, "025879424");
-	strcpy(businessCard.company.url, "SAMSUNG.com");
-	strcpy(businessCard.company.address, "서울시 서초구");
-	strcpy(businessCard.company.faxNumber, "025879424");
-	index = TakeIn(&businessCardBinder, businessCard);
-	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
-		index->personal.cellularPhoneNumber, index->personal.emailAddress,
-		index->company.name, index->company.telephoneNumber, index->company.url,
-		index->company.address, index->company.faxNumber);
-	//TakeIn
-	printf("\nTakeIn\n");
-	strcpy(businessCard.personal.name, "이길동");
-	strcpy(businessCard.personal.position, "대리");
-	strcpy(businessCard.personal.cellularPhoneNumber, "0105879424");
-	strcpy(businessCard.personal.emailAddress, "lee@");
-	strcpy(businessCard.company.name, "현대");
-	strcpy(businessCard.company.telephoneNumber, "025879424");
-	strcpy(businessCard.company.url, "HUNDAI.com");
-	strcpy(businessCard.company.address, "서울시 중구");
-	strcpy(businessCard.company.faxNumber, "025879424");
-	index = TakeIn(&businessCardBinder, businessCard);
-	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
-		index->personal.cellularPhoneNumber, index->personal.emailAddress,
-		index->company.name, index->company.telephoneNumber, index->company.url,
-		index->company.address, index->company.faxNumber);
-	//TakeIn
-	printf("\nTakeIn\n");
-	strcpy(businessCard.personal.name, "홍길동");
-	strcpy(businessCard.personal.position, "과장");
-	strcpy(businessCard.personal.cellularPhoneNumber, "0105879424");
-	strcpy(businessCard.personal.emailAddress, "hong2@");
-	strcpy(businessCard.company.name, "엘지");
-	strcpy(businessCard.company.telephoneNumber, "025879424");
-	strcpy(businessCard.company.url, "LG.com");
-	strcpy(businessCard.company.address, "서울시 서초구");
-	strcpy(businessCard.company.faxNumber, "025879424");
-	index = TakeIn(&businessCardBinder, businessCard);
-	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
-		index->personal.cellularPhoneNumber, index->personal.emailAddress,
-		index->company.name, index->company.telephoneNumber, index->company.url,
-		index->company.address, index->company.faxNumber);
-
-	//Find
-	printf("\nFind\n");
-	Find(&businessCardBinder, "홍길동", &indexes, &count);
-	i = 0;
-	while (i < count) {
-		printf("%s %s %s %s %s %s %s %s %s\n", indexes[i]->personal.name, indexes[i]->personal.position,
-			indexes[i]->personal.cellularPhoneNumber, indexes[i]->personal.emailAddress,
-			indexes[i]->company.name, indexes[i]->company.telephoneNumber, indexes[i]->company.url,
-			indexes[i]->company.address, indexes[i]->company.faxNumber);
-		i++;
-	}
-	if (indexes != NULL) {
-		free(indexes);
-		indexes = NULL;
-	}
-
-	//FindByCompanyNames
-	printf("\nFindByCompanyNames\n");
-	index = FindByCompanyName(&businessCardBinder, "삼성");
-	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
-		index->personal.cellularPhoneNumber, index->personal.emailAddress,
-		index->company.name, index->company.telephoneNumber, index->company.url,
-		index->company.address, index->company.faxNumber);
-
-	//Previous
-	printf("\nPrevious\n");
-	index = BusinessCardBinder_Previous(&businessCardBinder);
-	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
-		index->personal.cellularPhoneNumber, index->personal.emailAddress,
-		index->company.name, index->company.telephoneNumber, index->company.url,
-		index->company.address, index->company.faxNumber);
-
-	//First & Previous, UnderFlow Check
-	printf("\nFirst\n");
-	index = BusinessCardBinder_First(&businessCardBinder);
-	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
-		index->personal.cellularPhoneNumber, index->personal.emailAddress,
-		index->company.name, index->company.telephoneNumber, index->company.url,
-		index->company.address, index->company.faxNumber);
-	printf("\nPrevious\n");
-	index = BusinessCardBinder_Previous(&businessCardBinder);
-	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
-		index->personal.cellularPhoneNumber, index->personal.emailAddress,
-		index->company.name, index->company.telephoneNumber, index->company.url,
-		index->company.address, index->company.faxNumber);
-
-	//Next
-	printf("\nNext\n");
-	index = BusinessCardBinder_Next(&businessCardBinder);
-	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
-		index->personal.cellularPhoneNumber, index->personal.emailAddress,
-		index->company.name, index->company.telephoneNumber, index->company.url,
-		index->company.address, index->company.faxNumber);
-
-	//Last & Next, Overflow check
-	printf("\nLast\n");
-	index = BusinessCardBinder_Last(&businessCardBinder);
-	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
-		index->personal.cellularPhoneNumber, index->personal.emailAddress,
-		index->company.name, index->company.telephoneNumber, index->company.url,
-		index->company.address, index->company.faxNumber);
-	printf("\nNext\n");
-	index = BusinessCardBinder_Next(&businessCardBinder);
-	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
-		index->personal.cellularPhoneNumber, index->personal.emailAddress,
-		index->company.name, index->company.telephoneNumber, index->company.url,
-		index->company.address, index->company.faxNumber);
-
-	//TakeOut
-	printf("\nTakeOut\n");
-	index = BusinessCardBinder_Last(&businessCardBinder);
-	businessCard = TakeOut(&businessCardBinder, index);
-	printf("%s %s %s %s %s %s %s %s %s\n", businessCard.personal.name, businessCard.personal.position,
-		businessCard.personal.cellularPhoneNumber, businessCard.personal.emailAddress,
-		businessCard.company.name, businessCard.company.telephoneNumber, businessCard.company.url,
-		businessCard.company.address, businessCard.company.faxNumber);
-
-	//Save
-	printf("\nSave\n");
-	Save(&businessCardBinder);
-
-	//Destroy
-	printf("\nDestroy\n");
-	BusinessCardBinder_Destroy(&businessCardBinder);
-
-	return 0;
-}
+//
+////메인함수정의
+//int main(int argc, char *argv[]) {
+//	BusinessCardBinder businessCardBinder;
+//	BusinessCard businessCard;
+//	BusinessCard *index;
+//	BusinessCard* (*indexes);
+//	ULong count;
+//	ULong i;
+//
+//	//Create
+//	printf("\nCreate\n");
+//	BusinessCardBinder_Create(&businessCardBinder);
+//
+//	//Load
+//	printf("\nLoad\n");
+//	Load(&businessCardBinder);
+//
+//	//TakeIn
+//	printf("\nTakeIn\n");
+//	strcpy(businessCard.personal.name, "홍길동");
+//	strcpy(businessCard.personal.position, "사원");
+//	strcpy(businessCard.personal.cellularPhoneNumber, "0105879424");
+//	strcpy(businessCard.personal.emailAddress, "hong@");
+//	strcpy(businessCard.company.name, "삼성");
+//	strcpy(businessCard.company.telephoneNumber, "025879424");
+//	strcpy(businessCard.company.url, "SAMSUNG.com");
+//	strcpy(businessCard.company.address, "서울시 서초구");
+//	strcpy(businessCard.company.faxNumber, "025879424");
+//	index = TakeIn(&businessCardBinder, businessCard);
+//	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
+//		index->personal.cellularPhoneNumber, index->personal.emailAddress,
+//		index->company.name, index->company.telephoneNumber, index->company.url,
+//		index->company.address, index->company.faxNumber);
+//	//TakeIn
+//	printf("\nTakeIn\n");
+//	strcpy(businessCard.personal.name, "이길동");
+//	strcpy(businessCard.personal.position, "대리");
+//	strcpy(businessCard.personal.cellularPhoneNumber, "0105879424");
+//	strcpy(businessCard.personal.emailAddress, "lee@");
+//	strcpy(businessCard.company.name, "현대");
+//	strcpy(businessCard.company.telephoneNumber, "025879424");
+//	strcpy(businessCard.company.url, "HUNDAI.com");
+//	strcpy(businessCard.company.address, "서울시 중구");
+//	strcpy(businessCard.company.faxNumber, "025879424");
+//	index = TakeIn(&businessCardBinder, businessCard);
+//	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
+//		index->personal.cellularPhoneNumber, index->personal.emailAddress,
+//		index->company.name, index->company.telephoneNumber, index->company.url,
+//		index->company.address, index->company.faxNumber);
+//	//TakeIn
+//	printf("\nTakeIn\n");
+//	strcpy(businessCard.personal.name, "홍길동");
+//	strcpy(businessCard.personal.position, "과장");
+//	strcpy(businessCard.personal.cellularPhoneNumber, "0105879424");
+//	strcpy(businessCard.personal.emailAddress, "hong2@");
+//	strcpy(businessCard.company.name, "엘지");
+//	strcpy(businessCard.company.telephoneNumber, "025879424");
+//	strcpy(businessCard.company.url, "LG.com");
+//	strcpy(businessCard.company.address, "서울시 서초구");
+//	strcpy(businessCard.company.faxNumber, "025879424");
+//	index = TakeIn(&businessCardBinder, businessCard);
+//	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
+//		index->personal.cellularPhoneNumber, index->personal.emailAddress,
+//		index->company.name, index->company.telephoneNumber, index->company.url,
+//		index->company.address, index->company.faxNumber);
+//
+//	//Find
+//	printf("\nFind\n");
+//	Find(&businessCardBinder, "홍길동", &indexes, &count);
+//	i = 0;
+//	while (i < count) {
+//		printf("%s %s %s %s %s %s %s %s %s\n", indexes[i]->personal.name, indexes[i]->personal.position,
+//			indexes[i]->personal.cellularPhoneNumber, indexes[i]->personal.emailAddress,
+//			indexes[i]->company.name, indexes[i]->company.telephoneNumber, indexes[i]->company.url,
+//			indexes[i]->company.address, indexes[i]->company.faxNumber);
+//		i++;
+//	}
+//	if (indexes != NULL) {
+//		free(indexes);
+//		indexes = NULL;
+//	}
+//
+//	//FindByCompanyNames
+//	printf("\nFindByCompanyNames\n");
+//	index = FindByCompanyName(&businessCardBinder, "삼성");
+//	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
+//		index->personal.cellularPhoneNumber, index->personal.emailAddress,
+//		index->company.name, index->company.telephoneNumber, index->company.url,
+//		index->company.address, index->company.faxNumber);
+//
+//	//Previous
+//	printf("\nPrevious\n");
+//	index = BusinessCardBinder_Previous(&businessCardBinder);
+//	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
+//		index->personal.cellularPhoneNumber, index->personal.emailAddress,
+//		index->company.name, index->company.telephoneNumber, index->company.url,
+//		index->company.address, index->company.faxNumber);
+//
+//	//First & Previous, UnderFlow Check
+//	printf("\nFirst\n");
+//	index = BusinessCardBinder_First(&businessCardBinder);
+//	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
+//		index->personal.cellularPhoneNumber, index->personal.emailAddress,
+//		index->company.name, index->company.telephoneNumber, index->company.url,
+//		index->company.address, index->company.faxNumber);
+//	printf("\nPrevious\n");
+//	index = BusinessCardBinder_Previous(&businessCardBinder);
+//	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
+//		index->personal.cellularPhoneNumber, index->personal.emailAddress,
+//		index->company.name, index->company.telephoneNumber, index->company.url,
+//		index->company.address, index->company.faxNumber);
+//
+//	//Next
+//	printf("\nNext\n");
+//	index = BusinessCardBinder_Next(&businessCardBinder);
+//	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
+//		index->personal.cellularPhoneNumber, index->personal.emailAddress,
+//		index->company.name, index->company.telephoneNumber, index->company.url,
+//		index->company.address, index->company.faxNumber);
+//
+//	//Last & Next, Overflow check
+//	printf("\nLast\n");
+//	index = BusinessCardBinder_Last(&businessCardBinder);
+//	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
+//		index->personal.cellularPhoneNumber, index->personal.emailAddress,
+//		index->company.name, index->company.telephoneNumber, index->company.url,
+//		index->company.address, index->company.faxNumber);
+//	printf("\nNext\n");
+//	index = BusinessCardBinder_Next(&businessCardBinder);
+//	printf("%s %s %s %s %s %s %s %s %s\n", index->personal.name, index->personal.position,
+//		index->personal.cellularPhoneNumber, index->personal.emailAddress,
+//		index->company.name, index->company.telephoneNumber, index->company.url,
+//		index->company.address, index->company.faxNumber);
+//
+//	//TakeOut
+//	printf("\nTakeOut\n");
+//	index = BusinessCardBinder_Last(&businessCardBinder);
+//	businessCard = TakeOut(&businessCardBinder, index);
+//	printf("%s %s %s %s %s %s %s %s %s\n", businessCard.personal.name, businessCard.personal.position,
+//		businessCard.personal.cellularPhoneNumber, businessCard.personal.emailAddress,
+//		businessCard.company.name, businessCard.company.telephoneNumber, businessCard.company.url,
+//		businessCard.company.address, businessCard.company.faxNumber);
+//
+//	//Save
+//	printf("\nSave\n");
+//	Save(&businessCardBinder);
+//
+//	//Destroy
+//	printf("\nDestroy\n");
+//	BusinessCardBinder_Destroy(&businessCardBinder);
+//
+//	return 0;
+//}
 
 /*
 함수명칭 : BusinessCardBinder_Create

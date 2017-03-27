@@ -87,7 +87,7 @@ BOOL TakingOutForm_OnClose(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 		SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYURL_INFO), WM_GETTEXT, (WPARAM)256, (LPARAM)businessCard.company.url);
 		SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYADDRESS_INFO), WM_GETTEXT, (WPARAM)256, (LPARAM)businessCard.company.address);
 		SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYFAXNUMBER_INFO), WM_GETTEXT, (WPARAM)12, (LPARAM)businessCard.company.faxNumber);
-		businessCard.next = NULL;
+		//businessCard.next = NULL;
 		//2.2.2. 명함관리철 윈도우를 찾는다.
 		hBusinessCardBinderForm = FindWindow("#32770", "명함관리철");
 		//2.2.3. 명함관리철 윈도우의 명함관리철에 명함을 끼운다.

@@ -5,6 +5,7 @@
 
 //사용자 정의 자료형
 typedef unsigned long int ULong;
+typedef signed long int Long;
 typedef struct _company {
 	char name[64];
 	char telephoneNumber[12];
@@ -49,5 +50,4 @@ void BusinessCardBinder_Destroy(BusinessCardBinder *businessCardBinder);
 int CompareNames(void *one, void *other);
 int CompareCompanyNames(void *one, void *other);
 int CompareIndexes(void *one, void *other);
-
 #endif //_BUSINESSCARDBINDER_H

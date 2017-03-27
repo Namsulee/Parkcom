@@ -1,4 +1,4 @@
-#pragma once
+//TakingOutForm.h
 #ifndef _TAKINGOUTFORM_H
 #define _TAKINGOUTFORM_H
 #include <Windows.h>

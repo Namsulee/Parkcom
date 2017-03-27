@@ -1,6 +1,4 @@
-#pragma once
 //TakingInForm.h
-
 #ifndef _TAKINGINNFORM_H
 #define _TAKINGINFORM_H
 #include <Windows.h>

@@ -1,10 +1,10 @@
 #include "BusinessCardBinderForm.h"
-#include "BusinessCardBinder.h"
-#include "resource.h"
-#include <stdlib.h>
 #include "TakingInForm.h"
 #include "TakingOutForm.h"
 #include "BusinessCardBinderFindingForm.h"
+#include "BusinessCardBinder.h"
+#include "resource.h"
+#include <stdlib.h>
 
 //메인함수
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdline, int mCmdShow) {
@@ -32,11 +32,11 @@ BOOL BusinessCardBinderForm_OnInitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam
 	BusinessCardBinder *businessCardBinder;
 	BusinessCard *index;
 	businessCardBinder = (BusinessCardBinder*)malloc(sizeof(BusinessCardBinder));
-	Create(businessCardBinder);
+	BusinessCardBinder_Create(businessCardBinder);
 	//Load 추가 20170325
 	Load(businessCardBinder);
 	SetWindowLong(hWnd, GWL_USERDATA, (LONG)businessCardBinder);
-	index = First(businessCardBinder);
+	index = BusinessCardBinder_First(businessCardBinder);
 	if (index != NULL) {
 		SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.name);
 		SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALPOSITION_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.position);
@@ -81,7 +81,7 @@ BOOL BusinessCardBinderForm_OnClose(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	if (businessCardBinder != NULL) {
 		//Save 추가 20170325
 		Save(businessCardBinder);
-		Destroy(businessCardBinder);
+		BusinessCardBinder_Destroy(businessCardBinder);
 		free(businessCardBinder);
 	}
 	EndDialog(hWnd, 0);
@@ -109,34 +109,34 @@ BOOL BusinessCardBinderForm_OnTakeOutButtonclicked(HWND hWnd, WPARAM wParam, LPA
 	return FALSE;
 }
 
-BOOL BusinessCardBinderForm_OnArrangeButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam) {
-	BusinessCardBinder *businessCardBinder;
-	BusinessCard *index;
-	if (HIWORD(wParam) == BN_CLICKED) {
-		businessCardBinder = (BusinessCardBinder*)GetWindowLong(hWnd, GWL_USERDATA);
-		Arrange(businessCardBinder);
-		index = First(businessCardBinder);
-		if (index != NULL) {
-			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.name);
-			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALPOSITION_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.position);
-			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALCELLULARPHONENUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.cellularPhoneNumber);
-			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALEMAILADDRESS_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.emailAddress);
-			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->company.name);
-			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYTELEPHONENUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->company.telephoneNumber);
-			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYURL_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->company.url);
-			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYADDRESS_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->company.address);
-			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYFAXNUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->company.faxNumber);
-		}
-	}
-	return FALSE;
-}
+//BOOL BusinessCardBinderForm_OnArrangeButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam) {
+//	BusinessCardBinder *businessCardBinder;
+//	BusinessCard *index;
+//	if (HIWORD(wParam) == BN_CLICKED) {
+//		businessCardBinder = (BusinessCardBinder*)GetWindowLong(hWnd, GWL_USERDATA);
+//		Arrange(businessCardBinder);
+//		index = BusinessCardBinder_First(businessCardBinder);
+//		if (index != NULL) {
+//			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.name);
+//			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALPOSITION_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.position);
+//			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALCELLULARPHONENUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.cellularPhoneNumber);
+//			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALEMAILADDRESS_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.emailAddress);
+//			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->company.name);
+//			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYTELEPHONENUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->company.telephoneNumber);
+//			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYURL_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->company.url);
+//			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYADDRESS_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->company.address);
+//			SendMessage(GetDlgItem(hWnd, IDC_STATIC_COMPANYFAXNUMBER_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->company.faxNumber);
+//		}
+//	}
+//	return FALSE;
+//}
 
 BOOL BusinessCardBinderForm_OnFirstButtonClicked(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	BusinessCardBinder *businessCardBinder;
 	BusinessCard *index;
 	if (HIWORD(wParam) == BN_CLICKED) {
 		businessCardBinder = (BusinessCardBinder*)GetWindowLong(hWnd, GWL_USERDATA);
-		index = First(businessCardBinder);
+		index = BusinessCardBinder_First(businessCardBinder);
 		if (index != NULL) {
 			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.name);
 			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALPOSITION_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.position);
@@ -157,7 +157,7 @@ BOOL BusinessCardBinderForm_OnPreviousButtonClicked(HWND hWnd, WPARAM wParam, LP
 	BusinessCard *index;
 	if (HIWORD(wParam) == BN_CLICKED) {
 		businessCardBinder = (BusinessCardBinder*)GetWindowLong(hWnd, GWL_USERDATA);
-		index = Previous(businessCardBinder);
+		index = BusinessCardBinder_Previous(businessCardBinder);
 		if (index != NULL) {
 			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.name);
 			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALPOSITION_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.position);
@@ -178,7 +178,7 @@ BOOL BusinessCardBinderForm_OnNextButtonClicked(HWND hWnd, WPARAM wParam, LPARAM
 	BusinessCard *index;
 	if (HIWORD(wParam) == BN_CLICKED) {
 		businessCardBinder = (BusinessCardBinder*)GetWindowLong(hWnd, GWL_USERDATA);
-		index = Next(businessCardBinder);
+		index = BusinessCardBinder_Next(businessCardBinder);
 		if (index != NULL) {
 			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.name);
 			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALPOSITION_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.position);
@@ -199,7 +199,7 @@ BOOL BusinessCardBinderForm_OnLastButtonClicked(HWND hWnd, WPARAM wParam, LPARAM
 	BusinessCard *index;
 	if (HIWORD(wParam) == BN_CLICKED) {
 		businessCardBinder = (BusinessCardBinder*)GetWindowLong(hWnd, GWL_USERDATA);
-		index = Last(businessCardBinder);
+		index = BusinessCardBinder_Last(businessCardBinder);
 		if (index != NULL) {
 			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALNAME_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.name);
 			SendMessage(GetDlgItem(hWnd, IDC_STATIC_PERSONALPOSITION_INFO), WM_SETTEXT, (WPARAM)0, (LPARAM)index->personal.position);
