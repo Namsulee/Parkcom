@@ -1,4 +1,3 @@
 ﻿  Main.c
-c:\users\juju5\documents\github\parkcom\se_level4\dateclanguage20170327\dateclanguage20170327\main.c(40): warning C4102: 'defalut': 참조되지 않은 레이블입니다.
   DateCLanguage20170327.vcxproj -> C:\Users\juju5\Documents\GitHub\Parkcom\SE_Level4\DateCLanguage20170327\Debug\DateCLanguage20170327.exe
   DateCLanguage20170327.vcxproj -> C:\Users\juju5\Documents\GitHub\Parkcom\SE_Level4\DateCLanguage20170327\Debug\DateCLanguage20170327.pdb (Partial PDB)
