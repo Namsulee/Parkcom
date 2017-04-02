@@ -69,7 +69,7 @@ Date Yesterday(Date *date) {
 	yesterday_.year = yesterday.tm_year + 1900;
 	yesterday_.month = (Month)(yesterday.tm_mon + 1);
 	yesterday_.day = yesterday.tm_mday;
-	yesterday_.weekDay = yesterday.tm_mday;
+	yesterday_.weekDay = (WeekDay)(yesterday.tm_wday);
 	Destroy(&yesterday_);
 	return yesterday_;
 }
@@ -90,7 +90,7 @@ Date Tommorrow(Date *date) {
 	tommorrow_.year = tommorrow.tm_year + 1900;
 	tommorrow_.month = (Month)(tommorrow.tm_mon + 1);
 	tommorrow_.day = tommorrow.tm_mday;
-	tommorrow_.weekDay = tommorrow.tm_mday;
+	tommorrow_.weekDay = (WeekDay)(tommorrow.tm_wday);
 	Destroy(&tommorrow_);
 	return tommorrow_;
 }
@@ -111,7 +111,7 @@ Date PreviousDate(Date *date, UShort days) {
 	previousDate_.year = previousDate.tm_year + 1900;
 	previousDate_.month = (Month)(previousDate.tm_mon + 1);
 	previousDate_.day = previousDate.tm_mday;
-	previousDate_.weekDay = previousDate.tm_mday;
+	previousDate_.weekDay = (WeekDay)(previousDate.tm_wday);
 	Destroy(&previousDate_);
 	return previousDate_;
 }
@@ -132,7 +132,7 @@ Date NextDate(Date *date, UShort days) {
 	nextDate_.year = nextDate.tm_year + 1900;
 	nextDate_.month = (Month)(nextDate.tm_mon + 1);
 	nextDate_.day = nextDate.tm_mday;
-	nextDate_.weekDay = nextDate.tm_mday;
+	nextDate_.weekDay = (WeekDay)(nextDate.tm_wday);
 	Destroy(&nextDate_);
 	return nextDate_;
 }

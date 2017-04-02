@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
 	today = date.Today(&date);
 	printf("%4d-%02d-%02d-", today.year, today.month, today.day);
 	switch(today.weekDay) {
-	case SUNDAY: printf("일요일\n"); break;
+		case SUNDAY: printf("일요일\n"); break;
 		case MONDAY: printf("월요일\n"); break;
 		case TUESDAY: printf("화요일\n"); break;
 		case WEDNESDAY: printf("수요일\n"); break;
@@ -41,9 +41,9 @@ int main(int argc, char *argv[]) {
 	}
 
 	//어제
-	yesterday = date.Yesterday(&today);
+	yesterday = today.Yesterday(&today);
 	printf("%4d-%02d-%02d-", yesterday.year, yesterday.month, yesterday.day);
-	switch (today.weekDay) {
+	switch (yesterday.weekDay) {
 		case SUNDAY: printf("일요일\n"); break;
 		case MONDAY: printf("월요일\n"); break;
 		case TUESDAY: printf("화요일\n"); break;
@@ -55,9 +55,9 @@ int main(int argc, char *argv[]) {
 	}
 
 	//내일
-	tommorrow = date.Tommorrow(&yesterday);
+	tommorrow = yesterday.Tommorrow(&yesterday);
 	printf("%4d-%02d-%02d-", tommorrow.year, tommorrow.month, tommorrow.day);
-	switch (today.weekDay) {
+	switch (tommorrow.weekDay) {
 		case SUNDAY: printf("일요일\n"); break;
 		case MONDAY: printf("월요일\n"); break;
 		case TUESDAY: printf("화요일\n"); break;
@@ -69,9 +69,9 @@ int main(int argc, char *argv[]) {
 	}
 
 	//이전날짜
-	previousDate = date.PreviousDate(&today, 3);
+	previousDate = today.PreviousDate(&today, 3);
 	printf("%4d-%02d-%02d-", previousDate.year, previousDate.month, previousDate.day);
-	switch (today.weekDay) {
+	switch (previousDate.weekDay) {
 		case SUNDAY: printf("일요일\n"); break;
 		case MONDAY: printf("월요일\n"); break;
 		case TUESDAY: printf("화요일\n"); break;
@@ -83,9 +83,9 @@ int main(int argc, char *argv[]) {
 	}
 	
 	//이후날짜
-	nextDate = date.NextDate(&today, 4);
+	nextDate = today.NextDate(&today, 4);
 	printf("%4d-%02d-%02d-", nextDate.year, nextDate.month, nextDate.day);
-	switch (today.weekDay) {
+	switch (nextDate.weekDay) {
 		case SUNDAY: printf("일요일\n"); break;
 		case MONDAY: printf("월요일\n"); break;
 		case TUESDAY: printf("화요일\n"); break;

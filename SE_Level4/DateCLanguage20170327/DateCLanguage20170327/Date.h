@@ -5,7 +5,7 @@
 //사용자 정의 자료형
 typedef unsigned short UShort;
 typedef enum _boolean { FALSE = 0, TRUE = 1 }Boolean;
-typedef enum _month { JAN = 1, FEB = 2, MAR = 3, APR = 4, MAY = 5, TUN = 6, JUL = 7, AUG = 8, SEP = 9, OCT = 10, NOV = 11, DEC = 12 }Month;
+typedef enum _month { JAN = 1, FEB = 2, MAR = 3, APR = 4, MAY = 5, JUN = 6, JUL = 7, AUG = 8, SEP = 9, OCT = 10, NOV = 11, DEC = 12 }Month;
 typedef enum _weekDay {SUNDAY = 0, MONDAY = 1, TUESDAY = 2, WEDNESDAY = 3, THURSDAY = 4, FRIDAY = 5, SATURDAY = 6} WeekDay;
 typedef struct _date Date;
 typedef struct _date {
