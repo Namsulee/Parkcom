@@ -30,7 +30,8 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -89,9 +90,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -141,10 +143,14 @@
   <ItemGroup>
     <ClInclude Include="Array.h" />
     <ClInclude Include="Memo.h" />
+    <ClInclude Include="NoteBookApp.h" />
+    <ClInclude Include="NoteBookForm.h" />
     <ClInclude Include="SingleCharacter.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Memo.cpp" />
+    <ClCompile Include="NoteBookApp.cpp" />
+    <ClCompile Include="NoteBookForm.cpp" />
     <ClCompile Include="SingleCharacter.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

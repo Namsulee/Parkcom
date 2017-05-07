@@ -5,7 +5,7 @@
 #include "Array.h"
 #include "SingleCharacter.h"
 
-typedef signed long Long;
+typedef signed long int Long;
 
 class Memo {
 public:

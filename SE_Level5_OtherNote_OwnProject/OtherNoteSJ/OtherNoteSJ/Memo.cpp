@@ -45,21 +45,21 @@ SingleCharacter& Memo::operator [] (Long index) {
 	return this->singleCharacters.GetAt(index);
 }
 
-#include <iostream>
-using namespace std;
-
-int main(int argc, char* argv[]) {
-	Memo memo;
-	Long index;
-	SingleCharacter singCharacter;
-
-	index = memo.Write('a');
-	singCharacter = memo.GetAt(index);
-	cout << singCharacter.GetValue() << endl;
-
-	index = memo.Write('b');
-	singCharacter = memo.GetAt(index);
-	cout << singCharacter.GetValue() << endl;
-
-	return 0;
-}
+//#include <iostream>
+//using namespace std;
+//
+//int main(int argc, char* argv[]) {
+//	Memo memo;
+//	Long index;
+//	SingleCharacter singCharacter;
+//
+//	index = memo.Write('a');
+//	singCharacter = memo.GetAt(index);
+//	cout << singCharacter.GetValue() << endl;
+//
+//	index = memo.Write('b');
+//	singCharacter = memo.GetAt(index);
+//	cout << singCharacter.GetValue() << endl;
+//
+//	return 0;
+//}
