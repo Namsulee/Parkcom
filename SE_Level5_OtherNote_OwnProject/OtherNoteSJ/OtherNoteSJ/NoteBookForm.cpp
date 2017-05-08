@@ -7,7 +7,8 @@ BEGIN_MESSAGE_MAP(NoteBookForm, CFrameWnd)
 	ON_WM_CREATE()
 	ON_WM_PAINT()
 	ON_WM_CLOSE()
-	END_MESSAGE_MAP()
+	ON_WM_CHAR()
+END_MESSAGE_MAP()
 
 NoteBookForm::NoteBookForm() {
 
@@ -16,8 +17,8 @@ NoteBookForm::NoteBookForm() {
 BOOL NoteBookForm::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	CFrameWnd::OnCreate(lpCreateStruct);
 	this->memo = new Memo(10);
-	this->memo->Write('a');
-	this->memo->Write('b');
+	//this->memo->Write('a');
+	//this->memo->Write('b');
 	return FALSE;
 }
 
@@ -35,5 +36,9 @@ void NoteBookForm::OnPaint() {
 void NoteBookForm::OnClose() {
 	delete this->memo;
 	CFrameWnd::OnClose();
+}
 
+void NoteBookForm::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
+	this->memo->Write(nChar);
+	this->RedrawWindow();
 }
