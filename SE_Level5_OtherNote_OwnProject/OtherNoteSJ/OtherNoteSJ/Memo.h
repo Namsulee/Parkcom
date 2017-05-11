@@ -3,23 +3,23 @@
 #define _MEMO_H
 
 #include "Array.h"
-#include "SingleCharacter.h"
-
 typedef signed long int Long;
 
+class Character;
 class Memo {
 public:
 	Memo(Long capacity = 100);
 	Memo(const Memo& source);
 	~Memo();
 	Long Write(char value);
-	SingleCharacter& GetAt(Long index);
+	Long Memo::Write(char* value);
+	Character* GetAt(Long index);
 	Memo& operator = (const Memo& source);
-	SingleCharacter& operator [] (Long index);
+	Character* operator [] (Long index);
 	Long GetCapacity() const;
 	Long GetLength() const;
 private:
-	Array<SingleCharacter> singleCharacters;
+	Array<Character*> characters;
 	Long capacity;
 	Long length;
 };

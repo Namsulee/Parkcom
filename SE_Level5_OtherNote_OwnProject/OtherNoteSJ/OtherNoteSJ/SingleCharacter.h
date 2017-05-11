@@ -1,8 +1,8 @@
 #pragma once
 #ifndef _SINGLECHARACTER_H
 #define _SINGLECHARATER_H
-
-class SingleCharacter {
+#include "Character.h"
+class SingleCharacter : public Character{
 public:
 	SingleCharacter();
 	SingleCharacter(char value);
