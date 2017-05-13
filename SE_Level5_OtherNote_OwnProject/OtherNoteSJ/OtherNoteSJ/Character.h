@@ -7,7 +7,7 @@ class Character {
 public:
 	Character();
 	Character(const Character& source);
-	~Character();
+	virtual ~Character() = 0;
 	Character& operator = (const Character& source);
 
 };

@@ -85,16 +85,25 @@ Character* Memo::operator [] (Long index) {
 //}
 
 #include <iostream>
+#include <string>
 using namespace std;
 int main(int argc, char *argv[]) {
 	Memo memo;
-	int index = memo.Write("วั");
-	Character *character = memo.GetAt(index);
-	cout << static_cast<DoubleCharacter*>(character)->GetValue() << endl;
+	Character *characterLink;
+	Long index;
+	string characters;
+
+	index = memo.Write("วั");
+	characterLink = memo.GetAt(index);
+	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[0];
+	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[1];
 
 	index = memo.Write("ฑÛ");
-	character = memo.GetAt(index);
-	cout << static_cast<DoubleCharacter*>(character)->GetValue() << endl;
+	characterLink = memo.GetAt(index);
+	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[0];
+	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[1];
+
+	cout << characters << endl;
 
 	return 0;
 }
