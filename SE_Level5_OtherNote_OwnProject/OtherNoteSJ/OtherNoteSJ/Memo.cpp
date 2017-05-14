@@ -55,6 +55,17 @@ Character* Memo::GetAt(Long index) {
 	return this->characters.GetAt(index);
 }
 
+Long Memo::Erase(Long index) {
+	Character *characterLink = this->characters.GetAt(index);
+	if (characterLink != 0) {
+		delete characterLink;
+		index = this->characters.Delete(index);
+		this->length--;
+		this->capacity--;
+	}
+	return index;
+}
+
 Memo& Memo::operator = (const Memo& source) {
 	this->characters = source.characters;
 	this->capacity = source.capacity;
@@ -64,6 +75,8 @@ Memo& Memo::operator = (const Memo& source) {
 Character* Memo::operator [] (Long index) {
 	return this->characters.GetAt(index);
 }
+
+
 
 //#include <iostream>
 //using namespace std;
@@ -84,26 +97,26 @@ Character* Memo::operator [] (Long index) {
 //	return 0;
 //}
 
-#include <iostream>
-#include <string>
-using namespace std;
-int main(int argc, char *argv[]) {
-	Memo memo;
-	Character *characterLink;
-	Long index;
-	string characters;
-
-	index = memo.Write("한");
-	characterLink = memo.GetAt(index);
-	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[0];
-	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[1];
-
-	index = memo.Write("글");
-	characterLink = memo.GetAt(index);
-	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[0];
-	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[1];
-
-	cout << characters << endl;
-
-	return 0;
-}
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//int main(int argc, char *argv[]) {
+//	Memo memo;
+//	Character *characterLink;
+//	Long index;
+//	string characters;
+//
+//	index = memo.Write("한");
+//	characterLink = memo.GetAt(index);
+//	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[0];
+//	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[1];
+//
+//	index = memo.Write("글");
+//	characterLink = memo.GetAt(index);
+//	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[0];
+//	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[1];
+//
+//	cout << characters << endl;
+//
+//	return 0;
+//}

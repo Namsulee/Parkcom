@@ -2,16 +2,20 @@
 
 #include "NoteBookForm.h"
 #include "Memo.h"
+#include "SingleCharacter.h"
+#include "DoubleCharacter.h"
+#include <Windows.h>
 
 BEGIN_MESSAGE_MAP(NoteBookForm, CFrameWnd)
 	ON_WM_CREATE()
 	ON_WM_PAINT()
 	ON_WM_CLOSE()
 	ON_WM_CHAR()
+	ON_MESSAGE(WM_IME_COMPOSITION, OnImeComposition)
 END_MESSAGE_MAP()
 
 NoteBookForm::NoteBookForm() {
-
+	this->endComposition = false;
 }
 
 BOOL NoteBookForm::OnCreate(LPCREATESTRUCT lpCreateStruct) {
@@ -19,18 +23,28 @@ BOOL NoteBookForm::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	this->memo = new Memo(10);
 	//this->memo->Write('a');
 	//this->memo->Write('b');
+	this->endComposition = true;
 	return FALSE;
 }
 
 void NoteBookForm::OnPaint() {
 	CPaintDC dc(this);
-	CString singleCharacters;
+	Character *characterLink;
+	CString characters;
 	Long i = 0;
 	while (i < this->memo->GetLength()) {
-		singleCharacters += this->memo->GetAt(i).GetValue();
+		characterLink = this->memo->GetAt(i);
+		if (dynamic_cast<SingleCharacter*>(characterLink)) {
+			characters += (dynamic_cast<SingleCharacter*>(characterLink))->GetValue();
+		}
+		else if (dynamic_cast<DoubleCharacter*>(characterLink)) {
+			characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[0];
+			characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[1];
+		}
+		
 		i++;
 	}
-	dc.TextOut(0, 0, singleCharacters);
+	dc.TextOut(0, 0, characters);
 }
 
 void NoteBookForm::OnClose() {
@@ -41,4 +55,25 @@ void NoteBookForm::OnClose() {
 void NoteBookForm::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
 	this->memo->Write(nChar);
 	this->RedrawWindow();
+}
+
+LRESULT NoteBookForm::OnImeComposition(WPARAM wParam, LPARAM lParam) {
+	char composition[2];
+	composition[0] = *(((char*)&wParam) + 1);
+	composition[1] = *((char*)&wParam);
+
+	if (lParam & GCS_COMPSTR) {
+		if (this->endComposition == false) {
+			this->memo->Erase(this->memo->GetLength() - 1);
+		}
+		this->endComposition = false;
+		this->memo->Write(composition);
+	}
+	else if (lParam & GCS_RESULTSTR) {
+		this->endComposition = true;
+		this->memo->Erase(this->memo->GetLength() - 1);
+		this->memo->Write(composition);
+	}
+	this->RedrawWindow();
+	return 0;
 }

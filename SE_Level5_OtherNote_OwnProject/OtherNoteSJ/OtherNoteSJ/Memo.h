@@ -12,8 +12,9 @@ public:
 	Memo(const Memo& source);
 	~Memo();
 	Long Write(char value);
-	Long Memo::Write(char* value);
+	Long Write(char* value);
 	Character* GetAt(Long index);
+	Long Erase(Long index);
 	Memo& operator = (const Memo& source);
 	Character* operator [] (Long index);
 	Long GetCapacity() const;

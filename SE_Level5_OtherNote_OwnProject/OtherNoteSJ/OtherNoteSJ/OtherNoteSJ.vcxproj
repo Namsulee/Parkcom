@@ -142,12 +142,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Array.h" />
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="DoubleCharacter.h" />
     <ClInclude Include="Memo.h" />
     <ClInclude Include="NoteBookApp.h" />
     <ClInclude Include="NoteBookForm.h" />
     <ClInclude Include="SingleCharacter.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="DoubleCharacter.cpp" />
     <ClCompile Include="Memo.cpp" />
     <ClCompile Include="NoteBookApp.cpp" />
     <ClCompile Include="NoteBookForm.cpp" />
