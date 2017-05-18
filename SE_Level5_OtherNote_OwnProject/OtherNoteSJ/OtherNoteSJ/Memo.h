@@ -3,26 +3,28 @@
 #define _MEMO_H
 
 #include "Array.h"
+#include "Line.h"
 typedef signed long int Long;
 
-class Character;
 class Memo {
 public:
 	Memo(Long capacity = 100);
 	Memo(const Memo& source);
 	~Memo();
-	Long Write(char value);
-	Long Write(char* value);
-	Character* GetAt(Long index);
+	void Write(char value);
+	void Write(char* value);
+	Line& GetAt(Long index);
 	Long Erase(Long index);
 	Memo& operator = (const Memo& source);
-	Character* operator [] (Long index);
+	Line& operator [] (Long index);
 	Long GetCapacity() const;
 	Long GetLength() const;
+	Long GetRow() const;
 private:
-	Array<Character*> characters;
+	Array<Line> lines;
 	Long capacity;
 	Long length;
+	Long row;
 };
 
 inline Long Memo::GetCapacity() const {
@@ -31,6 +33,10 @@ inline Long Memo::GetCapacity() const {
 
 inline Long Memo::GetLength() const {
 	return this->length;
+}
+
+inline Long Memo::GetRow() const {
+	return this->row;
 }
 
 #endif //_MEMO_H

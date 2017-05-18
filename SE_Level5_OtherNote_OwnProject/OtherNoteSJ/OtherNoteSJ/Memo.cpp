@@ -4,119 +4,67 @@
 #include "DoubleCharacter.h"
 
 Memo::Memo(Long capacity)
-	:characters(capacity) {
+	:lines(capacity) {
 	this->capacity = capacity;
 	this->length = 0;
+	this->row = 0;
 }
 
 Memo::Memo(const Memo& source)
-	:characters(source.characters) {
+	:lines(source.lines) {
 	this->capacity = source.capacity;
 	this->length = source.length;
+	this->row = source.row;
 }
 
 Memo::~Memo() {
-	Long i = 0;
-	while (i < this->length) {
-		delete this->characters.GetAt(i);
-		i++;
-	}
+	
 }
 
-Long Memo::Write(char value) {
-	Long index;
-	SingleCharacter *singleCharacter = new SingleCharacter(value);
-	if (this->length < this->capacity) {
-		index = this->characters.Store(this->length, singleCharacter);
-	}
-	else {
-		index = this->characters.AppendFromRear(singleCharacter);
-		this->capacity++;
-	}
-	this->length++;
-	return index;
+void Memo::Write(char value) {
+	Line *lineLink = &this->lines.GetAt(this->row);
+	Long index = lineLink->Write(value);
 }
 
-Long Memo::Write(char* value) {
-	Long index;
-	DoubleCharacter *doubleCharacter = new DoubleCharacter(value);
-	if (this->length < this->capacity) {
-		index = this->characters.Store(this->length, doubleCharacter);
-	}
-	else {
-		index = this->characters.AppendFromRear(doubleCharacter);
-		this->capacity++;
-	}
-	this->length++;
-	return index;
+void Memo::Write(char* value) {
+	Line *lineLink = &this->lines.GetAt(this->row);
+	Long index = lineLink->Write(value);
 }
 
-Character* Memo::GetAt(Long index) {
-	return this->characters.GetAt(index);
+Line& Memo::GetAt(Long index) {
+	return this->lines.GetAt(index);
 }
 
 Long Memo::Erase(Long index) {
-	Character *characterLink = this->characters.GetAt(index);
-	if (characterLink != 0) {
-		delete characterLink;
-		index = this->characters.Delete(index);
-		this->length--;
-		this->capacity--;
+	Line *lineLink = &this->lines.GetAt(index);
+	if (lineLink->GetLength() >= 2) {
+		index = lineLink->Erase(index);
+	}
+	else if (lineLink->GetLength() == 1) {
+		index = lineLink->Erase(index);
+		if (this->length >= 2) {
+			this->lines.Delete(this->row);
+			this->capacity--;
+			this->length--;
+			this->row--;
+		}
 	}
 	return index;
 }
 
 Memo& Memo::operator = (const Memo& source) {
-	this->characters = source.characters;
-	this->capacity = source.capacity;
-	this->length = source.length;
+	
+	if (&this->lines != 0) {
+		delete[] & this->lines;
+	}
+	this->lines = source.lines;
+	Long i = 0;
+	while (i < source.length) {
+		this->lines[i] = const_cast<Memo&>(source).lines[i];
+		i++;
+	}
 	return *this;
 }
-Character* Memo::operator [] (Long index) {
-	return this->characters.GetAt(index);
+Line& Memo::operator [] (Long index) {
+	return this->lines.GetAt(index);
 }
-
-
-
-//#include <iostream>
-//using namespace std;
-//
-//int main(int argc, char* argv[]) {
-//	Memo memo;
-//	Long index;
-//	SingleCharacter singCharacter;
-//
-//	index = memo.Write('a');
-//	singCharacter = memo.GetAt(index);
-//	cout << singCharacter.GetValue() << endl;
-//
-//	index = memo.Write('b');
-//	singCharacter = memo.GetAt(index);
-//	cout << singCharacter.GetValue() << endl;
-//
-//	return 0;
-//}
-
-//#include <iostream>
-//#include <string>
-//using namespace std;
-//int main(int argc, char *argv[]) {
-//	Memo memo;
-//	Character *characterLink;
-//	Long index;
-//	string characters;
-//
-//	index = memo.Write("วั");
-//	characterLink = memo.GetAt(index);
-//	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[0];
-//	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[1];
-//
-//	index = memo.Write("ฑÛ");
-//	characterLink = memo.GetAt(index);
-//	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[0];
-//	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[1];
-//
-//	cout << characters << endl;
-//
-//	return 0;
-//}
