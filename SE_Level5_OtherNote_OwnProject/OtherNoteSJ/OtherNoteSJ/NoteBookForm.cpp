@@ -32,8 +32,8 @@ void NoteBookForm::OnPaint() {
 	Character *characterLink;
 	CString characters;
 	Long i = 0;
-	while (i < this->memo->GetLength()) {
-		characterLink = this->memo->GetAt(i);
+	while (i < this->memo->GetAt(0).GetLength()) {
+		characterLink = this->memo->GetAt(0).GetAt(i);
 		if (dynamic_cast<SingleCharacter*>(characterLink)) {
 			characters += (dynamic_cast<SingleCharacter*>(characterLink))->GetValue();
 		}
@@ -53,7 +53,13 @@ void NoteBookForm::OnClose() {
 }
 
 void NoteBookForm::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
-	this->memo->Write(nChar);
+	Line *lineLink = &this->memo->GetAt(this->memo->GetRow());
+	if (nChar == VK_BACK) {
+		lineLink->Erase();
+	}
+	else {
+		lineLink->Write(nChar);
+	}	
 	this->RedrawWindow();
 }
 
@@ -62,17 +68,19 @@ LRESULT NoteBookForm::OnImeComposition(WPARAM wParam, LPARAM lParam) {
 	composition[0] = *(((char*)&wParam) + 1);
 	composition[1] = *((char*)&wParam);
 
+	Line *lineLink = &this->memo->GetAt(this->memo->GetRow());
+
 	if (lParam & GCS_COMPSTR) {
 		if (this->endComposition == false) {
-			this->memo->Erase(this->memo->GetLength() - 1);
+			lineLink->Erase();
 		}
 		this->endComposition = false;
-		this->memo->Write(composition);
+		lineLink->Write(composition);
 	}
 	else if (lParam & GCS_RESULTSTR) {
 		this->endComposition = true;
-		this->memo->Erase(this->memo->GetLength() - 1);
-		this->memo->Write(composition);
+		lineLink->Erase();
+		lineLink->Write(composition);
 	}
 	this->RedrawWindow();
 	return 0;
