@@ -38,15 +38,15 @@ Line& Memo::GetAt(Long index) {
 Long Memo::Erase(Long index) {
 	Line *lineLink = &this->lines.GetAt(index);
 	if (lineLink->GetLength() >= 2) {
-		index = lineLink->Erase(index);
+		index = lineLink->Erase();
 	}
 	else if (lineLink->GetLength() == 1) {
-		index = lineLink->Erase(index);
+		index = lineLink->Erase();
 		if (this->length >= 2) {
+			this->row--;
 			this->lines.Delete(this->row);
 			this->capacity--;
 			this->length--;
-			this->row--;
 		}
 	}
 	return index;
@@ -54,15 +54,18 @@ Long Memo::Erase(Long index) {
 
 Memo& Memo::operator = (const Memo& source) {
 	
-	if (&this->lines != 0) {
-		delete[] & this->lines;
-	}
+	/*if (&this->lines != 0) {
+		delete[] &this->lines;
+	}*/
 	this->lines = source.lines;
 	Long i = 0;
 	while (i < source.length) {
 		this->lines[i] = const_cast<Memo&>(source).lines[i];
 		i++;
 	}
+	this->capacity = source.capacity;
+	this->length = source.length;
+	this->row = source.row;
 	return *this;
 }
 Line& Memo::operator [] (Long index) {

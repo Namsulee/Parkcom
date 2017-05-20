@@ -64,17 +64,15 @@ Long Line::Write(char *value) {
 	return index;
 }
 
-Long Line::Erase(Long index) {
-	Character *characterLink = this->characters.GetAt(index);
-	if (index >= 0) {
-		if (characterLink != 0) {
-			delete characterLink;
-		}
-		index = this->characters.Delete(index);
-		this->capacity--;
-		this->length--;;
-		this->column--;
+Long Line::Erase() {
+	Character *characterLink = this->characters.GetAt(--this->column);
+	if (characterLink != 0) {
+		delete characterLink;
 	}
+	Long index = this->characters.Delete(this->column);
+	this->capacity--;
+	this->length--;;
+	//this->column--;
 	return index;
 }
 
@@ -95,19 +93,21 @@ Line& Line::operator=(const Line& source) {
 
 	this->characters = source.characters;
 	Character *temp;
-	SingleCharacter *singleCharacter;
-	DoubleCharacter *doubleCharacter;
+	Character *newCharacter;
+	//SingleCharacter *singleCharacter;
+	//DoubleCharacter *doubleCharacter;
 	i = 0;
 	while (i < source.length) {
 		temp = const_cast<Line&>(source).characters.GetAt(i);
 		if (dynamic_cast<SingleCharacter*>(temp)) {
-			singleCharacter = new SingleCharacter(*(static_cast<SingleCharacter*>(temp)));
-			this->characters.Modify(i, singleCharacter);
+			newCharacter = new SingleCharacter(*(static_cast<SingleCharacter*>(temp)));
+			//this->characters.Modify(i, newCharacter);
 		}
 		else {
-			doubleCharacter = new DoubleCharacter(*(static_cast<DoubleCharacter*>(temp)));
-			this->characters.Modify(i, doubleCharacter);
+			newCharacter = new DoubleCharacter(*(static_cast<DoubleCharacter*>(temp)));
+			//this->characters.Modify(i, newCharacter);
 		}
+		this->characters.Modify(i, newCharacter);
 		i++;
 	}
 	this->capacity = source.capacity;

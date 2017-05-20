@@ -12,7 +12,7 @@ public:
 	~Line();
 	Long Write(char value);
 	Long Write(char *value);
-	Long Erase(Long index);
+	Long Erase();
 	Character* GetAt(Long index);
 	Character* operator[](Long index);
 	Line& operator=(const Line& source);	
