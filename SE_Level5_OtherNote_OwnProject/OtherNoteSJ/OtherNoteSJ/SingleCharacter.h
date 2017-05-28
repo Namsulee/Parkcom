@@ -1,21 +1,26 @@
 #pragma once
+//SingleCharacter.h
+
 #ifndef _SINGLECHARACTER_H
-#define _SINGLECHARATER_H
+#define _SINGLECHARACTER_H
+
 #include "Character.h"
-class SingleCharacter : public Character{
-public:
+
+class SingleCharacter : public Character {
+public :
 	SingleCharacter();
 	SingleCharacter(char value);
-	SingleCharacter(const SingleCharacter& source);
-	~SingleCharacter();	
-	bool IsEqual(const SingleCharacter& other);
-	bool IsNotEquals(const SingleCharacter& other);
+	~SingleCharacter();
+	
+	bool IsEquals(const SingleCharacter& other);
+	bool IsNotEquals(const SingleCharacter& other);	
+	
+	SingleCharacter& operator = (const SingleCharacter& source);
 	bool operator == (const SingleCharacter& other);
 	bool operator != (const SingleCharacter& other);
-	SingleCharacter& operator = (const SingleCharacter& source);
 
 	char GetValue() const;
-protected:
+private:
 	char value;
 };
 
@@ -23,4 +28,4 @@ inline char SingleCharacter::GetValue() const {
 	return this->value;
 }
 
-#endif //_SINGLECHARATER_H
+#endif _SINGLECHARACTER_H

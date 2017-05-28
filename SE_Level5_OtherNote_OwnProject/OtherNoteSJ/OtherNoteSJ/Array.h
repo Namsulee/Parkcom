@@ -1,4 +1,5 @@
 #pragma once
+//Array.h
 
 //Guard ¼±¾ð
 #ifndef _ARRAY_H
@@ -8,7 +9,7 @@
 typedef signed long int Long;
 
 template <typename T>
-class Array {
+class Array{
 public:
 	Array(Long capacity = 100);
 	Array(const Array& source);
@@ -62,7 +63,7 @@ Array<T>::Array(Long capacity) {
 template <typename T>
 Array<T>::Array(const Array& source) {
 	this->front = new T[source.capacity];
-
+	
 	Long i = 0;
 	while (i < source.length) {
 		this->front[i] = source.front[i];
@@ -174,7 +175,7 @@ Long Array<T>::AppendFromRear(T object) {
 		temp[i] = this->front[i];
 		i++;
 	}
-
+	
 	if (this->front != 0) {
 		delete[] this->front;
 	}
@@ -191,7 +192,7 @@ Long Array<T>::AppendFromRear(T object) {
 
 template <typename T>
 Long Array<T>::Delete(Long index) {
-	T(*temp);
+	T(*temp)=0;
 
 	if (this->capacity > 1) {
 		temp = new T[this->capacity - 1];
@@ -308,7 +309,7 @@ Long Array<T>::Modify(Long index, T object) {
 template <typename T>
 Long Array<T>::LinearSearchUnique(void *key, int(*compare)(void *, void *)) {
 	Long index = -1;
-
+	
 	Long i = 0;
 	while (i < this->length && compare(this->front + i, key) != 0) {
 		i++;
@@ -327,7 +328,7 @@ void Array<T>::LinearSearchDuplicate(void *key, Long *(*indexes), Long *count, i
 
 	*count = 0;
 	*indexes = new Long[this->length];
-
+	
 	Long i = 0;
 	while (i < this->length) {
 		if (compare(this->front + i, key) == 0) {
@@ -344,7 +345,7 @@ Long Array<T>::BinarySearchUnique(void *key, int(*compare)(void *, void *)) {
 	Long index = -1;
 	Long begin = 0;
 	Long end = this->length - 1;
-
+	
 	Long middle = (begin + end) / 2;
 	while (begin <= end && compare(this->front + middle, key) != 0) {
 		if (compare(this->front + middle, key) < 0) {

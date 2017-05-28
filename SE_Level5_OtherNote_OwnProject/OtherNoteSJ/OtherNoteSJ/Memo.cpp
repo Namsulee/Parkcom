@@ -1,73 +1,42 @@
 //Memo.cpp
 #include "Memo.h"
-#include "SingleCharacter.h"
-#include "DoubleCharacter.h"
+#include "Line.h"
 
 Memo::Memo(Long capacity)
-	:lines(capacity) {
-	this->capacity = capacity;
-	this->length = 0;
-	this->row = 0;
+	:Composite(capacity) {
+	this->row = Composite::Add(new Line);
 }
 
 Memo::Memo(const Memo& source)
-	:lines(source.lines) {
-	this->capacity = source.capacity;
-	this->length = source.length;
+	: Composite(source) {
 	this->row = source.row;
 }
 
 Memo::~Memo() {
-	
+
 }
 
-void Memo::Write(char value) {
-	Line *lineLink = &this->lines.GetAt(this->row);
-	Long index = lineLink->Write(value);
+Long Memo::AddLine() {
+	this->row = Composite::Add(new Line);
+	return this->row;
 }
 
-void Memo::Write(char* value) {
-	Line *lineLink = &this->lines.GetAt(this->row);
-	Long index = lineLink->Write(value);
+Line* Memo::GetLine(Long index) {
+	return static_cast<Line*>(Composite::GetAt(index));
 }
 
-Line& Memo::GetAt(Long index) {
-	return this->lines.GetAt(index);
-}
-
-Long Memo::Erase(Long index) {
-	Line *lineLink = &this->lines.GetAt(index);
-	if (lineLink->GetLength() >= 2) {
-		index = lineLink->Erase();
-	}
-	else if (lineLink->GetLength() == 1) {
-		index = lineLink->Erase();
-		if (this->length >= 2) {
-			this->row--;
-			this->lines.Delete(this->row);
-			this->capacity--;
-			this->length--;
-		}
-	}
+Long Memo::RemoveLine(Long index) {
+	index = Composite::Remove(index);
+	this->row--;
 	return index;
 }
 
+Line* Memo::operator [](Long index) {
+	return static_cast<Line*>(Composite::operator[](index));
+}
+
 Memo& Memo::operator = (const Memo& source) {
-	
-	/*if (&this->lines != 0) {
-		delete[] &this->lines;
-	}*/
-	this->lines = source.lines;
-	Long i = 0;
-	while (i < source.length) {
-		this->lines[i] = const_cast<Memo&>(source).lines[i];
-		i++;
-	}
-	this->capacity = source.capacity;
-	this->length = source.length;
+	Composite::operator = (source);
 	this->row = source.row;
 	return *this;
-}
-Line& Memo::operator [] (Long index) {
-	return this->lines.GetAt(index);
 }

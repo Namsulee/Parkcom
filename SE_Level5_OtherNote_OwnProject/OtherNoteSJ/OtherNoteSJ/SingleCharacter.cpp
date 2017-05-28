@@ -1,29 +1,21 @@
 //SingleCharacter.cpp
-
 #include "SingleCharacter.h"
 
-//디폴트 생성자
-SingleCharacter::SingleCharacter() {
+SingleCharacter::SingleCharacter() 
+	:Character(){
 	this->value = ' ';
 }
 
-//매개변수에 의한 생성자
-SingleCharacter::SingleCharacter(char value) {
+SingleCharacter::SingleCharacter(char value) 
+	:Character(){
 	this->value = value;
 }
 
-//복사생성자
-SingleCharacter::SingleCharacter(const SingleCharacter& source) {
-	this->value = source.value;
-}
-
-//소멸자
 SingleCharacter::~SingleCharacter() {
 
 }
 
-//관계연산
-bool SingleCharacter::IsEqual(const SingleCharacter& other) {
+bool SingleCharacter::IsEquals(const SingleCharacter& other) {
 	bool ret = false;
 	if (this->value == other.value) {
 		ret = true;
@@ -31,16 +23,20 @@ bool SingleCharacter::IsEqual(const SingleCharacter& other) {
 	return ret;
 }
 
-//관계연산
 bool SingleCharacter::IsNotEquals(const SingleCharacter& other) {
 	bool ret = false;
 	if (this->value != other.value) {
 		ret = true;
 	}
-	return ret;
+	return false;
 }
 
-//==연산자 오버로딩
+SingleCharacter& SingleCharacter::operator=(const SingleCharacter& source) {
+	Character::operator=(source);
+	this->value = source.value;
+	return *this;
+}
+
 bool SingleCharacter::operator==(const SingleCharacter& other) {
 	bool ret = false;
 	if (this->value == other.value) {
@@ -49,17 +45,10 @@ bool SingleCharacter::operator==(const SingleCharacter& other) {
 	return ret;
 }
 
-//!=연산자 오버로딩
 bool SingleCharacter::operator!=(const SingleCharacter& other) {
 	bool ret = false;
 	if (this->value != other.value) {
 		ret = true;
 	}
-	return ret;
-}
-
-//치환연산자
-SingleCharacter& SingleCharacter::operator=(const SingleCharacter& source) {
-	this->value = source.value;
-	return *this;
+	return false;
 }

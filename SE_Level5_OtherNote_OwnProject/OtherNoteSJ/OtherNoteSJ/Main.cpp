@@ -1,103 +1,131 @@
-
-
-//#include <iostream>
-//using namespace std;
-//
-//int main(int argc, char* argv[]) {
-//	Memo memo;
-//	Long index;
-//	SingleCharacter singCharacter;
-//
-//	index = memo.Write('a');
-//	singCharacter = memo.GetAt(index);
-//	cout << singCharacter.GetValue() << endl;
-//
-//	index = memo.Write('b');
-//	singCharacter = memo.GetAt(index);
-//	cout << singCharacter.GetValue() << endl;
-//
-//	return 0;
-//}
-
-//#include <iostream>
-//#include <string>
-//using namespace std;
-//int main(int argc, char *argv[]) {
-//	Memo memo;
-//	Character *characterLink;
-//	Long index;
-//	string characters;
-//
-//	index = memo.Write("한");
-//	characterLink = memo.GetAt(index);
-//	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[0];
-//	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[1];
-//
-//	index = memo.Write("글");
-//	characterLink = memo.GetAt(index);
-//	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[0];
-//	characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[1];
-//
-//	cout << characters << endl;
-//
-//	return 0;
-//}
-
-
-
-#include <iostream>
-#include <string>
+//Main.cpp
 #include "Memo.h"
 #include "Line.h"
 #include "Character.h"
 #include "SingleCharacter.h"
 #include "DoubleCharacter.h"
+#include <iostream>
+#include <string>
+
 using namespace std;
+
+typedef signed long int Long;
+
 int main(int argc, char *argv[]) {
-
-	Memo memo;
-	memo.Write('a');
-	Line line = memo.GetAt(memo.GetRow());
-	Character *characterLink = line.GetAt(line.GetColumn() - 1);
-	string completeString;
-	completeString = static_cast<SingleCharacter*>(characterLink)->GetValue();
-
-	cout << completeString << endl;
-
-	memo.Write("한");
-	line = memo.GetAt(memo.GetRow());
-	characterLink = line.GetAt(line.GetColumn() - 1);
 	
-	completeString = static_cast<DoubleCharacter*>(characterLink)->GetValue()[0];
-	completeString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[1];
+	Memo memo;
 
-	cout << completeString << endl;
+	//1. 메모에 한글자를 적는다.
+	Character *characterLink;
+	string coutString;
+	
+	Line *lineLink = memo.GetLine(0);
+	Long index = lineLink->Write('a');
+	characterLink = lineLink->GetCharacter(index);
+	if (dynamic_cast<SingleCharacter*>(characterLink)) {
+		coutString += static_cast<SingleCharacter*>(characterLink)->GetValue();
+		//cout << static_cast<SingleCharacter*>(characterLink)->GetValue() << endl;
+	}
+	else {
+		coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[0];
+		coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[1];
+		//cout << static_cast<DoubleCharacter*>(characterLink)->GetValue()[0] << endl;
+		//cout << static_cast<DoubleCharacter*>(characterLink)->GetValue()[1] << endl;
+	}
 
-	memo.Write("글");
-	line = memo.GetAt(memo.GetRow());
-	characterLink = line.GetAt(line.GetColumn() - 1);
+	index = lineLink->Write("한");
+	characterLink = lineLink->GetCharacter(index);
+	if (dynamic_cast<SingleCharacter*>(characterLink)) {
+		coutString += static_cast<SingleCharacter*>(characterLink)->GetValue();
+		//cout << static_cast<SingleCharacter*>(characterLink)->GetValue() << endl;
+	}
+	else {
+		coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[0];
+		coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[1];
+		//cout << static_cast<DoubleCharacter*>(characterLink)->GetValue()[0] << endl;
+		//cout << static_cast<DoubleCharacter*>(characterLink)->GetValue()[1] << endl;
+	}
 
-	completeString = static_cast<DoubleCharacter*>(characterLink)->GetValue()[0];
-	completeString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[1];
+	index = lineLink->Write("글");
+	characterLink = lineLink->GetCharacter(index);
+	if (dynamic_cast<SingleCharacter*>(characterLink)) {
+		coutString += static_cast<SingleCharacter*>(characterLink)->GetValue();
+		//cout << static_cast<SingleCharacter*>(characterLink)->GetValue() << endl;
+	}
+	else {
+		coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[0];
+		coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[1];
+		//cout << static_cast<DoubleCharacter*>(characterLink)->GetValue()[0] << endl;
+		//cout << static_cast<DoubleCharacter*>(characterLink)->GetValue()[1] << endl;
+	}
+	
+	index = lineLink->Write('b');
+	characterLink = lineLink->GetCharacter(index);
+	if (dynamic_cast<SingleCharacter*>(characterLink)) {
+		coutString += static_cast<SingleCharacter*>(characterLink)->GetValue();
+		//cout << static_cast<SingleCharacter*>(characterLink)->GetValue() << endl;
+	}
+	else {
+		coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[0];
+		coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[1];
+		//cout << static_cast<DoubleCharacter*>(characterLink)->GetValue()[0] << endl;
+		//cout << static_cast<DoubleCharacter*>(characterLink)->GetValue()[1] << endl;
+	}
 
-	cout << completeString << endl;
+	cout << "Write character : " << coutString << endl;
+	
+	//2. 메모에 한글자를 지운다.
+	index = lineLink->Erase();
+	Long i = 0;
+	coutString = "";
+	while (i < lineLink->GetLength()) {
+		characterLink = lineLink->GetCharacter(i);
+		if (dynamic_cast<SingleCharacter*>(characterLink)) {
+			coutString += static_cast<SingleCharacter*>(characterLink)->GetValue();
+		}
+		else {
+			coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[0];
+			coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[1];
+		}
+		i++;
+	}
+	cout << "Erase Character : " << coutString << endl;
 
-	memo.Write('1');
-	line = memo.GetAt(memo.GetRow());
-	characterLink = line.GetAt(line.GetColumn() - 1);
-	completeString = static_cast<SingleCharacter*>(characterLink)->GetValue();
+	index = lineLink->Erase();
+	i = 0;
+	coutString = "";
+	while (i < lineLink->GetLength()) {
+		characterLink = lineLink->GetCharacter(i);
+		if (dynamic_cast<SingleCharacter*>(characterLink)) {
+			coutString += static_cast<SingleCharacter*>(characterLink)->GetValue();
+		}
+		else {
+			coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[0];
+			coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[1];
+		}
+		i++;
+	}
+	cout << "Erase Character : " << coutString << endl;
 
-	cout << completeString << endl;
+	//3. AddLine
+	coutString = "";
+	index = memo.AddLine();
+	lineLink = memo.GetLine(index);
+	index = lineLink->Write('d');
+	characterLink = lineLink->GetCharacter(index);
+	if (dynamic_cast<SingleCharacter*>(characterLink)) {
+		coutString += static_cast<SingleCharacter*>(characterLink)->GetValue();
+	}
+	else {
+		coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[0];
+		coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[1];
+	}
+	cout << "AddLine : " << coutString << endl;
 
-	Long index = memo.Erase(memo.GetRow());
-	cout << index << endl;
-
-	Memo memo2;
-	memo2 = memo;
-	Character *characterLink2 = line.GetAt(line.GetColumn() - 1);
-	string completeString2;
-	completeString2 += static_cast<SingleCharacter*>(characterLink2)->GetValue();
-	cout << completeString << endl;
+	//4. RemoveLine
+	cout << memo.GetLength() << endl;
+	index = memo.RemoveLine(1);
+	cout << memo.GetLength() << endl;
 
 	return 0;
 }
