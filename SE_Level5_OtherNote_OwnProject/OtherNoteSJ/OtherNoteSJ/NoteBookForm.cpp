@@ -2,6 +2,7 @@
 
 #include "NoteBookForm.h"
 #include "Memo.h"
+#include "Line.h"
 #include "SingleCharacter.h"
 #include "DoubleCharacter.h"
 #include <Windows.h>
@@ -17,14 +18,17 @@ END_MESSAGE_MAP()
 NoteBookForm::NoteBookForm() {
 	this->endComposition = false;
 }
+NoteBookForm::~NoteBookForm() {
 
-BOOL NoteBookForm::OnCreate(LPCREATESTRUCT lpCreateStruct) {
+}
+
+int NoteBookForm::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	CFrameWnd::OnCreate(lpCreateStruct);
 	this->memo = new Memo(10);
 	//this->memo->Write('a');
 	//this->memo->Write('b');
 	this->endComposition = true;
-	return FALSE;
+	return 0;
 }
 
 void NoteBookForm::OnPaint() {
@@ -32,8 +36,10 @@ void NoteBookForm::OnPaint() {
 	Character *characterLink;
 	CString characters;
 	Long i = 0;
-	while (i < this->memo->GetAt(0).GetLength()) {
-		characterLink = this->memo->GetAt(0).GetAt(i);
+	this->GetMemo()->GetLine(0)->GetLength();
+
+	while (i < this->GetMemo()->GetLine(0)->GetLength()){
+		characterLink = this->GetMemo()->GetLine(0)->GetCharacter(i);
 		if (dynamic_cast<SingleCharacter*>(characterLink)) {
 			characters += (dynamic_cast<SingleCharacter*>(characterLink))->GetValue();
 		}
@@ -41,7 +47,7 @@ void NoteBookForm::OnPaint() {
 			characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[0];
 			characters += (dynamic_cast<DoubleCharacter*>(characterLink))->GetValue()[1];
 		}
-		
+
 		i++;
 	}
 	dc.TextOut(0, 0, characters);
@@ -53,13 +59,13 @@ void NoteBookForm::OnClose() {
 }
 
 void NoteBookForm::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
-	Line *lineLink = &this->memo->GetAt(this->memo->GetRow());
+	Line *lineLink = this->GetMemo()->GetLine(this->memo->GetRow());
 	if (nChar == VK_BACK) {
 		lineLink->Erase();
 	}
 	else {
 		lineLink->Write(nChar);
-	}	
+	}
 	this->RedrawWindow();
 }
 
@@ -68,8 +74,7 @@ LRESULT NoteBookForm::OnImeComposition(WPARAM wParam, LPARAM lParam) {
 	composition[0] = *(((char*)&wParam) + 1);
 	composition[1] = *((char*)&wParam);
 
-	Line *lineLink = &this->memo->GetAt(this->memo->GetRow());
-
+	Line *lineLink = this->GetMemo()->GetLine(this->memo->GetRow());
 	if (lParam & GCS_COMPSTR) {
 		if (this->endComposition == false) {
 			lineLink->Erase();

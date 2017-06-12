@@ -8,10 +8,10 @@
 class Memo;
 
 class NoteBookForm : public CFrameWnd {
-public: 
-	NoteBookForm();
 public:
-	Memo *memo;
+	NoteBookForm();
+	~NoteBookForm();
+	Memo* GetMemo() const;
 protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnPaint();
@@ -20,7 +20,12 @@ protected:
 	afx_msg LRESULT OnImeComposition(WPARAM wParam, LPARAM lParam);
 	DECLARE_MESSAGE_MAP()
 private:
+	Memo *memo;
 	bool endComposition;
 };
+
+inline Memo* NoteBookForm::GetMemo() const {
+	return const_cast<Memo*>(this->memo);
+}
 
 #endif //_NOTEBOOKFORM_H
