@@ -2,7 +2,7 @@
 #include "Composite.h"
 #include "SingleCharacter.h"
 #include "DoubleCharacter.h"
-//#include "Memo.h"
+#include "Memo.h"
 #include "Line.h"
 
 Composite::Composite(Long capacity) 
@@ -15,28 +15,28 @@ Composite::Composite(const Composite& source)
 	:contents(source.capacity){
 
 	Long i = 0;
-	Contents *contents;
-	Contents *newContents;
+	Contents *contentsLink;
+	Contents *newContentsLink;
 
 	while (i < source.length) {
-		contents = const_cast<Composite&>(source).GetAt(i);
-		if (dynamic_cast<Character*>(contents)) {
-			if (dynamic_cast<SingleCharacter*>(contents)) {
-				newContents = new SingleCharacter();
+		contentsLink = const_cast<Composite&>(source).GetAt(i);
+		if (dynamic_cast<Character*>(contentsLink)) {
+			if (dynamic_cast<SingleCharacter*>(contentsLink)) {
+				newContentsLink = new SingleCharacter(*(static_cast<SingleCharacter*>(contentsLink)));
 			}
 			else {
-				newContents = new DoubleCharacter();
+				newContentsLink = new DoubleCharacter(*(static_cast<DoubleCharacter*>(contentsLink)));
 			}
 		}
 		else {
-			if (dynamic_cast<Line*>(contents)) {
-				newContents = new Line();
+			if (dynamic_cast<Line*>(contentsLink)) {
+				newContentsLink = new Line(*(static_cast<Line*>(contentsLink)));
 			}
-			/*else {
-				newContents = new Memo();
-			}*/
+			else {
+				newContentsLink = new Memo(*(static_cast<Memo*>(contentsLink)));
+			}
 		}
-		this->contents.Store(i, newContents);
+		this->contents.Store(i, newContentsLink);
 		i++;
 	}
 
@@ -94,12 +94,28 @@ Composite& Composite::operator = (const Composite& source) {
 	i = 0;
 	while (i < source.length) {
 		contentsLink = const_cast<Composite&>(source).contents[i];
-		if (dynamic_cast<SingleCharacter*>(contentsLink)) {
-			contentsLink = new SingleCharacter(*(static_cast<SingleCharacter*>(contentsLink)));
+
+		if (dynamic_cast<Character*>(contentsLink)) {
+			if (dynamic_cast<SingleCharacter*>(contentsLink)) {
+				contentsLink = new SingleCharacter(*(static_cast<SingleCharacter*>(contentsLink)));
+			}
+			else {
+				contentsLink = new DoubleCharacter(*(static_cast<DoubleCharacter*>(contentsLink)));
+			}
+		}
+		else {
+			if (dynamic_cast<Line*>(contentsLink)) {
+				contentsLink = new Line(*(static_cast<Line*>(contentsLink)));
+			}
+			else {
+				contentsLink = new Memo(*(static_cast<Memo*>(contentsLink)));
+			}
 		}
 		this->contents.Modify(i, contentsLink);
 		i++;
 	}
+	this->capacity = source.capacity;
+	this->length = source.length;
 	return *this;
 }
 
