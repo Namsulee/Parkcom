@@ -5,21 +5,21 @@
 #include "Memo.h"
 #include "Line.h"
 
-Composite::Composite(Long capacity) 
-	:contents(capacity){
+Composite::Composite(Long capacity)
+	:contents(capacity) {
 	this->capacity = capacity;
 	this->length = 0;
 }
 
-Composite::Composite(const Composite& source) 
-	:contents(source.capacity){
+Composite::Composite(const Composite& source)
+	: contents(source.capacity) {
 
 	Long i = 0;
-	Contents *contentsLink;
-	Contents *newContentsLink;
+	/*Contents *contentsLink;
+	Contents *newContentsLink;*/
 
 	while (i < source.length) {
-		contentsLink = const_cast<Composite&>(source).GetAt(i);
+		/*contentsLink = const_cast<Composite&>(source).GetAt(i);
 		if (dynamic_cast<Character*>(contentsLink)) {
 			if (dynamic_cast<SingleCharacter*>(contentsLink)) {
 				newContentsLink = new SingleCharacter(*(static_cast<SingleCharacter*>(contentsLink)));
@@ -36,7 +36,8 @@ Composite::Composite(const Composite& source)
 				newContentsLink = new Memo(*(static_cast<Memo*>(contentsLink)));
 			}
 		}
-		this->contents.Store(i, newContentsLink);
+		this->contents.Store(i, newContentsLink);*/
+		this->contents.Store(i, const_cast<Composite&>(source).contents.GetAt(i)->Clone());
 		i++;
 	}
 
@@ -49,7 +50,7 @@ Composite::~Composite() {
 	while (i < this->length) {
 		if (this->contents[i] != 0) {
 			delete this->contents[i];
-		}		
+		}
 		i++;
 	}
 }
@@ -86,14 +87,14 @@ Composite& Composite::operator = (const Composite& source) {
 	while (i < this->length) {
 		if (this->contents[i] != 0) {
 			delete this->contents[i];
-		}		
+		}
 		i++;
 	}
 	this->contents = source.contents;
-	Contents *contentsLink;
+	//Contents *contentsLink;
 	i = 0;
 	while (i < source.length) {
-		contentsLink = const_cast<Composite&>(source).contents[i];
+		/*contentsLink = const_cast<Composite&>(source).contents[i];
 
 		if (dynamic_cast<Character*>(contentsLink)) {
 			if (dynamic_cast<SingleCharacter*>(contentsLink)) {
@@ -110,8 +111,8 @@ Composite& Composite::operator = (const Composite& source) {
 			else {
 				contentsLink = new Memo(*(static_cast<Memo*>(contentsLink)));
 			}
-		}
-		this->contents.Modify(i, contentsLink);
+		}*/
+		this->contents.Modify(i, const_cast<Composite&>(source).contents.GetAt(i)->Clone());
 		i++;
 	}
 	this->capacity = source.capacity;

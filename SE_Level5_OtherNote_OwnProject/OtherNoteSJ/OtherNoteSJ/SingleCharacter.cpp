@@ -52,3 +52,7 @@ bool SingleCharacter::operator!=(const SingleCharacter& other) {
 	}
 	return false;
 }
+
+Contents* SingleCharacter::Clone() const {
+	return new SingleCharacter(*this);
+}

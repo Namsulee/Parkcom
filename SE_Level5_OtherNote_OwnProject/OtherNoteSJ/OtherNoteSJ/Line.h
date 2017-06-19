@@ -21,6 +21,8 @@ public:
 	Character* operator [] (Long index);
 	Line& operator = (const Line& source);
 
+	Contents* Clone() const;
+
 	Long GetColumn() const;
 private:
 	Long column;

@@ -17,6 +17,8 @@ public :
 
 	Contents* operator [] (Long index) { return 0; };//연산자는 virtual이 되지 않는다. 오버라이딩 못한다
 	Contents& operator = (const Contents& source);
+
+	virtual Contents* Clone() const = 0;
 	
 };
 

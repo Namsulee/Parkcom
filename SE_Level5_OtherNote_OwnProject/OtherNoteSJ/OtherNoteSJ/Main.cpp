@@ -24,52 +24,40 @@ int main(int argc, char *argv[]) {
 	characterLink = lineLink->GetCharacter(index);
 	if (dynamic_cast<SingleCharacter*>(characterLink)) {
 		coutString += static_cast<SingleCharacter*>(characterLink)->GetValue();
-		//cout << static_cast<SingleCharacter*>(characterLink)->GetValue() << endl;
 	}
 	else {
 		coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[0];
 		coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[1];
-		//cout << static_cast<DoubleCharacter*>(characterLink)->GetValue()[0] << endl;
-		//cout << static_cast<DoubleCharacter*>(characterLink)->GetValue()[1] << endl;
 	}
 
 	index = lineLink->Write("วั");
 	characterLink = lineLink->GetCharacter(index);
 	if (dynamic_cast<SingleCharacter*>(characterLink)) {
 		coutString += static_cast<SingleCharacter*>(characterLink)->GetValue();
-		//cout << static_cast<SingleCharacter*>(characterLink)->GetValue() << endl;
 	}
 	else {
 		coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[0];
 		coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[1];
-		//cout << static_cast<DoubleCharacter*>(characterLink)->GetValue()[0] << endl;
-		//cout << static_cast<DoubleCharacter*>(characterLink)->GetValue()[1] << endl;
 	}
 
 	index = lineLink->Write("ฑÛ");
 	characterLink = lineLink->GetCharacter(index);
 	if (dynamic_cast<SingleCharacter*>(characterLink)) {
 		coutString += static_cast<SingleCharacter*>(characterLink)->GetValue();
-		//cout << static_cast<SingleCharacter*>(characterLink)->GetValue() << endl;
 	}
 	else {
 		coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[0];
 		coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[1];
-		//cout << static_cast<DoubleCharacter*>(characterLink)->GetValue()[0] << endl;
-		//cout << static_cast<DoubleCharacter*>(characterLink)->GetValue()[1] << endl;
 	}
 	
 	index = lineLink->Write('b');
 	characterLink = lineLink->GetCharacter(index);
 	if (dynamic_cast<SingleCharacter*>(characterLink)) {
 		coutString += static_cast<SingleCharacter*>(characterLink)->GetValue();
-		//cout << static_cast<SingleCharacter*>(characterLink)->GetValue() << endl;
 	}
 	else {
 		coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[0];
 		coutString += static_cast<DoubleCharacter*>(characterLink)->GetValue()[1];
-		//cout << static_cast<DoubleCharacter*>(characterLink)->GetValue()[0] << endl;
-		//cout << static_cast<DoubleCharacter*>(characterLink)->GetValue()[1] << endl;
 	}
 
 	cout << "Write character : " << coutString << endl;

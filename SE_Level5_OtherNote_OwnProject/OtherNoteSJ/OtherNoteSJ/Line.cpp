@@ -49,3 +49,7 @@ Line& Line::operator = (const Line& source) {
 	this->column = source.column;
 	return *this;
 }
+
+Contents* Line::Clone() const {
+	return new Line(*this);
+}

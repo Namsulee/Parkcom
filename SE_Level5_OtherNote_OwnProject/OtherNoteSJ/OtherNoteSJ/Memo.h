@@ -20,6 +20,8 @@ public:
 	Line* operator [](Long index);
 	Memo& operator = (const Memo& source);
 
+	Contents* Clone() const;
+
 	Long GetRow() const;
 private:
 	Long row;

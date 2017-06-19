@@ -51,3 +51,7 @@ bool DoubleCharacter::operator != (const DoubleCharacter& other) {
 	}
 	return ret;
 }
+
+Contents* DoubleCharacter::Clone() const {
+	return new DoubleCharacter(*this);
+}

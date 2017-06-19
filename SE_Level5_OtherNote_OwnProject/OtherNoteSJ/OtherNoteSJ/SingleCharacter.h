@@ -18,6 +18,7 @@ public :
 	SingleCharacter& operator = (const SingleCharacter& source);
 	bool operator == (const SingleCharacter& other);
 	bool operator != (const SingleCharacter& other);
+	Contents* Clone() const;
 
 	char GetValue() const;
 private:

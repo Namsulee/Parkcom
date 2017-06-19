@@ -40,3 +40,7 @@ Memo& Memo::operator = (const Memo& source) {
 	this->row = source.row;
 	return *this;
 }
+
+Contents* Memo::Clone() const {
+	return new Memo(*this);
+}
