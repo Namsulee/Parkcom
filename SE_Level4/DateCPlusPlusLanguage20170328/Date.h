@@ -9,43 +9,43 @@ typedef unsigned short int UShort;
 
 class Date {
 public:	//operation들은 public으로 한다
-	Date();						//생성자
-	~Date();					//소멸자
-	Date(UShort year, UShort month, UShort day);	//1999, FEB, 25
-	Date(char(*date));								//"19971212"
-	Date(const Date& source);	//복사생성자
-	static Date Today();		//static 정적 멤버
-	operator char*();			//형변화 함수
+	Date();									//기본 생성자
+	~Date();								//소멸자
+	Date(UShort year, UShort month, UShort day);	//매개변수 생성자 오버로딩 1999, FEB, 25
+	Date(char(*date));								//매개변수 생성자 오버로딩 "19971212"
+	Date(const Date& source);				//복사생성자
+	static Date Today();					//static 정적 멤버
+	operator char*();						//형변화 함수
 
 	Date Yesterday();
-	Date& operator --();		//전위
-	Date operator --(int);		//후위
+	Date& operator--();						//전위 - 연산자오버로딩
+	Date operator--(int);					//후위 - 연산자오버로딩
 
 	Date Tomorrow();
-	Date& operator ++();		//전위
-	Date operator ++(int);		//후위
+	Date& operator++();						//전위 - 연산자오버로딩
+	Date operator++(int);					//후위 - 연산자오버로딩
 
 	Date PreviousDate(UShort days);
-	Date operator -(UShort days);
+	Date operator-(UShort days);			//연산자오버로딩
 
 	Date NextDate(UShort days);
-	Date operator +(UShort days);
+	Date operator+(UShort days);			//연산자오버로딩
 
 	bool IsEquals(const Date& other);
-	bool operator ==(const Date& other);
+	bool operator==(const Date& other);		//연산자오버로딩
 
 	bool IsNotEquals(const Date& other);
-	bool operator !=(const Date& other);
+	bool operator!=(const Date& other);		//연산자오버로딩
 
 	bool IsGreaterThan(const Date& other);
-	bool operator >(const Date& other);
-	bool operator >=(const Date& other);
+	bool operator>(const Date& other);		//연산자오버로딩
+	bool operator>=(const Date& other);		//연산자오버로딩
 
 	bool IsLessThan(const Date& other);
-	bool operator <(const Date& other);
-	bool operator <=(const Date& other);
+	bool operator<(const Date& other);		//연산자오버로딩
+	bool operator<=(const Date& other);		//연산자오버로딩
 
-	Date& operator =(const Date& source);	//치환연산자
+	Date& operator=(const Date& source);	//치환연산자
 
 	// attribute들에 대한 Get 함수들 -> inline 함수로 구현
 	UShort GetYear() const;
