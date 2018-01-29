@@ -15,7 +15,7 @@ public:	//operation들은 public으로 한다
 	Date(char(*date));								//매개변수 생성자 오버로딩 "19971212"
 	Date(const Date& source);				//복사생성자
 	static Date Today();					//static 정적 멤버
-	operator char*();						//형변화 함수
+	operator char*();						//형변환 함수
 
 	Date Yesterday();
 	Date& operator--();						//전위 - 연산자오버로딩
