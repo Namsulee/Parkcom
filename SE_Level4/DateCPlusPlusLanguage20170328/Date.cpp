@@ -37,7 +37,10 @@ Date::Date(const Date& source) {
 
 Date::Date(char(*date)) {	//"19970125"
 	struct tm temp = { 0, };
-	sscanf(date, "%Y%m%d", &temp);
+	sscanf(date, "%4d%02d%02d", &temp.tm_year, &temp.tm_mon, &temp.tm_mday);
+	temp.tm_year -= 1900;
+	temp.tm_mon -=  1;
+	
 	mktime(&temp);
 	this->year = temp.tm_year + 1900;
 	this->month = static_cast<Month>(temp.tm_mon + 1);
@@ -104,34 +107,34 @@ Date Date::operator--(int) {
 	temp.weekDay = static_cast<WeekDay>(yesterday.tm_wday);
 	return temp;
 }
-
-Date Date::Tomorrow() {
-
-}
-
-Date& Date::operator++() {
-
-}
-
-Date Date::operator++(int) {
-
-}
-
-Date Date::PreviousDate(UShort days) {
-
-}
-
-Date Date::operator-(UShort days) {
-
-}
-
-Date Date::NextDate(UShort days) {
-
-}
-
-Date Date::operator+(UShort days) {
-
-}
+//
+//Date Date::Tomorrow() {
+//
+//}
+//
+//Date& Date::operator++() {
+//
+//}
+//
+//Date Date::operator++(int) {
+//
+//}
+//
+//Date Date::PreviousDate(UShort days) {
+//
+//}
+//
+//Date Date::operator-(UShort days) {
+//
+//}
+//
+//Date Date::NextDate(UShort days) {
+//
+//}
+//
+//Date Date::operator+(UShort days) {
+//
+//}
 
 bool Date::IsEquals(const Date& other) {
 	bool ret = false;
@@ -152,39 +155,43 @@ bool Date::operator==(const Date& other) {
 	}
 	return ret;
 }
-
-bool Date::IsNotEquals(const Date& other) {
-
-}
-
-bool Date::operator!=(const Date& other) {
-
-}
-
-bool Date::IsGreaterThan(const Date& other) {
-
-}
-
-bool Date::operator>(const Date& other) {
-
-}
-
-bool Date::operator>=(const Date& other) {
-
-}
-
-bool Date::IsLessThan(const Date& other) {
-
-}
-
-bool Date::operator<(const Date& other) {
-
-}
-
-bool Date::operator<=(const Date& other) {
-
-}
-
+//
+//bool Date::IsNotEquals(const Date& other) {
+//
+//}
+//
+//bool Date::operator!=(const Date& other) {
+//
+//}
+//
+//bool Date::IsGreaterThan(const Date& other) {
+//
+//}
+//
+//bool Date::operator>(const Date& other) {
+//
+//}
+//
+//bool Date::operator>=(const Date& other) {
+//
+//}
+//
+//bool Date::IsLessThan(const Date& other) {
+//
+//}
+//
+//bool Date::operator<(const Date& other) {
+//
+//}
+//
+//bool Date::operator<=(const Date& other) {
+//
+//}
+//
 Date& Date::operator=(const Date& source) {
-
+	this->year = source.year;
+	this->month = source.month;
+	this->day = source.day;
+	this->weekDay = source.weekDay;
+	return *this;
 }
