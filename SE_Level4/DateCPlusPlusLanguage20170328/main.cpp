@@ -9,8 +9,12 @@ int main(int argc, char *argv) {
 
 	cout << static_cast<char *>(today) << endl;
 
-	Date someday("20180201");
+	Date someday("20090803");
 	cout << static_cast<char *>(someday) << endl;
+
+	//아래 코드도 정상동작함
+	/*char * str = Date::Today();
+	cout << str << endl;*/
 
 	return 0;
 }

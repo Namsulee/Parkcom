@@ -107,34 +107,67 @@ Date Date::operator--(int) {
 	temp.weekDay = static_cast<WeekDay>(yesterday.tm_wday);
 	return temp;
 }
-//
-//Date Date::Tomorrow() {
-//
-//}
-//
-//Date& Date::operator++() {
-//
-//}
-//
-//Date Date::operator++(int) {
-//
-//}
-//
-//Date Date::PreviousDate(UShort days) {
-//
-//}
-//
-//Date Date::operator-(UShort days) {
-//
-//}
-//
-//Date Date::NextDate(UShort days) {
-//
-//}
-//
-//Date Date::operator+(UShort days) {
-//
-//}
+
+Date Date::Tomorrow() {
+	struct tm tomorrow = { 0, };
+	Date tomorrow_;
+	tomorrow.tm_year = this->year - 1900;
+	tomorrow.tm_mon = this->month - 1;
+	tomorrow.tm_mday = this->day + 1;
+	mktime(&tomorrow);
+	tomorrow_.year = tomorrow.tm_year + 1900;
+	tomorrow_.month = static_cast<Month>(tomorrow.tm_mon + 1);
+	tomorrow_.day = tomorrow.tm_mday;
+	tomorrow_.weekDay = static_cast<WeekDay>(tomorrow.tm_wday);
+	return tomorrow_;
+}
+
+Date& Date::operator++() {
+	struct tm tomorrow = { 0, };
+	tomorrow.tm_year = this->year - 1900;
+	tomorrow.tm_mon = this->month - 1;
+	tomorrow.tm_mday = this->day + 1;
+	mktime(&tomorrow);
+	this->year = tomorrow.tm_year + 1900;
+	this->month = static_cast<Month>(tomorrow.tm_mon + 1);
+	this->day = tomorrow.tm_mday;
+	this->weekDay = static_cast<WeekDay>(tomorrow.tm_wday);
+	return *this;
+}
+
+Date Date::operator++(int) {
+	struct tm tomorrow = { 0, };
+	Date temp(*this);
+	tomorrow.tm_year = this->year - 1900;
+	tomorrow.tm_mon = this->month - 1;
+	tomorrow.tm_mday = this->day + 1;
+	mktime(&tomorrow);
+	/*this->year = tomorrow.tm_year + 1900;
+	this->month = static_cast<Month>(tomorrow.tm_mon + 1);
+	this->day = tomorrow.tm_mday;
+	this->weekDay = static_cast<WeekDay>(tomorrow.tm_wday);*/
+	temp.year = tomorrow.tm_year + 1900;
+	temp.month = static_cast<Month>(tomorrow.tm_mon + 1);
+	temp.day = tomorrow.tm_mday;
+	temp.weekDay = static_cast<WeekDay>(tomorrow.tm_wday);
+	return temp;
+}
+
+Date Date::PreviousDate(UShort days) {
+
+}
+
+Date Date::operator-(UShort days) {
+
+}
+
+Date Date::NextDate(UShort days) {
+
+}
+
+Date Date::operator+(UShort days) {
+
+}
 
 bool Date::IsEquals(const Date& other) {
 	bool ret = false;
