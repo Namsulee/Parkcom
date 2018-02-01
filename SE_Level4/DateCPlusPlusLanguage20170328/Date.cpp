@@ -154,19 +154,59 @@ Date Date::operator++(int) {
 }
 
 Date Date::PreviousDate(UShort days) {
-
+	struct tm previousDate = { 0, };
+	Date previousDate_;
+	previousDate.tm_year = this->year - 1900;
+	previousDate.tm_mon = this->month - 1;
+	previousDate.tm_mday = this->day - days;
+	mktime(&previousDate);
+	previousDate_.year = previousDate.tm_year + 1900;
+	previousDate_.month = static_cast<Month>(previousDate.tm_mon + 1);
+	previousDate_.day = previousDate.tm_mday;
+	previousDate_.weekDay = static_cast<WeekDay>(previousDate.tm_wday);
+	return previousDate_;
 }
 
 Date Date::operator-(UShort days) {
-
+	struct tm previousDate = { 0, };
+	Date previousDate_;
+	previousDate.tm_year = this->year - 1900;
+	previousDate.tm_mon = this->month - 1;
+	previousDate.tm_mday = this->day - days;
+	mktime(&previousDate);
+	previousDate_.year = previousDate.tm_year + 1900;
+	previousDate_.month = static_cast<Month>(previousDate.tm_mon + 1);
+	previousDate_.day = previousDate.tm_mday;
+	previousDate_.weekDay = static_cast<WeekDay>(previousDate.tm_wday);
+	return previousDate_;
 }
 
 Date Date::NextDate(UShort days) {
-
+	struct tm nextDate = { 0, };
+	Date nextDate_;
+	nextDate.tm_year = this->year - 1900;
+	nextDate.tm_mon = this->month - 1;
+	nextDate.tm_mday = this->day + days;
+	mktime(&nextDate);
+	nextDate_.year = nextDate.tm_year + 1900;
+	nextDate_.month = static_cast<Month>(nextDate.tm_mon + 1);
+	nextDate_.day = nextDate.tm_mday;
+	nextDate_.weekDay = static_cast<WeekDay>(nextDate.tm_wday);
+	return nextDate_;
 }
 
 Date Date::operator+(UShort days) {
-
+	struct tm nextDate = { 0, };
+	Date nextDate_;
+	nextDate.tm_year = this->year - 1900;
+	nextDate.tm_mon = this->month - 1;
+	nextDate.tm_mday = this->day + days;
+	mktime(&nextDate);
+	nextDate_.year = nextDate.tm_year + 1900;
+	nextDate_.month = static_cast<Month>(nextDate.tm_mon + 1);
+	nextDate_.day = nextDate.tm_mday;
+	nextDate_.weekDay = static_cast<WeekDay>(nextDate.tm_wday);
+	return nextDate_;
 }
 
 bool Date::IsEquals(const Date& other) {
@@ -188,40 +228,129 @@ bool Date::operator==(const Date& other) {
 	}
 	return ret;
 }
-//
-//bool Date::IsNotEquals(const Date& other) {
-//
-//}
-//
-//bool Date::operator!=(const Date& other) {
-//
-//}
-//
-//bool Date::IsGreaterThan(const Date& other) {
-//
-//}
-//
-//bool Date::operator>(const Date& other) {
-//
-//}
-//
-//bool Date::operator>=(const Date& other) {
-//
-//}
-//
-//bool Date::IsLessThan(const Date& other) {
-//
-//}
-//
-//bool Date::operator<(const Date& other) {
-//
-//}
-//
-//bool Date::operator<=(const Date& other) {
-//
-//}
-//
-Date& Date::operator=(const Date& source) {
+
+bool Date::IsNotEquals(const Date& other) {
+	bool ret = false;
+	if (this->year != other.year ||
+		this->month != other.month ||
+		this->day != other.day) {
+		ret = true;
+	}
+	return ret;
+}
+
+bool Date::operator!=(const Date& other) {
+	bool ret = false;
+	if (this->year != other.year ||
+		this->month != other.month ||
+		this->day != other.day) {
+		ret = true;
+	}
+	return ret;
+}
+
+bool Date::IsGreaterThan(const Date& other) {
+	bool ret = false;
+	if (this->year > other.year) {
+		ret = true;
+	} else if (this->year == other.year &&
+		this->month > other.month) {
+		ret = true;
+	}
+	else if (this->year == other.year &&
+		this->month == other.month &&
+		this->day > other.day) {
+		ret = true;
+	}
+	return ret;
+}
+
+bool Date::operator>(const Date& other) {
+	bool ret = false;
+	if (this->year > other.year) {
+		ret = true;
+	}
+	else if (this->year == other.year &&
+		this->month > other.month) {
+		ret = true;
+	}
+	else if (this->year == other.year &&
+		this->month == other.month &&
+		this->day > other.day) {
+		ret = true;
+	}
+	return ret;
+}
+
+bool Date::operator>=(const Date& other) {
+	bool ret = false;
+	if (this->year >= other.year) {
+		ret = true;
+	}
+	else if (this->year == other.year &&
+		this->month >= other.month) {
+		ret = true;
+	}
+	else if (this->year == other.year &&
+		this->month == other.month &&
+		this->day >= other.day) {
+		ret = true;
+	}
+	return ret;
+}
+
+bool Date::IsLessThan(const Date& other) {
+	bool ret = false;
+	if (this->year < other.year) {
+		ret = true;
+	}
+	else if (this->year == other.year &&
+		this->month < other.month) {
+		ret = true;
+	}
+	else if (this->year == other.year &&
+		this->month == other.month &&
+		this->day < other.day) {
+		ret = true;
+	}
+	return ret;
+}
+
+bool Date::operator<(const Date& other) {
+	bool ret = false;
+	if (this->year < other.year) {
+		ret = true;
+	}
+	else if (this->year == other.year &&
+		this->month < other.month) {
+		ret = true;
+	}
+	else if (this->year == other.year &&
+		this->month == other.month &&
+		this->day < other.day) {
+		ret = true;
+	}
+	return ret;
+}
+
+bool Date::operator<=(const Date& other) {
+	bool ret = false;
+	if (this->year <= other.year) {
+		ret = true;
+	}
+	else if (this->year == other.year &&
+		this->month <= other.month) {
+		ret = true;
+	}
+	else if (this->year == other.year &&
+		this->month == other.month &&
+		this->day <= other.day) {
+		ret = true;
+	}
+	return ret;
+}
+
+Date& Date::operator=(const Date& source) {	//치환연산자는 자동으로 생성되지만 반드시 정의를 하자.
 	this->year = source.year;
 	this->month = source.month;
 	this->day = source.day;
