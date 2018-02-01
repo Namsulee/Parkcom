@@ -97,9 +97,12 @@ Date& Date::operator--() {
 Date Date::operator--(int) {
 	struct tm yesterday = { 0, };
 	Date temp(*this);	//this는 주소, *this는 값
-	yesterday.tm_year = this->month - 1900;
+	/*yesterday.tm_year = this->year - 1900;
 	yesterday.tm_mon = this->month - 1;
-	yesterday.tm_mday = this->day - 1;
+	yesterday.tm_mday = this->day - 1;*/
+	yesterday.tm_year = temp.year - 1900;
+	yesterday.tm_mon = temp.month - 1;
+	yesterday.tm_mday = temp.day - 1;
 	mktime(&yesterday);
 	temp.year = yesterday.tm_year + 1900;
 	temp.month = static_cast<Month>(yesterday.tm_mon + 1);
